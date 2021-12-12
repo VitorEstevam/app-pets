@@ -1,7 +1,7 @@
+import 'package:app_pets/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:app_pets/consts/routes.dart';
 import 'package:app_pets/consts/theme.dart';
 import 'package:app_pets/consts/provider_stores.dart';
 
@@ -23,7 +23,6 @@ class AppRoot extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'App Pets',
         theme: theme,
-        initialRoute: '/',
-        routes: routes);
+        home: const TabBarHandler());
   }
 }

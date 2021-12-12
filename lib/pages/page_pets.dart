@@ -1,16 +1,17 @@
+import 'package:app_pets/pages/page_add_task.dart';
 import 'package:app_pets/stores/example/example.dart';
 import 'package:app_pets/widgets/image_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/src/provider.dart';
 
-class PageHome extends StatelessWidget {
-  const PageHome({Key? key}) : super(key: key);
+class PagePets extends StatelessWidget {
+  const PagePets({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         title: const Text("Meus Pets"),
         actions: [IconButton(onPressed: () => {}, icon: const Icon(Icons.add))],
@@ -22,19 +23,17 @@ class PageHome extends StatelessWidget {
             const SizedBox(height: 30),
             Expanded(
               flex: 1,
-              child: Container(
+              child: SizedBox(
                 width: double.infinity,
-                child: Column(children: [
+                child: Column(children: const [
                   Expanded(
-                    child: Container(
-                      child: const FittedBox(
-                        fit: BoxFit.fitHeight,
-                        alignment: Alignment.bottomCenter,
-                        child: ImageLoader("lib/assets/dog1.jpeg"),
-                      ),
+                    child: FittedBox(
+                      fit: BoxFit.fitHeight,
+                      alignment: Alignment.bottomCenter,
+                      child: ImageLoader("lib/assets/dog1.jpeg"),
                     ),
                   ),
-                  const Text(
+                  Text(
                     "Luke",
                     style: TextStyle(
                       fontSize: 24,
@@ -66,7 +65,12 @@ class PageHome extends StatelessWidget {
                     ),
                     Container(height: 20),
                     ElevatedButton(
-                      onPressed: () => {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const PageAddTask()),
+                        );
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [

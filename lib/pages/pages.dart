@@ -1,5 +1,5 @@
 
-import 'package:app_pets/pages/page_home.dart';
+import 'package:app_pets/pages/page_pets.dart';
 import 'package:flutter/material.dart';
 
 class TabBarHandler extends StatelessWidget {
@@ -32,11 +32,11 @@ class TabBarHandler extends StatelessWidget {
           child: const TabBarView(
             children: <Widget>[
               Center(
-                child: Text("It's cloudy here"),
+                child: Text("Noticias"),
               ),
-              PageHome(),
+              PagePets(),
               Center(
-                child: Text("It's sunny here"),
+                child: Text("Configs"),
               ),
             ],
           ),
