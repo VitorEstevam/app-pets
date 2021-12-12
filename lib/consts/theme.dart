@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 ThemeData theme = ThemeData(
+  backgroundColor: const Color(0xFFFFEBEE),
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    backgroundColor:Colors.red
+  ),
   primarySwatch: const MaterialColor(
     0xFFFF5967,
     <int, Color>{

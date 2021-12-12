@@ -11,25 +11,22 @@ class TabBarHandler extends StatelessWidget {
       initialIndex: 1,
       length: 3,
       child: Scaffold(
-        bottomNavigationBar: Container(
-
-          child: TabBar(
-            indicatorColor: Colors.green,
-            labelColor: Colors.blue,
-            unselectedLabelColor: Colors.purple,
-              tabs: const <Widget>[
-                Tab(
-                  icon: Icon(Icons.cloud_outlined),
-                ),
-                Tab(
-                  icon: Icon(Icons.beach_access_sharp),
-                ),
-                Tab(
-                  icon: Icon(Icons.brightness_5_sharp),
-                ),
-              ],
-            ),
-        ),
+        bottomNavigationBar: TabBar(
+          indicatorColor: Theme.of(context).primaryColor,
+          labelColor: Theme.of(context).primaryColor,
+          unselectedLabelColor: Colors.grey.shade700,
+            tabs: const <Widget>[
+              Tab(
+                icon: Icon(Icons.menu_book_rounded, size:30),
+              ),
+              Tab(
+                icon: Icon(Icons.pets, size:30),
+              ),
+              Tab(
+                icon: Icon(Icons.settings, size:30),
+              ),
+            ],
+          ),
         body: Container(
           color: Theme.of(context).backgroundColor,
           child: const TabBarView(
