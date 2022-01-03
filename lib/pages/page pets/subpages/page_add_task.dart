@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:app_pets/classes/task.dart';
+import 'package:app_pets/stores/example/store_tasks.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/src/provider.dart';
 
 class PageAddTask extends StatefulWidget {
   const PageAddTask({Key? key}) : super(key: key);
@@ -47,7 +49,7 @@ class _PageAddTaskState extends State<PageAddTask> {
                     }
                     return null;
                   },
-                  onFieldSubmitted: (String val) {
+                  onChanged: (String val) {
                     task.title = val;
                   },
                 ),
@@ -69,7 +71,7 @@ class _PageAddTaskState extends State<PageAddTask> {
                     }
                     return null;
                   },
-                  onFieldSubmitted: (String val) {
+                  onChanged: (String val) {
                     task.description = val;
                   },
                 ),
@@ -109,10 +111,13 @@ class _PageAddTaskState extends State<PageAddTask> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Processing Data')),
+                        const SnackBar(content: Text('Task salva')),
                       );
+                      print(task.title);
+                      context.read<StoreTasks>().insert(task);
+                      Future.delayed(const Duration(milliseconds: 800),
+                          () => {Navigator.pop(context)});
                     }
-                    print(json.encode(task));
                   },
                   child: FractionallySizedBox(
                     widthFactor: 1,

@@ -1,4 +1,4 @@
-import 'package:app_pets/pages/pages.dart';
+import 'package:app_pets/pages/tab_bar_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
