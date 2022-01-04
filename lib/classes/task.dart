@@ -1,37 +1,27 @@
-enum taskType{
-  unique, weekly, progressive
+import 'package:app_pets/classes/sub_task.dart';
+
+abstract class Task {
+  late String title;
+  DateTime getNextDate();
+  void markAsDone();
 }
 
-class Task { //unique
-  String? title;
-  String? description;
-  DateTime? date;
-  bool done = false;
+class TaskUnique implements Task {
+  @override
+  String title;
+  late SubTask subTask;
 
-  Task.unique({this.title, this.description, this.date});
+  TaskUnique(this.title, DateTime _dateToDo){
+    subTask = SubTask(_dateToDo);
+  }
+  
+  @override
+  DateTime getNextDate() {
+    return subTask.dateToDo;
+  }
+
+  @override
+  void markAsDone() {
+    subTask.done = true;
+  }
 }
-
-  // // Read-only non-final property
-  // int? get launchYear => launchDate?.year;
-
-  // // Constructor, with syntactic sugar for assignment to members.
-  // Spacecraft(this.name, this.launchDate) {
-  //   // Initialization code goes here.
-  // }
-
-  // // Named constructor that forwards to the default one.
-  // Spacecraft.unlaunched(String name) : this(name, null);
-
-  // // Method.
-  // void describe() {
-  //   print('Spacecraft: $name');
-  //   // Type promotion doesn't work on getters.
-  //   var launchDate = this.launchDate;
-  //   if (launchDate != null) {
-  //     int years =
-  //         DateTime.now().difference(launchDate).inDays ~/ 365;
-  //     print('Launched: $launchYear ($years years ago)');
-  //   } else {
-  //     print('Unlaunched');
-  //   }
-  // }

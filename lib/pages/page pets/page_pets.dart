@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:app_pets/classes/task.dart';
-import 'package:app_pets/pages/page%20pets/subpages/page_add_task.dart';
+import 'package:app_pets/pages/page%20pets/subpages/page_add_task/page_add_task.dart';
 import 'package:app_pets/stores/example/store_tasks.dart';
 import 'package:app_pets/widgets/image_loader.dart';
 import 'package:flutter/material.dart';
