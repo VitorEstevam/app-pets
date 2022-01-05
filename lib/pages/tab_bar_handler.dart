@@ -1,43 +1,53 @@
-
-import 'package:app_pets/pages/page%20pets/router_page_pet.dart';
-import 'package:app_pets/pages/page%20pets/page_pets.dart';
+import 'package:app_pets/pages/page%20pets/router_page_home.dart';
+import 'package:app_pets/pages/page%20pets/page_home.dart';
 import 'package:flutter/material.dart';
 
 class TabBarHandler extends StatelessWidget {
-  const TabBarHandler({ Key? key }) : super(key: key);
+  const TabBarHandler({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      initialIndex: 1,
-      length: 3,
+      initialIndex: 2,
+      length: 4,
       child: Scaffold(
         bottomNavigationBar: TabBar(
           indicatorColor: Theme.of(context).primaryColor,
           labelColor: Theme.of(context).primaryColor,
           unselectedLabelColor: Colors.grey.shade700,
-            tabs: const <Widget>[
-              Tab(
-                icon: Icon(Icons.menu_book_rounded, size:30),
-              ),
-              Tab(
-                icon: Icon(Icons.pets, size:30),
-              ),
-              Tab(
-                icon: Icon(Icons.settings, size:30),
-              ),
-            ],
-          ),
+          tabs: const <Widget>[
+            Tab(
+              icon: Icon(Icons.menu_book_rounded, size: 30),
+              text: "noticias",
+            ),
+            Tab(
+              icon: Icon(Icons.directions_run, size: 30),
+              text: "tarefas",
+            ),
+            Tab(
+              icon: Icon(Icons.home, size: 30),
+              text: "inicio",
+            ),
+            Tab(
+              icon: Icon(Icons.pets, size: 30),
+              text: "pets",
+            ),
+          ],
+        ),
         body: Container(
           color: Theme.of(context).backgroundColor,
           child: const TabBarView(
+            physics: NeverScrollableScrollPhysics(),
             children: <Widget>[
               Center(
                 child: Text("Noticias"),
               ),
-              RouterPagePet(),
               Center(
-                child: Text("Configs"),
+                child: Text("tarefas"),
+              ),
+              RouterPageHome(),
+              Center(
+                child: Text("pets"),
               ),
             ],
           ),

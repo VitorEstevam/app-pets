@@ -35,7 +35,7 @@ class _DatePickerState extends State<DatePicker> {
           lastDate: DateTime(DateTime.now().year + 2),
         );
         if (pickedDate != null) {
-          String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+          String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
           setState(
             () {
               dateinput.text = formattedDate;

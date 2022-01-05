@@ -4,10 +4,13 @@ import 'dart:ffi';
 import 'package:app_pets/classes/task.dart';
 import 'package:app_pets/stores/example/store_tasks.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/src/provider.dart';
 
 import 'widgets/date_picker.dart';
+import 'widgets/period_selector.dart';
+import 'widgets/pet_selector.dart';
 import 'widgets/title_field.dart';
 
 class PageAddTask extends StatefulWidget {
@@ -20,13 +23,26 @@ class PageAddTask extends StatefulWidget {
 class _PageAddTaskState extends State<PageAddTask> {
   String? title;
   DateTime? date;
+  String? pet;
 
-  void setDate(DateTime _date) {
+  void setDateUnique(DateTime _date) {
     date = _date;
+  }
+
+  void setDateWeekly(DateTime _date) {
+    // todo
+  }
+
+  void setDatePeriod(DateTime _date) {
+    // todo
   }
 
   void setTitle(String _title) {
     title = _title;
+  }
+
+  void setPet(String _pet) {
+    pet = _pet;
   }
 
   void submitForm() {
@@ -51,40 +67,42 @@ class _PageAddTaskState extends State<PageAddTask> {
       appBar: AppBar(
         title: const Text("Adicionar Tarefa"),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(height: 20),
-                TitleField(
-                  callback: setTitle,
+      body: CustomScrollView(
+        slivers: [
+          SliverFillRemaining(
+            hasScrollBody: true,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(height: 20),
+                    TitleField(
+                      callback: setTitle,
+                    ),
+                    Container(height: 20),
+                    PetSelector(
+                      callback: (a) => {print(a)},
+                      pets: const ["luke", "zelda", "pelor"],
+                    ),
+                    Container(height: 20),
+                    Expanded(
+                      child: PeriodSelector(
+                        onSelectedUnique: setDateUnique,
+                      ),
+                    ),
+                  ],
                 ),
-                Container(height: 20),
-                FractionallySizedBox(
-                  widthFactor: 0.5,
-                  child: DatePicker(
-                    callback: setDate,
-                  ),
-                ),
-                Container(height: 20),
-                ElevatedButton(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Icon(Icons.add),
-                      Text('ADICIONAR TAREFA'),
-                    ],
-                  ),
-                  onPressed: submitForm,
-                ),
-              ],
+              ),
             ),
           ),
-        ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: submitForm,
+        child: const Icon(Icons.save),
       ),
     );
   }

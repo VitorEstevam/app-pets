@@ -9,19 +9,15 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/src/provider.dart';
 
-class PagePets extends StatelessWidget {
-  const PagePets({Key? key}) : super(key: key);
+class PageHome extends StatelessWidget {
+  const PageHome({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        title: const Text("Meus Pets"),
-        actions: [
-          IconButton(onPressed: () => {}, icon: const Icon(Icons.add)),
-          IconButton(onPressed: () => {}, icon: const Icon(Icons.train_sharp)),
-        ],
+        title: const Text("nome do app"),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
