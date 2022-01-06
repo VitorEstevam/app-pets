@@ -1,5 +1,5 @@
-import 'package:app_pets/pages/page%20pets/router_page_home.dart';
-import 'package:app_pets/pages/page%20pets/page_home.dart';
+import 'package:app_pets/pages/page_home/router_page_home.dart';
+import 'package:app_pets/pages/page_home/subpages/page_home/page_home.dart';
 import 'package:flutter/material.dart';
 
 class TabBarHandler extends StatelessWidget {

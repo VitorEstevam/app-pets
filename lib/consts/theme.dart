@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 ThemeData theme = ThemeData(
   backgroundColor: Colors.white,
@@ -20,4 +21,5 @@ ThemeData theme = ThemeData(
       900: Color.fromRGBO(255, 89, 103, 1),
     },
   ),
+  textTheme: GoogleFonts.robotoTextTheme(),
 );

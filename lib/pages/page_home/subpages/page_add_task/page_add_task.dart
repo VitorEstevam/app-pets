@@ -48,12 +48,12 @@ class _PageAddTaskState extends State<PageAddTask> {
   void submitForm() {
     if (_formKey.currentState!.validate()) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Task salva')),
+        const SnackBar(content: Text('Task salva'), duration: Duration(milliseconds: 500)),
       );
       var task = TaskUnique(title!, date!);
       context.read<StoreTasks>().insert(task);
       Future.delayed(
-          const Duration(milliseconds: 800), () => {Navigator.pop(context)});
+          const Duration(milliseconds: 500), () => {Navigator.pop(context)});
     }
   }
 
@@ -100,9 +100,10 @@ class _PageAddTaskState extends State<PageAddTask> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: submitForm,
-        child: const Icon(Icons.save),
+        label: const Text("SALVAR"),
+        icon: const Icon(Icons.save),
       ),
     );
   }

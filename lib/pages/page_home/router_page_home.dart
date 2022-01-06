@@ -1,5 +1,5 @@
-import 'package:app_pets/pages/page%20pets/page_home.dart';
-import 'package:app_pets/pages/page%20pets/subpages/page_add_task/page_add_task.dart';
+import 'package:app_pets/pages/page_home/subpages/page_home/page_home.dart';
+import 'package:app_pets/pages/page_home/subpages/page_add_task/page_add_task.dart';
 import 'package:flutter/material.dart';
 
 class RouterPageHome extends StatefulWidget {
