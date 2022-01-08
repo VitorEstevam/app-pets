@@ -2,6 +2,8 @@ import 'package:app_pets/classes/task.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import 'widgets/task_unique_calendar.dart';
+
 Widget getBodyByTaskType(Task task) {
   switch (task.runtimeType) {
     case TaskUnique:
@@ -29,23 +31,35 @@ class BodyUnique extends StatelessWidget {
               overflow: TextOverflow.ellipsis),
           Container(height: 15),
           Text(
-            DateFormat('dd/MM/yyyy').format(_task.subTask.dateToDo),
+            DateFormat('dd/MM/yyyy').format(_task.subTasks[0].dateToDo),
             style: const TextStyle(fontSize: 15),
           ),
+          TaskCalendar(_task)
         ],
       ),
     );
   }
 }
 
-class PageTask extends StatelessWidget {
+class PageTask extends StatefulWidget {
   final Task task;
 
   const PageTask({Key? key, required this.task}) : super(key: key);
 
   @override
+  State<PageTask> createState() => _PageTaskState();
+}
+
+class _PageTaskState extends State<PageTask> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text(task.title)), body: getBodyByTaskType(task));
+      appBar: AppBar(title: Text(widget.task.title)),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () => setState(() {
+                widget.task.markAsDone();
+              })),
+      body: getBodyByTaskType(widget.task),
+    );
   }
 }

@@ -10,7 +10,7 @@ class StoreTasks = _StoreTasks with _$StoreTasks;
 // Create the class
 abstract class _StoreTasks with Store {
   @observable
-  ObservableList<Task> tasks = ObservableList<Task>.of([TaskUnique("Levar para tomar banho", DateTime.now()), TaskUnique("Segunda dose do remédio de verme", DateTime.now())]);
+  ObservableList<Task> tasks = ObservableList<Task>.of([TaskUnique("Levar para tomar banho", DateTime(2022,01,15)), TaskUnique("Segunda dose do remédio de verme", DateTime(2022,01,05))]);
 
   @action
   void insert(Task t) {

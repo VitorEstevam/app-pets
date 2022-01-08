@@ -47,7 +47,7 @@ class CardTask extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      DateFormat('dd/MM/yyyy').format(_task.subTask.dateToDo),
+                      DateFormat('dd/MM/yyyy').format(_task.subTasks[0].dateToDo),
                       style: const TextStyle(fontSize: 15),
                     ),
                     Text(_task.title,
