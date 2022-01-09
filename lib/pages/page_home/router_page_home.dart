@@ -12,7 +12,8 @@ class RouterPageHome extends StatefulWidget {
   _RouterPageHomeState createState() => _RouterPageHomeState();
 }
 
-class _RouterPageHomeState extends State<RouterPageHome> {
+class _RouterPageHomeState extends State<RouterPageHome>
+    with AutomaticKeepAliveClientMixin<RouterPageHome> {
   @override
   Widget build(BuildContext context) {
     return Navigator(
@@ -20,11 +21,15 @@ class _RouterPageHomeState extends State<RouterPageHome> {
         Widget page = const PageHome();
         if (settings.name == 'page_pets') page = const PageHome();
         if (settings.name == 'page_add_task') page = const PageAddTask();
-        if (settings.name == 'page_task') page = PageTask( task: settings.arguments as Task,);
+        if (settings.name == 'page_task')
+          page = PageTask(
+            task: settings.arguments as Task,
+          );
         return MaterialPageRoute(builder: (_) => page);
       },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
-
-
