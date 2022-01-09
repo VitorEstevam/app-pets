@@ -2,7 +2,7 @@ import 'package:app_pets/classes/task.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'widgets/task_unique_calendar.dart';
+import 'widgets/task_calendar.dart';
 
 Widget getBodyByTaskType(Task task) {
   switch (task.runtimeType) {
@@ -34,6 +34,7 @@ class BodyUnique extends StatelessWidget {
             DateFormat('dd/MM/yyyy').format(_task.subTasks[0].dateToDo),
             style: const TextStyle(fontSize: 15),
           ),
+          const Text("Frequência", style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
           TaskCalendar(_task)
         ],
       ),

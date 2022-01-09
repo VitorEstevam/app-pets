@@ -15,6 +15,8 @@ class SubTask {
 }
 
 //-------------------------------------
+enum TaskStatus { late, today, coming }
+
 class Task {
   String title = "";
   List<SubTask> subTasks = [];
@@ -27,6 +29,23 @@ class Task {
   void updateSubTasks() {
     //pass
   }
+  TaskStatus getStatus() {
+    var now = DateTime.now();
+    var today = DateTime(now.year, now.month, now.day);
+    var date = subTasks[0].dateToDo;
+
+    var c = date.compareTo(today);
+    switch (c) {
+      case -1:
+        return TaskStatus.late;
+      case 0:
+        return TaskStatus.today;
+      case 1:
+        return TaskStatus.coming;
+      default:
+        return TaskStatus.late;
+    }
+  }
 
   //get status -> enum late, onDay and coming
 
@@ -37,7 +56,7 @@ class Task {
     );
 
     for (var subTask in subTasks) {
-    map[subTask.dateToDo] = [subTask.done];
+      map[subTask.dateToDo] = [subTask.done];
     }
     return map;
   }
@@ -64,7 +83,7 @@ class TaskUnique extends Task {
   @override
   void markAsDone() {
     var _now = DateTime.now().toUtc();
-    if (subTasks[0].dateToDo.compareTo(_now) == 0) {
+    if (getStatus() == TaskStatus.today) {
       subTasks[0].done = true;
     }
   }

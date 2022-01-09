@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:app_pets/classes/task.dart';
 import 'package:app_pets/consts/theme.dart';
+import 'package:app_pets/consts/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/locale.dart';
@@ -23,10 +24,12 @@ class _TaskCalendarState extends State<TaskCalendar> {
   }
 
   Color getEventColor(DateTime date) {
+    var status = widget.task.getStatus();
+    
     if (tasks[date]![0]) {
       return Colors.green;
     } else {
-      if (date.compareTo(DateTime.now().toUtc()) < 0) {
+      if (compareDates(date, DateTime.now()) < 0) {
         return Colors.red;
       } else {
         return Colors.grey;
