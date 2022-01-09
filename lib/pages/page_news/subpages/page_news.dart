@@ -1,4 +1,5 @@
 import 'package:app_pets/classes/news.dart';
+import 'package:app_pets/pages/page_news/subpages/page_news_view.dart';
 import 'package:app_pets/stores/news/store_news.dart';
 import 'package:app_pets/widgets/image_loader.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,10 @@ class NewsCard extends StatelessWidget {
   final News item;
 
   void openNews(BuildContext context, News news) {
-    Navigator.pushNamed(context, "page_news_view");
+    Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => PageNewsView(news)),
+        );
   }
 
   @override

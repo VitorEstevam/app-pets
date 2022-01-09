@@ -16,11 +16,7 @@ class _RouterPageNewsState extends State<RouterPageNews>
   Widget build(BuildContext context) {
     return Navigator(
       onGenerateRoute: (settings) {
-        Widget page = const PageNews();
-        if (settings.name == 'page_news') page = const PageNews();
-        if (settings.name == 'page_news_view') page = PageNewsView();
-
-        return MaterialPageRoute(builder: (_) => page);
+        return MaterialPageRoute(builder: (_) => PageNews());
       },
     );
   }

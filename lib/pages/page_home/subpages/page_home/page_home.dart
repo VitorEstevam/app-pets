@@ -14,9 +14,9 @@ class PageHome extends StatelessWidget {
       backgroundColor: Theme.of(context).backgroundColor,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => PageAddTask()),
-  ),
+          context,
+          MaterialPageRoute(builder: (context) => PageAddTask()),
+        ),
         label: Text('ADICIONAR TAREFA'),
         icon: Icon(Icons.add),
       ),
@@ -82,7 +82,8 @@ class MainButtons extends StatelessWidget {
               child: const SizedBox(
                 height: 40,
                 child: Center(
-                  child: Text("VER TODOS", style:TextStyle(fontWeight: FontWeight.bold)),
+                  child: Text("VER TODOS",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
               ),
             ),
@@ -99,7 +100,8 @@ class MainButtons extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
                       Icon(Icons.add),
-                      Text("ADICIONAR PET", style:TextStyle(fontWeight: FontWeight.bold)),
+                      Text("ADICIONAR PET",
+                          style: TextStyle(fontWeight: FontWeight.bold)),
                     ],
                   ),
                 )),
