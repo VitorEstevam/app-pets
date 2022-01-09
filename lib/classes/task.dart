@@ -28,6 +28,8 @@ class Task {
     //pass
   }
 
+  //get status -> enum late, onDay and coming
+
   LinkedHashMap<DateTime, List<bool>> toMap() {
     var map = LinkedHashMap<DateTime, List<bool>>(
       equals: isSameDay,
@@ -61,7 +63,8 @@ class TaskUnique extends Task {
 
   @override
   void markAsDone() {
-    if (subTasks[0].dateToDo.compareTo(DateTime.now()) >= 0) {
+    var _now = DateTime.now().toUtc();
+    if (subTasks[0].dateToDo.compareTo(_now) == 0) {
       subTasks[0].done = true;
     }
   }
@@ -114,24 +117,24 @@ class TaskPeriodic extends TaskMultiday {
 }
 
 //-------------------------
-void main() {
-//   var tu1 = TaskUnique("task unique 1", DateTime(2022, 01, 02));
-//   tu1.markAsDone();
-//   print(tu1.title +
-//       tu1.subTasks[0].dateToDo.toString() +
-//       tu1.subTasks[0].done.toString());
+// void main() {
+// //   var tu1 = TaskUnique("task unique 1", DateTime(2022, 01, 02));
+// //   tu1.markAsDone();
+// //   print(tu1.title +
+// //       tu1.subTasks[0].dateToDo.toString() +
+// //       tu1.subTasks[0].done.toString());
 
-//   var tu2 = TaskUnique("aaaaa", DateTime.now().add(Duration(days: 1)));
-//   tu2.markAsDone();
-//   print(tu2.title +
-//       tu2.subTasks[0].dateToDo.toString() +
-//       tu2.subTasks[0].done.toString());
+// //   var tu2 = TaskUnique("aaaaa", DateTime.now().add(Duration(days: 1)));
+// //   tu2.markAsDone();
+// //   print(tu2.title +
+// //       tu2.subTasks[0].dateToDo.toString() +
+// //       tu2.subTasks[0].done.toString());
 
-  var tu = TaskUnique("t1", DateTime(2019));
-  var tw = TaskWeekly("t1", [DateTime.monday, DateTime.tuesday]);
-  var tp = TaskPeriodic("t1", Duration(days: 2));
+//   var tu = TaskUnique("t1", DateTime(2019));
+//   var tw = TaskWeekly("t1", [DateTime.monday, DateTime.tuesday]);
+//   var tp = TaskPeriodic("t1", Duration(days: 2));
 
-  print(tu is Task);
-  print(tw is Task);
-  print(tp is Task);
-}
+//   print(tu is Task);
+//   print(tw is Task);
+//   print(tp is Task);
+// }

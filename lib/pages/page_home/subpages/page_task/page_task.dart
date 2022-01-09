@@ -55,7 +55,9 @@ class _PageTaskState extends State<PageTask> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(widget.task.title)),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
+          label: const Text("Feita hoje"),
+          icon: const Icon(Icons.check),
           onPressed: () => setState(() {
                 widget.task.markAsDone();
               })),

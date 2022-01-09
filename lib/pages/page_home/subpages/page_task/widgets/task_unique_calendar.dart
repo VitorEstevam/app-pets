@@ -22,11 +22,11 @@ class _TaskCalendarState extends State<TaskCalendar> {
     return tasks[day] ?? [];
   }
 
-  Color getEventColor(date) {
+  Color getEventColor(DateTime date) {
     if (tasks[date]![0]) {
       return Colors.green;
     } else {
-      if (date.compareTo(DateTime.now()) < 0) {
+      if (date.compareTo(DateTime.now().toUtc()) < 0) {
         return Colors.red;
       } else {
         return Colors.grey;

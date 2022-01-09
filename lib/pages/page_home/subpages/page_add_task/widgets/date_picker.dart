@@ -14,37 +14,43 @@ class _DatePickerState extends State<DatePicker> {
   TextEditingController dateinput = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Por favor, preencha a data';
-        }
-        return null;
-      },
-      controller: dateinput,
-      decoration: const InputDecoration(
-        labelText: "Data",
-        border: OutlineInputBorder(),
-      ),
-      readOnly: true,
-      onTap: () async {
-        DateTime? pickedDate = await showDatePicker(
-          context: context,
-          initialDate: DateTime.now(),
-          firstDate: DateTime.now(),
-          lastDate: DateTime(DateTime.now().year + 2),
-        );
-        if (pickedDate != null) {
-          String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
-          setState(
-            () {
-              dateinput.text = formattedDate;
+    return LayoutBuilder(builder: (context, constraints) {
+        return Container(
+          width: constraints.maxWidth/2,
+          child: TextFormField(
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Por favor, preencha a data';
+              }
+              return null;
             },
-          );
-          
-          widget.callback(pickedDate);
-        }
-      },
+            controller: dateinput,
+            decoration: const InputDecoration(
+              labelText: "Data",
+              border: OutlineInputBorder(),
+            ),
+            readOnly: true,
+            onTap: () async {
+              DateTime? pickedDate = await showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime.now(),
+                lastDate: DateTime(DateTime.now().year + 2),
+              );
+              if (pickedDate != null) {
+                String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
+                setState(
+                  () {
+                    dateinput.text = formattedDate;
+                  },
+                );
+                
+                widget.callback(pickedDate);
+              }
+            },
+          ),
+        );
+      }
     );
   }
 }

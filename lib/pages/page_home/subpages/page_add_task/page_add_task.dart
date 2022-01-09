@@ -22,19 +22,13 @@ class PageAddTask extends StatefulWidget {
 
 class _PageAddTaskState extends State<PageAddTask> {
   String? title;
-  DateTime? date;
+  Function? taskFactory;
+  dynamic taskParam;
   String? pet;
 
-  void setDateUnique(DateTime _date) {
-    date = _date;
-  }
-
-  void setDateWeekly(DateTime _date) {
-    // todo
-  }
-
-  void setDatePeriod(DateTime _date) {
-    // todo
+  void setFrequency(Function factory,dynamic param){
+    taskParam = param;
+    taskFactory = factory;
   }
 
   void setTitle(String _title) {
@@ -48,10 +42,13 @@ class _PageAddTaskState extends State<PageAddTask> {
   void submitForm() {
     if (_formKey.currentState!.validate()) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Task salva'), duration: Duration(milliseconds: 500)),
+        const SnackBar(
+            content: Text('Task salva'), duration: Duration(milliseconds: 500)),
       );
-      var task = TaskUnique(title!, date!);
+
+      var task = taskFactory!(title,taskParam);
       context.read<StoreTasks>().insert(task);
+
       Future.delayed(
           const Duration(milliseconds: 500), () => {Navigator.pop(context)});
     }
@@ -67,39 +64,30 @@ class _PageAddTaskState extends State<PageAddTask> {
       appBar: AppBar(
         title: const Text("Adicionar Tarefa"),
       ),
-      body: CustomScrollView(
-        slivers: [
-          SliverFillRemaining(
-            hasScrollBody: true,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(height: 20),
-                    TitleField(
-                      callback: setTitle,
-                    ),
-                    Container(height: 20),
-                    PetSelector(
-                      callback: (a) => {print(a)},
-                      pets: const ["luke", "zelda", "pelor"],
-                    ),
-                    Container(height: 20),
-                    Expanded(
-                      child: PeriodSelector(
-                        onSelectedUnique: setDateUnique,
-                      ),
-                    ),
-                  ],
-                ),
+      body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(height: 20),
+                  TitleField(
+                    callback: setTitle,
+                  ),
+                  Container(height: 20),
+                  PetSelector(
+                    callback: (a) => {print(a)},
+                    pets: const ["luke", "zelda", "pelor"],
+                  ),
+                  Container(height: 20),
+                  PeriodSelector(setFrequency),
+                ],
               ),
             ),
-          ),
-        ],
-      ),
+          )),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: submitForm,
         label: const Text("SALVAR"),
