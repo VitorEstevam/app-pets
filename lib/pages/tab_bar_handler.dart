@@ -1,5 +1,6 @@
 import 'package:app_pets/pages/page_home/router_page_home.dart';
 import 'package:app_pets/pages/page_home/subpages/page_home/page_home.dart';
+import 'package:app_pets/pages/page_news/router_page_news.dart';
 import 'package:flutter/material.dart';
 
 class TabBarHandler extends StatelessWidget {
@@ -39,9 +40,7 @@ class TabBarHandler extends StatelessWidget {
           child: const TabBarView(
             physics: NeverScrollableScrollPhysics(),
             children: <Widget>[
-              Center(
-                child: Text("Noticias"),
-              ),
+              RouterPageNews(),
               Center(
                 child: Text("tarefas"),
               ),
