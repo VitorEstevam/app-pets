@@ -1,4 +1,5 @@
 import 'package:app_pets/pages/page_home/subpages/page_add_task/page_add_task.dart';
+import 'package:app_pets/pages/page_home/subpages/page_add_task/page_add_task.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/pet_picture.dart';
@@ -15,7 +16,9 @@ class PageHome extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => PageAddTask()),
+          MaterialPageRoute(
+            builder: (context) => const PageAddTask(),
+          ),
         ),
         label: Text('ADICIONAR TAREFA'),
         icon: Icon(Icons.add),
