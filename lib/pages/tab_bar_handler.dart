@@ -1,6 +1,6 @@
-import 'package:app_pets/pages/page_home/router_page_home.dart';
 import 'package:app_pets/pages/page_home/subpages/page_home/page_home.dart';
-import 'package:app_pets/pages/page_news/router_page_news.dart';
+import 'package:app_pets/pages/page_news/subpages/page_news.dart';
+import 'package:app_pets/widgets/tab_view_navigator.dart';
 import 'package:flutter/material.dart';
 
 class TabBarHandler extends StatelessWidget {
@@ -37,14 +37,22 @@ class TabBarHandler extends StatelessWidget {
         ),
         body: Container(
           color: Theme.of(context).backgroundColor,
-          child: const TabBarView(
+          child: TabBarView(
             physics: NeverScrollableScrollPhysics(),
             children: <Widget>[
-              RouterPageNews(),
+              TabViewNavigator(
+                builder: (context) {
+                  return const PageNews();
+                },
+              ),
               Center(
                 child: Text("tarefas"),
               ),
-              RouterPageHome(),
+              TabViewNavigator(
+                builder: (context) {
+                  return const PageHome();
+                },
+              ),
               Center(
                 child: Text("pets"),
               ),

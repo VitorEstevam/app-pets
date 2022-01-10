@@ -1,4 +1,5 @@
 import 'package:app_pets/classes/task.dart';
+import 'package:app_pets/pages/page_home/subpages/page_task/page_task.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -20,10 +21,13 @@ class CardTask extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10.0),
           child: InkWell(
-            onTap: () => Navigator.pushNamed(
+            onTap: () => Navigator.push(
               context,
-              "page_task",
-              arguments: task
+              MaterialPageRoute(
+                builder: (context) => PageTask(
+                  task: task,
+                ),
+              ),
             ),
             child: Container(
               height: 50,
@@ -47,7 +51,8 @@ class CardTask extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      DateFormat('dd/MM/yyyy').format(_task.subTasks[0].dateToDo),
+                      DateFormat('dd/MM/yyyy')
+                          .format(_task.subTasks[0].dateToDo),
                       style: const TextStyle(fontSize: 15),
                     ),
                     Text(_task.title,
