@@ -29,7 +29,9 @@ class BodyUnique extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(_task.title + " com ${_storeGlobal.pets[0].name}", //trocar pro pet dinamico
+          Text(
+              _task.title +
+                  " com ${_storeGlobal.pets[0].name}", //trocar pro pet dinamico
               style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               maxLines: 2,
               overflow: TextOverflow.ellipsis),
@@ -38,7 +40,8 @@ class BodyUnique extends StatelessWidget {
             DateFormat('dd/MM/yyyy').format(_task.subTasks[0].dateToDo),
             style: const TextStyle(fontSize: 15),
           ),
-          const Text("Frequência", style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+          const Text("Frequência",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           TaskCalendar(_task)
         ],
       ),
@@ -61,6 +64,7 @@ class _PageTaskState extends State<PageTask> {
     return Scaffold(
       appBar: AppBar(title: Text(widget.task.title)),
       floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: Theme.of(context).primaryColor,
           label: const Text("Feita hoje"),
           icon: const Icon(Icons.check),
           onPressed: () => setState(() {

@@ -15,7 +15,7 @@ class StoreGlobal = _StoreGlobal with _$StoreGlobal;
 // Create the class
 abstract class _StoreGlobal with Store {
   
-  bool tutorialDone = true;
+  bool tutorialDone = false;
 
   @observable
   ObservableList<Pet> pets = ObservableList<Pet>.of([]);
