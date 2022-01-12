@@ -66,7 +66,7 @@ class CreatePetIntro extends StatelessWidget {
               ),
             ),
 
-          ChooseCircleColor("lib/assets/dog1.jpeg", Colors.white, choose_color),
+          ChooseCircleColor("lib/assets/purple_icon.png", Colors.white, choose_color),
           
           Container(
              alignment: Alignment.centerLeft,

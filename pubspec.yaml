@@ -75,6 +75,7 @@ flutter:
     - lib/assets/Pag2_pets.png
     - lib/assets/Pag3_pets.png
     - lib/assets/Pag4_pets.png
+    - lib/assets/purple_icon.png
 
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

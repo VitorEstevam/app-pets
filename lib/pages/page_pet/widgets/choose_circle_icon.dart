@@ -7,15 +7,19 @@ class ChooseCircleIcon extends StatelessWidget {
 
   String imgUrl;
   void Function(String) action; 
+  Widget ?button;
+ 
 
-  ChooseCircleIcon(this.imgUrl, this.action);
+  ChooseCircleIcon(this.imgUrl, this.action){
+    
+    button = ElevatedButton(
+      child: Image.asset(imgUrl, width: 80, height: 80),
+      onPressed: (){   action(imgUrl); }
+    ); 
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      
-      child: Image.asset(imgUrl, width: 70, height: 70),
-      onPressed: (){ action(imgUrl); },
-    );
+    return button!;
   }
 }
