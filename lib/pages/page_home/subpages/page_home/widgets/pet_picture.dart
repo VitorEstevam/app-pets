@@ -14,34 +14,50 @@ class PetPicture extends StatelessWidget {
   Widget build(BuildContext context) {
     var _store_global = Provider.of<StoreGlobal>(context);
     
-    return Column(children: [
-      Expanded(
-        child: FittedBox(
-          fit: BoxFit.fitHeight,
-          alignment: Alignment.bottomCenter,
-          child: ImageLoader(_store_global.pets[0].petIconUrl), /// @TODO PEGAR ICON DO PET SELECIONADO
-        ),
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            _store_global.pets[0].name, //"Luke", /// @TODO Pegar nome do pet em destaque
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
+    return Column(
+      children: [
+        Stack(
+          alignment: Alignment.topCenter,
+          children: [
+          Expanded(
+            child: FittedBox(
+              fit: BoxFit.cover,
+              alignment: Alignment.bottomCenter,
+              child: Image.asset(_store_global.pets[0].colorIconUrl),
+            ),  
+          ),
+          
+          Expanded(
+            child: FittedBox(
+              fit: BoxFit.cover ,
+              alignment: Alignment.bottomCenter,
+              child: Image.asset(_store_global.pets[0].petIconUrl),
             ),
           ),
-          IconButton(
-            splashRadius:20.0,
-            onPressed: () {},
-            icon: Icon(
-              Icons.edit,
-              color: Theme.of(context).primaryColor,
-            ),
-          )
         ],
-      )
-    ]);
+
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              _store_global.pets[0].name, //"Luke", /// @TODO Pegar nome do pet em destaque
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            IconButton(
+              splashRadius:20.0,
+              onPressed: () {},
+              icon: Icon(
+                Icons.edit,
+                color: Theme.of(context).primaryColor,
+              ),
+            )
+          ],
+        )
+      ]
+    );
   }
 }
