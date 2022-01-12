@@ -15,18 +15,18 @@ class PetPicture extends StatelessWidget {
     var _store_global = Provider.of<StoreGlobal>(context);
     
     return Column(children: [
-      const Expanded(
+      Expanded(
         child: FittedBox(
           fit: BoxFit.fitHeight,
           alignment: Alignment.bottomCenter,
-          child: ImageLoader("lib/assets/dog1.jpeg"),
+          child: ImageLoader(_store_global.pets[0].petIconUrl), /// @TODO PEGAR ICON DO PET SELECIONADO
         ),
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            _store_global.pets[0].name, //"Luke",
+            _store_global.pets[0].name, //"Luke", /// @TODO Pegar nome do pet em destaque
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,

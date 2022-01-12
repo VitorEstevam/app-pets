@@ -1,4 +1,5 @@
 import 'package:app_pets/classes/pet.dart';
+import 'package:app_pets/classes/task.dart';
 import 'package:app_pets/pages/page_home/onboarding/onboard_intro.dart';
 import 'package:app_pets/pages/page_pet/create_pet_intro.dart';
 import 'package:app_pets/pages/tab_bar_handler.dart';
@@ -13,14 +14,33 @@ class StoreGlobal = _StoreGlobal with _$StoreGlobal;
 
 // Create the class
 abstract class _StoreGlobal with Store {
-  @observable
-  bool tutorialDone = false;
+  
+  bool tutorialDone = true;
 
   @observable
   ObservableList<Pet> pets = ObservableList<Pet>.of([]);
+
+  @observable
+  Map<String, Pet> mapPets = {};
+
   //ObservableList<Pet> pets = ObservableList<Pet>.of([ Pet("Zelda", "lib/assets/dog1.jpeg", Colors.purple)]);
   
+  List<String> getPetNames(){
+    List<String> names = [];
+    for(var i = 0; i < pets.length; i++){
+      names.add(pets[i].name);      
+    }
+    return names;
+  }
 
+  Pet getPetByIndex(int index){
+    if(index < pets.length){ 
+      return pets[index];
+    }
+    else{ 
+      return pets[0];
+    }
+  }
 
   Widget starting_app_route(){
     if(!tutorialDone) return OnboardingIntro();
@@ -29,7 +49,14 @@ abstract class _StoreGlobal with Store {
   }
 
   @action 
-  void addNewPet(Pet){
-    pets.add(Pet);    
+  void addNewPet(Pet newPet){
+    mapPets[newPet.name] = newPet;
+    pets.add(newPet);    
+  }
+
+  @action 
+  void addNewTaskToPet(String petName, Task task){
+    Pet pet = mapPets[petName]!;
+    pet.tasks.add(task);
   }
 }

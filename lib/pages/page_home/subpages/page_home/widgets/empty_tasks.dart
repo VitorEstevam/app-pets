@@ -1,5 +1,8 @@
+import 'package:app_pets/stores/example/store_global.dart';
 import 'package:app_pets/widgets/image_loader.dart';
 import 'package:flutter/material.dart';
+import 'package:mobx/mobx.dart';
+import 'package:provider/provider.dart';
 
 class EmptyTasks extends StatelessWidget {
   const EmptyTasks({
@@ -8,6 +11,8 @@ class EmptyTasks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var _storeGlobal = Provider.of<StoreGlobal>(context);
+
     return Column(
       children: [
         const Expanded(
@@ -18,8 +23,8 @@ class EmptyTasks extends StatelessWidget {
           ),
         ),
         Container(height: 10),
-        const Text(
-          "Não há tarefas para Luke... Vamos começar adicionando uma!",
+        Text(
+          "Não há tarefas para ${_storeGlobal.pets[0].name}... Vamos começar adicionando uma!",
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w400,

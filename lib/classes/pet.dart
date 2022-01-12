@@ -10,5 +10,4 @@ class Pet {
   List<Task> tasks = [];
 
   Pet(this.name, this.petIconUrl, this.colorReference);
-  
 }

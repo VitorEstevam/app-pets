@@ -1,6 +1,8 @@
 import 'package:app_pets/classes/task.dart';
+import 'package:app_pets/stores/example/store_global.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import 'widgets/task_calendar.dart';
 
@@ -19,13 +21,15 @@ class BodyUnique extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var _storeGlobal = Provider.of<StoreGlobal>(context);
+
     var _task = task as TaskUnique;
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(_task.title + " com luke", //trocar pro pet dinamico
+          Text(_task.title + " com ${_storeGlobal.pets[0].name}", //trocar pro pet dinamico
               style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               maxLines: 2,
               overflow: TextOverflow.ellipsis),

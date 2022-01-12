@@ -1,7 +1,9 @@
 import 'package:app_pets/classes/task.dart';
 import 'package:app_pets/pages/page_home/subpages/page_task/page_task.dart';
+import 'package:app_pets/stores/example/store_global.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class CardTask extends StatelessWidget {
   const CardTask({
@@ -14,6 +16,7 @@ class CardTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _task = task as TaskUnique;
+    var _store = Provider.of<StoreGlobal>(context);
 
     return Padding(
       padding: const EdgeInsets.only(left: 30.0),
@@ -32,8 +35,8 @@ class CardTask extends StatelessWidget {
             child: Container(
               height: 50,
               width: MediaQuery.of(context).size.width * 0.7,
-              decoration: const BoxDecoration(
-                boxShadow: [
+              decoration: BoxDecoration(
+                boxShadow: const [
                   BoxShadow(
                     color: Colors.black45,
                     blurRadius: 4,
@@ -42,7 +45,7 @@ class CardTask extends StatelessWidget {
                   ),
                 ],
                 borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                color: Colors.lightGreen, // pet color here
+                color: _store.pets[0].colorReference, // pet color here
               ),
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
