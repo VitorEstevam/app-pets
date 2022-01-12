@@ -1,3 +1,4 @@
+import 'package:app_pets/pages/page_pet/create_pet_intro.dart';
 import 'package:app_pets/pages/tab_bar_handler.dart';
 import 'package:app_pets/stores/example/store_global.dart';
 import 'package:app_pets/widgets/image_loader.dart';
@@ -74,7 +75,7 @@ class OnboardingIntro extends StatelessWidget {
             return Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                builder: (context) => TabBarHandler(),
+                builder: (context) => CreatePetIntro(),
               ),
               (route) => false, 
             );

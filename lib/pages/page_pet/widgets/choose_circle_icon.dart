@@ -11,9 +11,8 @@ class ChooseCircleIcon extends StatelessWidget {
  
 
   ChooseCircleIcon(this.imgUrl, this.action){
-    
-    button = ElevatedButton(
-      child: Image.asset(imgUrl, width: 80, height: 80),
+    button = OutlinedButton(
+      child: Image.asset(imgUrl, width: 100, height: 100),
       onPressed: (){   action(imgUrl); }
     ); 
   }
