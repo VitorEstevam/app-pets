@@ -58,7 +58,8 @@ class CreatePetIntro extends StatelessWidget {
             ),
           
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            
             children: [
               ChooseCircleIcon("lib/assets/cat_icon_creation.png", choose_icon),
               ChooseCircleIcon("lib/assets/dog_icon_creation.png", choose_icon),
@@ -75,7 +76,8 @@ class CreatePetIntro extends StatelessWidget {
             ),
 
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
             children: [
               ChooseCircleColor("lib/assets/green_icon.png", Colors.green, choose_color),
               ChooseCircleColor("lib/assets/purple_icon.png", Colors.purple, choose_color),
