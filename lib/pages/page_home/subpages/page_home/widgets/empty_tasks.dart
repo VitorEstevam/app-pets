@@ -13,24 +13,27 @@ class EmptyTasks extends StatelessWidget {
   Widget build(BuildContext context) {
     var _storeGlobal = Provider.of<StoreGlobal>(context);
 
-    return Column(
-      children: [
-        const Expanded(
-          child: FittedBox(
-            fit: BoxFit.fitHeight,
-            alignment: Alignment.topCenter,
-            child: ImageLoader("lib/assets/placeholderTask.png"),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal:15.0),
+      child: Column(
+        children: [
+          const Expanded(
+            child: FittedBox(
+              fit: BoxFit.fitHeight,
+              alignment: Alignment.topCenter,
+              child: ImageLoader("lib/assets/placeholderTask.png"),
+            ),
           ),
-        ),
-        Container(height: 10),
-        Text(
-          "Não há tarefas para ${_storeGlobal.pets[0].name}... Vamos começar adicionando uma!",
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w400,
+          Container(height: 10),
+          Text(
+            "Não há tarefas para ${_storeGlobal.pets[0].name}... Vamos começar adicionando uma!",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w400,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
