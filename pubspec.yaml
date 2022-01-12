@@ -71,6 +71,11 @@ flutter:
     - lib/assets/dog1.jpeg
     - lib/assets/placeholderTask.png
     - lib/assets/newsHeader.jpg
+    - lib/assets/Pag1_pets.png
+    - lib/assets/Pag2_pets.png
+    - lib/assets/Pag3_pets.png
+    - lib/assets/Pag4_pets.png
+
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
