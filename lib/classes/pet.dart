@@ -1,11 +1,14 @@
 
+import 'package:app_pets/classes/task.dart';
 import 'package:flutter/cupertino.dart';
 
 class Pet {
   String name;
-  Image petIcon;
+  String petIconUrl;
   Color colorReference;
 
-  Pet(this.name, this.petIcon, this.colorReference);
+  List<Task> tasks = [];
 
+  Pet(this.name, this.petIconUrl, this.colorReference);
+  
 }
