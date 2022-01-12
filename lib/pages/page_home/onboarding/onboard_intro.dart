@@ -147,16 +147,14 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
         description: textBody,
         styleDescription: const TextStyle(
             color: Colors.black,
-            fontSize: 20.0,
-            fontStyle: FontStyle.italic,
-            fontFamily: 'Raleway'),
+            fontSize: 20.0),
         maxLineTitle: 2,
         marginTitle:
             const EdgeInsets.only(left: 20.0, right:20.0,bottom: 10.0, top: 30),
         marginDescription:
             const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         backgroundImage: imgPath,
-        backgroundImageFit: BoxFit.fitWidth,
+        backgroundImageFit: BoxFit.cover,
         backgroundOpacity: 0.0,);
   }
 
@@ -199,7 +197,7 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
       prevButtonStyle: myButtonStyle(),
 
       // Next button
-      renderNextBtn: myButton("AVANÇAR"),
+      renderNextBtn: myButton("AVANÇ12312312312AR"),
       nextButtonStyle: myButtonStyle(),
 
       // Done button
