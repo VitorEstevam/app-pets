@@ -101,6 +101,7 @@ class _PageAddTaskState extends State<PageAddTask> {
         onPressed: submitForm,
         label: const Text("SALVAR"),
         icon: const Icon(Icons.save),
+                backgroundColor: Theme.of(context).primaryColor,
       ),
     );
   }
