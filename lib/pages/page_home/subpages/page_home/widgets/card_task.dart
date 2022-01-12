@@ -45,7 +45,7 @@ class CardTask extends StatelessWidget {
                   ),
                 ],
                 borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                color: _store.pets[0].colorReference, // pet color here
+                color: _store.pets[0].colorReference, // @TODO SELECTED PET COLOR
               ),
               child: Padding(
                 padding: const EdgeInsets.all(15.0),

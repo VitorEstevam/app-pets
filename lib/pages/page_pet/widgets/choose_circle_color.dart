@@ -7,16 +7,18 @@ class ChooseCircleColor extends StatelessWidget {
 
   String imgUrl;
   Color color = Colors.white;
-  void Function(Color) action; 
+  void Function(String, Color) action; 
 
   ChooseCircleColor(this.imgUrl, this.color, this.action);
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      
-      child: Image.asset(imgUrl, width: 70, height: 70),
-      onPressed: (){ action(color); },
-    );
+    return Container(
+      padding: EdgeInsets.only(left: 20),
+      child: OutlinedButton(
+        child: Image.asset(imgUrl, width: 100, height: 100, fit: BoxFit.fill,),
+        onPressed: (){   action(imgUrl, color); }
+      )
+    ); 
   }
 }

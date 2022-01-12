@@ -12,14 +12,16 @@ class CreatePetIntro extends StatelessWidget {
   
   String ?animalName;
   String ?animalImageUrl;
+  String ?iconColorUrl;
   Color ?iconColor; 
 
   void choose_icon(String stringUrl){
     animalImageUrl = stringUrl;
   }
 
-  void choose_color(Color color){
+  void choose_color(String colorUrl, Color color){
     iconColor = color;
+    iconColorUrl = colorUrl;
   }
 
   void setAnimalName(String name){
@@ -36,7 +38,7 @@ class CreatePetIntro extends StatelessWidget {
     var _store_global = Provider.of<StoreGlobal>(context);
 
     void createAnimal(){
-      _store_global.addNewPet( Pet(animalName!, animalImageUrl!, iconColor!) );
+      _store_global.addNewPet( Pet(animalName!, animalImageUrl!, iconColorUrl!, iconColor!) );
       Navigator.of(context).push(MaterialPageRoute(builder: (context)=> TabBarHandler()));
     }  
     
@@ -55,7 +57,13 @@ class CreatePetIntro extends StatelessWidget {
               ),
             ),
           
-          ChooseCircleIcon("lib/assets/dog1.jpeg", choose_icon),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ChooseCircleIcon("lib/assets/cat_icon_creation.png", choose_icon),
+              ChooseCircleIcon("lib/assets/dog_icon_creation.png", choose_icon),
+            ],
+          ),
           
           Container(
             alignment: Alignment.centerLeft,
@@ -66,7 +74,13 @@ class CreatePetIntro extends StatelessWidget {
               ),
             ),
 
-          ChooseCircleColor("lib/assets/purple_icon.png", Colors.purple, choose_color),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ChooseCircleColor("lib/assets/green_icon.png", Colors.green, choose_color),
+              ChooseCircleColor("lib/assets/purple_icon.png", Colors.purple, choose_color),
+            ],
+          ),
           
           Container(
              alignment: Alignment.centerLeft,
