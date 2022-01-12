@@ -76,7 +76,7 @@ class PageHome extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).backgroundColor,
       floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: Theme.of(context).primaryColor,
+        // backgroundColor: Theme.of(context).primaryColor,
         onPressed: () => Navigator.push(
           context,
           MaterialPageRoute(

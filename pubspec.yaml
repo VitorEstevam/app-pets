@@ -91,6 +91,8 @@ flutter_icons:
   android: "launcher_icon"
   ios: true
   image_path: "lib/assets/icon/icon.png"
+  adaptive_icon_background: "#e84758"
+  adaptive_icon_foreground: "lib/assets/icon/icon_foreground.png"
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
