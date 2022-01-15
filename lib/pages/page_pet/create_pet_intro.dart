@@ -1,11 +1,13 @@
 import 'package:app_pets/classes/pet.dart';
 import 'package:app_pets/pages/page_pet/widgets/choose_circle_color.dart';
-import 'package:app_pets/pages/page_pet/widgets/choose_circle_icon.dart';
+import 'package:app_pets/pages/page_pet/widgets/color_selector.dart';
 import 'package:app_pets/pages/tab_bar_handler.dart';
 import 'package:app_pets/stores/example/store_global.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'widgets/icon_selector.dart';
 
 class CreatePetIntro extends StatelessWidget {
   String? animalName;
@@ -14,31 +16,29 @@ class CreatePetIntro extends StatelessWidget {
   Color? iconColor;
 
   void choose_icon(String stringUrl) {
+    print(stringUrl);
     animalImageUrl = stringUrl;
   }
 
-  void choose_color(String colorUrl, Color color) {
+  void choose_color(Color color) {
     iconColor = color;
-    iconColorUrl = colorUrl;
   }
 
   void setAnimalName(String name) {
     animalName = name;
   }
 
-  void checkAllDone() {}
+  void createAnimal(BuildContext context) {
+    Provider.of<StoreGlobal>(context, listen: false)
+        .addNewPet(Pet(animalName!, animalImageUrl!, iconColor!));
+
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (context) => const TabBarHandler()));
+  }
 
   @override
   Widget build(BuildContext context) {
-    var _store_global = Provider.of<StoreGlobal>(context);
-
-    void createAnimal() {
-      _store_global.addNewPet(
-          Pet(animalName!, animalImageUrl!, iconColorUrl!, iconColor!));
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => TabBarHandler()));
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("nome do app"),
@@ -50,49 +50,11 @@ class CreatePetIntro extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(height: 20),
-              const Text(
-                "Selecione seu pet",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
+              IconSelector(onSelect: choose_icon),
+              
               Container(height: 20),
-              Row(
-                children: [
-                  Expanded(
-                    child: ChooseCircleIcon(
-                        "lib/assets/cat_icon_creation.png", choose_icon),
-                  ),
-                  Expanded(
-                    child: ChooseCircleIcon(
-                        "lib/assets/dog_icon_creation.png", choose_icon),
-                  ),
-                  Expanded(
-                    child: ChooseCircleIcon(
-                        "lib/assets/dog_icon_creation.png", choose_icon),
-                  ),
-                ],
-              ),
-              Container(height: 20),
-              const Text(
-                "Selecione uma cor para ele",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              Container(height: 20),
-              Row(
-                children: [
-                  Expanded(
-                    child: ChooseCircleColor("lib/assets/green_icon.png",
-                        Colors.green, choose_color),
-                  ),
-                  Expanded(
-                    child: ChooseCircleColor("lib/assets/green_icon.png",
-                        Colors.green, choose_color),
-                  ),
-                  Expanded(
-                    child: ChooseCircleColor("lib/assets/purple_icon.png",
-                        Colors.purple, choose_color),
-                  ),
-                ],
-              ),
+              ColorSelector(onSelect: choose_color),
+
               Container(height: 20),
               const Text(
                 "Nome do seu animal",
@@ -128,7 +90,7 @@ class CreatePetIntro extends StatelessWidget {
                   width: 200,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: createAnimal,
+                    onPressed: () => createAnimal(context),
                     child: const Text("Adicionar Pet",
                         style: TextStyle(
                           fontSize: 20,
@@ -143,3 +105,5 @@ class CreatePetIntro extends StatelessWidget {
     );
   }
 }
+
+

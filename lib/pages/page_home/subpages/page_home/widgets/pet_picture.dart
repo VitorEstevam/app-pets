@@ -17,7 +17,7 @@ class PetPicture extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Image.asset(_store_global.pets[0].colorIconUrl),
+            // Image.asset(_store_global.pets[0].colorIconUrl),
             Image.asset(_store_global.pets[0].petIconUrl),
           ],
         ),
