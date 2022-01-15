@@ -8,6 +8,44 @@ class TaskWeekly extends Task {
   }
 
   @override
+  String get subTitle {
+    var content = "";
+
+    for (var day in weekdays) {
+      if (content != "") content += " - ";
+
+      switch (day) {
+        case DateTime.monday:
+          content += "Segunda";
+          break;
+        case DateTime.tuesday:
+          content += "Terça";
+          break;
+        case DateTime.wednesday:
+          content += "Quarta";
+          break;
+        case DateTime.thursday:
+          content += "Quinta";
+          break;
+        case DateTime.friday:
+          content += "Sexta";
+          break;
+        case DateTime.saturday:
+          content += "Sábado";
+          break;
+        case DateTime.sunday:
+          content += "Domingo";
+          break;
+        default:
+          content += "";
+          break;
+      }
+    }
+
+    return content;
+  }
+
+  @override
   int getStreak() {
     var streak = 0;
     for (var task in subTasks) {
@@ -39,7 +77,7 @@ class TaskWeekly extends Task {
       }
     }
 
-    // get next
+    // get next events
     for (var i = 0; i < 7; i++) {
       var day = DateTime(end.year, end.month, end.day + (i));
 

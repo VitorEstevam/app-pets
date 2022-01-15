@@ -20,8 +20,8 @@ abstract class _StoreGlobal with Store {
   @observable
   ObservableList<Pet> pets = ObservableList<Pet>.of([
     Pet(
-      "Zelda",
-      "lib/assets/cat_icon_creation.png",
+      "Luke",
+      "lib/assets/dog_icon_creation.png",
       "lib/assets/purple_icon.png",
       Colors.purple,
     )

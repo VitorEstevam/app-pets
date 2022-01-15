@@ -50,6 +50,10 @@ class Task {
     startDate = DateTime.now();
   }
 
+  String get subTitle {
+    return "";
+  }
+
   void markAsDone() {
     //pass
   }

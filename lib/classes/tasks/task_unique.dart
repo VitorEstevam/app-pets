@@ -1,10 +1,17 @@
 
+import 'package:intl/intl.dart';
+
 import 'task.dart';
 
 class TaskUnique extends Task {
   TaskUnique(title, DateTime date) : super(title) {
     var _task = SubTask(date);
     subTasks.add(_task);
+  }
+
+  @override
+  String get subTitle {
+    return  DateFormat('dd/MM/yyyy').format(subTasks[0].dateToDo);
   }
 
   @override
