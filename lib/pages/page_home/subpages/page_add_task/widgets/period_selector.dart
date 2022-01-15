@@ -1,12 +1,14 @@
-import 'package:app_pets/classes/task.dart';
+import 'package:app_pets/classes/tasks/task.dart';
+import 'package:app_pets/classes/tasks/task_unique.dart';
 import 'package:app_pets/pages/page_home/subpages/page_add_task/widgets/date_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PeriodSelector extends StatefulWidget {
   final Function(Function factory, dynamic param) onPeriodSubmit;
-  
-  const PeriodSelector(this.onPeriodSubmit, {
+
+  const PeriodSelector(
+    this.onPeriodSubmit, {
     Key? key,
   }) : super(key: key);
 
@@ -17,15 +19,15 @@ class PeriodSelector extends StatefulWidget {
 class _PeriodSelectorState extends State<PeriodSelector> {
   var isSelected = [true, false, false];
 
-  void submitTaskUnique(DateTime dt){
-    var _factory = (String a, dynamic b) => TaskUnique(a,b);
+  void submitTaskUnique(DateTime dt) {
+    var _factory = (String a, dynamic b) => TaskUnique(a, b);
     widget.onPeriodSubmit(_factory, dt);
   }
 
   Widget getBody() {
     if (isSelected[0]) {
       return DatePicker(
-        callback: (a)=>submitTaskUnique(a),
+        callback: (a) => submitTaskUnique(a),
       );
     }
     if (isSelected[1]) return Container();

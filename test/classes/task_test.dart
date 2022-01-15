@@ -1,16 +1,19 @@
-import 'package:app_pets/classes/task.dart';
+import 'package:app_pets/classes/tasks/task.dart';
+import 'package:app_pets/classes/tasks/task_weekly.dart';
 import 'package:test/test.dart';
 
-// void main() {
-//   final now = DateTime.now();
-//   final tomorrow = DateTime(now.year, now.month, now.day + 1);
-//   test('mark a unique task as done', () {
-//     var task = TaskUnique("test task", tomorrow);
+void main() {
+  test('a', () {
+    var task = TaskWeekly("test task",[DateTime.monday, DateTime.saturday]);
+    // task.startDate = DateTime(2022,01,16);
+    // task.updateSubTasks();
+    print(task);
+    // var date = task.getNextDate();
+    // expect(date, equals(tomorrow));
 
-//     var date = task.getNextDate();
-//     expect(date, equals(tomorrow));
+    // task.markAsDone();
+    // expect(task.subTask[0].done, true);
+  });
 
-//     task.markAsDone();
-//     expect(task.subTask[0].done, true);
-//   });
-// }
+
+}

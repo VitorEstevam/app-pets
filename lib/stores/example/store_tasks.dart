@@ -1,4 +1,4 @@
-import 'package:app_pets/classes/task.dart';
+import 'package:app_pets/classes/tasks/task.dart';
 import 'package:mobx/mobx.dart';
 
 // run builder on cmd to generate the code

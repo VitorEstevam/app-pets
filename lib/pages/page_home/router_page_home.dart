@@ -1,4 +1,4 @@
-import 'package:app_pets/classes/task.dart';
+import 'package:app_pets/classes/tasks/task.dart';
 import 'package:app_pets/pages/page_home/subpages/page_home/page_home.dart';
 import 'package:app_pets/pages/page_home/subpages/page_add_task/page_add_task.dart';
 import 'package:flutter/material.dart';

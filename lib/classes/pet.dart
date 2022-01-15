@@ -1,5 +1,5 @@
 
-import 'package:app_pets/classes/task.dart';
+import 'package:app_pets/classes/tasks/task.dart';
 import 'package:flutter/cupertino.dart';
 
 class Pet {
