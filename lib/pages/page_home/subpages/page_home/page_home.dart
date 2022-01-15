@@ -1,58 +1,10 @@
+import 'package:app_pets/consts/theme.dart';
 import 'package:app_pets/pages/page_home/subpages/page_add_task/page_add_task.dart';
 import 'package:app_pets/pages/page_home/subpages/page_add_task/page_add_task.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/pet_picture.dart';
 import 'widgets/task_view.dart';
-
-class PageHome extends StatelessWidget {
-  const PageHome({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Theme.of(context).backgroundColor,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const PageAddTask(),
-          ),
-        ),
-        label: Text('ADICIONAR TAREFA'),
-        icon: Icon(Icons.add),
-      ),
-      appBar: AppBar(
-        title: const Text("nome do app"),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Container(height: 10),
-          const Expanded(
-            flex: 2,
-            child: SizedBox(
-              width: double.infinity,
-              child: PetPicture(),
-            ),
-          ),
-          const MainButtons(),
-          const Expanded(
-            flex: 2,
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
-              child: SizedBox(
-                width: double.infinity,
-                child: TaskViewer(),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 class MainButtons extends StatelessWidget {
   const MainButtons({
@@ -111,6 +63,59 @@ class MainButtons extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class PageHome extends StatelessWidget {
+  const PageHome({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Theme.of(context).backgroundColor,
+      floatingActionButton: FloatingActionButton.extended(
+        // backgroundColor: Theme.of(context).primaryColor,
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const PageAddTask(),
+          ),
+        ),
+        label: const Text('ADICIONAR TAREFA'),
+        icon: const Icon(Icons.add),
+      ),
+      appBar: AppBar(
+        title: const Text("nome do app"),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Container(height: 10),
+          const Expanded(
+            flex: 2,
+            child: SizedBox(
+              width: double.infinity,
+              child: PetPicture(),
+            ),
+          ),
+          const MainButtons(),
+          const Expanded(
+            flex: 2,
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: SizedBox(
+                width: double.infinity,
+                child: TaskViewer(),
+              ),
+            ),
+          ),
+          Container(
+            height: 40,
+          )
+        ],
+      ),
     );
   }
 }

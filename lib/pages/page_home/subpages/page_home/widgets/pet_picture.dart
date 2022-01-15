@@ -1,5 +1,7 @@
+import 'package:app_pets/stores/example/store_global.dart';
 import 'package:app_pets/widgets/image_loader.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PetPicture extends StatelessWidget {
   const PetPicture({
@@ -8,26 +10,31 @@ class PetPicture extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var _store_global = Provider.of<StoreGlobal>(context);
+
     return Column(children: [
-      const Expanded(
-        child: FittedBox(
-          fit: BoxFit.fitHeight,
-          alignment: Alignment.bottomCenter,
-          child: ImageLoader("lib/assets/dog1.jpeg"),
+      Expanded(
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Image.asset(_store_global.pets[0].colorIconUrl),
+            Image.asset(_store_global.pets[0].petIconUrl),
+          ],
         ),
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            "Luke",
-            style: TextStyle(
+          Text(
+            _store_global
+                .pets[0].name, //"Luke", /// @TODO Pegar nome do pet em destaque
+            style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
           ),
           IconButton(
-            splashRadius:20.0,
+            splashRadius: 20.0,
             onPressed: () {},
             icon: Icon(
               Icons.edit,

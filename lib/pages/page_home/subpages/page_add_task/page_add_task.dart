@@ -2,10 +2,12 @@ import 'dart:convert';
 import 'dart:ffi';
 
 import 'package:app_pets/classes/task.dart';
+import 'package:app_pets/stores/example/store_global.dart';
 import 'package:app_pets/stores/example/store_tasks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:provider/src/provider.dart';
 
 import 'widgets/date_picker.dart';
@@ -25,7 +27,7 @@ class _PageAddTaskState extends State<PageAddTask> {
   Function? taskFactory;
   dynamic taskParam;
   String? pet;
-
+  int selectedPet = 0;
   void setFrequency(Function factory,dynamic param){
     taskParam = param;
     taskFactory = factory;
@@ -46,11 +48,16 @@ class _PageAddTaskState extends State<PageAddTask> {
             content: Text('Task salva'), duration: Duration(milliseconds: 500)),
       );
 
+      /// @TODO adicionar task APENAS no pet
+      /// 
       var task = taskFactory!(title,taskParam);
+
       context.read<StoreTasks>().insert(task);
 
       Future.delayed(
           const Duration(milliseconds: 500), () => {Navigator.pop(context)});
+
+      context.read<StoreGlobal>().addNewTaskToPet(pet!, task);
     }
   }
 
@@ -58,6 +65,8 @@ class _PageAddTaskState extends State<PageAddTask> {
 
   @override
   Widget build(BuildContext context) {
+    var _storeGlobal = Provider.of<StoreGlobal>(context);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).backgroundColor,
@@ -80,7 +89,7 @@ class _PageAddTaskState extends State<PageAddTask> {
                   Container(height: 20),
                   PetSelector(
                     callback: (a) => {print(a)},
-                    pets: const ["luke", "zelda", "pelor"],
+                    pets: _storeGlobal.getPetNames(), // const ["luke", "zelda", "pelor"],
                   ),
                   Container(height: 20),
                   PeriodSelector(setFrequency),
@@ -92,6 +101,7 @@ class _PageAddTaskState extends State<PageAddTask> {
         onPressed: submitForm,
         label: const Text("SALVAR"),
         icon: const Icon(Icons.save),
+                backgroundColor: Theme.of(context).primaryColor,
       ),
     );
   }
