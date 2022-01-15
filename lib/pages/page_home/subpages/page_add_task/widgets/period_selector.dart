@@ -1,6 +1,8 @@
 import 'package:app_pets/classes/tasks/task.dart';
 import 'package:app_pets/classes/tasks/task_unique.dart';
+import 'package:app_pets/classes/tasks/task_weekly.dart';
 import 'package:app_pets/pages/page_home/subpages/page_add_task/widgets/date_picker.dart';
+import 'package:app_pets/pages/page_home/subpages/page_add_task/widgets/week_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -20,8 +22,15 @@ class _PeriodSelectorState extends State<PeriodSelector> {
   var isSelected = [true, false, false];
 
   void submitTaskUnique(DateTime dt) {
+    // ignore: prefer_function_declarations_over_variables
     var _factory = (String a, dynamic b) => TaskUnique(a, b);
     widget.onPeriodSubmit(_factory, dt);
+  }
+
+    void submitTaskWeekly(List<int> wk) {
+    // ignore: prefer_function_declarations_over_variables
+    var _factory = (String a, dynamic b) => TaskWeekly(a, b);
+    widget.onPeriodSubmit(_factory, wk);
   }
 
   Widget getBody() {
@@ -30,7 +39,13 @@ class _PeriodSelectorState extends State<PeriodSelector> {
         callback: (a) => submitTaskUnique(a),
       );
     }
-    if (isSelected[1]) return Container();
+    
+    if (isSelected[1]) {
+      return WeekPicker(
+        callback: (a) => submitTaskWeekly(a),
+      );
+    }
+
     if (isSelected[2]) return Container();
     return Container();
   }
