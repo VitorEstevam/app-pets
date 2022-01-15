@@ -1,4 +1,5 @@
-import 'package:app_pets/classes/task.dart';
+import 'package:app_pets/classes/tasks/task.dart';
+import 'package:app_pets/classes/tasks/task_unique.dart';
 import 'package:app_pets/pages/page_home/subpages/page_task/page_task.dart';
 import 'package:app_pets/stores/example/store_global.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,6 @@ class CardTask extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _task = task as TaskUnique;
     var _store = Provider.of<StoreGlobal>(context);
 
     return Padding(
@@ -55,10 +55,10 @@ class CardTask extends StatelessWidget {
                   children: [
                     Text(
                       DateFormat('dd/MM/yyyy')
-                          .format(_task.subTasks[0].dateToDo),
+                          .format(task.subTasks[0].dateToDo),
                       style: const TextStyle(fontSize: 15),
                     ),
-                    Text(_task.title,
+                    Text(task.title,
                         style: const TextStyle(
                             fontSize: 25, fontWeight: FontWeight.bold),
                         maxLines: 2,

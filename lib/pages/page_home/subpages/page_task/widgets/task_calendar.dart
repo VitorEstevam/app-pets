@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import 'package:app_pets/classes/task.dart';
+import 'package:app_pets/classes/tasks/task.dart';
 import 'package:app_pets/consts/theme.dart';
 import 'package:app_pets/consts/utils.dart';
 import 'package:flutter/material.dart';
