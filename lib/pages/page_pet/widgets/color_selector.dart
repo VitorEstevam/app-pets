@@ -12,7 +12,7 @@ class ColorSelector extends StatefulWidget {
 
 class _ColorSelectorState extends State<ColorSelector> {
   List<Color> colors = [Colors.green, Colors.purple, Colors.yellow];
-  int selected = 0;
+  int? selected;
 
   Widget colorWidget(index, Color color) {
     return Expanded(

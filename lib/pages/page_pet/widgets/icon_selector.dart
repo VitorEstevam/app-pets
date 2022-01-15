@@ -15,7 +15,7 @@ class _IconSelectorState extends State<IconSelector> {
     "lib/assets/cat_icon_creation.png",
     "lib/assets/dog_icon_creation.png"
   ];
-  int selected = 0;
+  int? selected;
 
   Widget iconWidget(index, path) {
     return Expanded(
