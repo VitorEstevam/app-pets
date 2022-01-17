@@ -1,3 +1,4 @@
+import 'package:app_pets/classes/pet.dart';
 import 'package:app_pets/stores/example/store_global.dart';
 import 'package:app_pets/stores/example/store_tasks.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,8 @@ import 'card_task.dart';
 import 'empty_tasks.dart';
 
 class TaskViewer extends StatefulWidget {
-  const TaskViewer({Key? key}) : super(key: key);
+  final Pet pet;
+  const TaskViewer({Key? key, required this.pet}) : super(key: key);
 
   @override
   State<TaskViewer> createState() => _TaskViewerState();
@@ -18,7 +20,7 @@ class TaskViewer extends StatefulWidget {
 class _TaskViewerState extends State<TaskViewer> {
   @override
   Widget build(BuildContext context) {
-    final pet = Provider.of<StoreGlobal>(context).pets; /// @TODO Passar aqui o pet escolhido para inicar ele
+    // final pet = Provider.of<StoreGlobal>(context).pets; /// @TODO Passar aqui o pet escolhido para inicar ele
     //final tasks = pet[0].tasks; // Provider.of<StoreTasks>(context);
     final tasks = Provider.of<StoreTasks>(context).tasks;
 
@@ -31,7 +33,7 @@ class _TaskViewerState extends State<TaskViewer> {
                 scrollDirection: Axis.horizontal,
                 itemCount: tasks.length,
                 itemBuilder: (context, i) {
-                  return CardTask(task: tasks[i]);
+                  return CardTask(task: tasks[i], color: widget.pet.colorReference);
                 },
               ),
       );

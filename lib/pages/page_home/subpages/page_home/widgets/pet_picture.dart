@@ -1,33 +1,35 @@
+import 'package:app_pets/classes/pet.dart';
+import 'package:app_pets/consts/utils.dart';
 import 'package:app_pets/stores/example/store_global.dart';
 import 'package:app_pets/widgets/image_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PetPicture extends StatelessWidget {
+  final Pet pet;
   const PetPicture({
     Key? key,
+    required this.pet,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var _store_global = Provider.of<StoreGlobal>(context);
-
     return Column(children: [
       Expanded(
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            // Image.asset(_store_global.pets[0].colorIconUrl),
-            Image.asset(_store_global.pets[0].petIconUrl),
-          ],
+        child: Container(
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(
+            image: DecorationImage(image: AssetImage(pet.petIconUrl)) ,
+              color: pet.colorReference,
+              shape: BoxShape.circle,
+              border: Border.all(color: pet.colorReference.darken(0.15), width: 8)),
         ),
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            _store_global
-                .pets[0].name, //"Luke", /// @TODO Pegar nome do pet em destaque
+            pet.name, //"Luke", /// @TODO Pegar nome do pet em destaque
             style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
