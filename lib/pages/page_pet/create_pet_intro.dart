@@ -10,31 +10,38 @@ import 'package:provider/provider.dart';
 import 'widgets/icon_selector.dart';
 
 class CreatePetIntro extends StatelessWidget {
-  String? animalName;
-  String? animalImageUrl;
-  String? iconColorUrl;
-  Color? iconColor;
+  String? name;
+  String? image;
+  Color? color;
+  final _formKey = GlobalKey<FormState>();
 
-  void choose_icon(String stringUrl) {
+  void chooseIcon(String stringUrl) {
     print(stringUrl);
-    animalImageUrl = stringUrl;
+    image = stringUrl;
   }
 
-  void choose_color(Color color) {
-    iconColor = color;
+  void chooseColor(Color color) {
+    color = color;
   }
 
-  void setAnimalName(String name) {
-    animalName = name;
+  void chooseName(String name) {
+    name = name;
   }
 
   void createAnimal(BuildContext context) {
     Provider.of<StoreGlobal>(context, listen: false)
-        .addNewPet(Pet(animalName!, animalImageUrl!, iconColor!));
+        .addNewPet(Pet(name!, image!, color!));
 
     Navigator.of(
       context,
     ).push(MaterialPageRoute(builder: (context) => const TabBarHandler()));
+  }
+
+  void submitForm(BuildContext context) {
+    if (_formKey.currentState!.validate()) {
+      print("válido");
+      createAnimal(context);
+    }
   }
 
   @override
@@ -44,61 +51,52 @@ class CreatePetIntro extends StatelessWidget {
         title: const Text("nome do app"),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(height: 20),
-              IconSelector(onSelect: choose_icon),
-              
-              Container(height: 20),
-              ColorSelector(onSelect: choose_color),
-
-              Container(height: 20),
-              const Text(
-                "Nome do seu animal",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              Container(height: 20),
-              TextFormField(
-                  decoration: const InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    labelText: 'Título',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Por favor, preencha o título';
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(height: 20),
+                IconSelector(onSelect: chooseIcon),
+                Container(height: 20),
+                ColorSelector(onSelect: chooseColor),
+                Container(height: 20),
+                TextInput(
+                  onChanged: chooseName,
+                  validator: (_) {
+                    if (name == null || name == "") {
+                      return 'Por favor, preencha o nome';
                     }
                     return null;
                   },
-                  onChanged: setAnimalName),
-              Container(height: 20),
-              const Text(
-                "Não se preocupe, você poderá adicionar mais posteriormente!",
-                style: TextStyle(
-                  fontSize: 15,
                 ),
-              ),
-              Container(height: 20),
-              Container(
-                alignment: Alignment.bottomCenter,
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: SizedBox(
-                  width: 200,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () => createAnimal(context),
-                    child: const Text("Adicionar Pet",
-                        style: TextStyle(
-                          fontSize: 20,
-                        )),
+                Container(height: 20),
+                const Text(
+                  "Não se preocupe, você poderá adicionar mais posteriormente!",
+                  style: TextStyle(
+                    fontSize: 15,
                   ),
                 ),
-              )
-            ],
+                Container(height: 20),
+                Container(
+                  alignment: Alignment.bottomCenter,
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  child: SizedBox(
+                    width: 200,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: () => submitForm(context),
+                      child: const Text("Adicionar Pet",
+                          style: TextStyle(
+                            fontSize: 20,
+                          )),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -106,4 +104,23 @@ class CreatePetIntro extends StatelessWidget {
   }
 }
 
+class TextInput extends StatelessWidget {
+  final void Function(String) onChanged;
+  final String? Function(dynamic a) validator;
 
+  const TextInput({Key? key, required this.onChanged, required this.validator})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+        validator: validator,
+        decoration: const InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
+          labelText: 'Nome',
+          border: OutlineInputBorder(),
+        ),
+        onChanged: onChanged);
+  }
+}
