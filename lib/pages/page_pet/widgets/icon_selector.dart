@@ -38,14 +38,19 @@ class _IconSelectorState extends State<IconSelector> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Text(
-          "Selecione seu pet",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        const Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            "Selecione um ícone para seu pet",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
         ),
         Container(height: 20),
         Wrap(
-          spacing: 15,
+          alignment: WrapAlignment.center,
+          spacing: 20,
           runSpacing: 15,
           children: [
             for (var i = 0; i < icons.length; i++) iconWidget(i, icons[i]),
@@ -69,8 +74,8 @@ class ChooseCircleIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 80,
-      height: 80,
+      width: 75,
+      height: 75,
       child: OutlinedButton(
           clipBehavior: Clip.antiAlias,
           style: ButtonStyle(
@@ -82,8 +87,8 @@ class ChooseCircleIcon extends StatelessWidget {
                   : null),
           child: Image.asset(
             imgUrl,
-            width: 80,
-            height: 80,
+            width: 75,
+            height: 75,
             fit: BoxFit.cover,
           ),
           onPressed: () {

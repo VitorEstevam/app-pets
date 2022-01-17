@@ -3,6 +3,7 @@ import 'package:app_pets/pages/page_pet/widgets/choose_circle_color.dart';
 import 'package:app_pets/pages/page_pet/widgets/color_selector.dart';
 import 'package:app_pets/pages/tab_bar_handler.dart';
 import 'package:app_pets/stores/example/store_global.dart';
+import 'package:app_pets/widgets/general_form_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,12 +21,12 @@ class CreatePetIntro extends StatelessWidget {
     image = stringUrl;
   }
 
-  void chooseColor(Color color) {
-    color = color;
+  void chooseColor(Color _color) {
+    color = _color;
   }
 
-  void chooseName(String name) {
-    name = name;
+  void chooseName(String _name) {
+    name = _name;
   }
 
   void createAnimal(BuildContext context) {
@@ -39,7 +40,7 @@ class CreatePetIntro extends StatelessWidget {
 
   void submitForm(BuildContext context) {
     if (_formKey.currentState!.validate()) {
-      print("válido");
+
       createAnimal(context);
     }
   }
@@ -48,7 +49,7 @@ class CreatePetIntro extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("nome do app"),
+        title: const Text("PetsApp"),
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -56,12 +57,28 @@ class CreatePetIntro extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(height: 20),
-                IconSelector(onSelect: chooseIcon),
+                GeneralFormField(
+                  validator: (_) {
+                    if (image == null) {
+                      return 'Por favor, selecione um ícone';
+                    }
+                    return null;
+                  },
+                  widget: IconSelector(onSelect: chooseIcon),
+                ),
                 Container(height: 20),
-                ColorSelector(onSelect: chooseColor),
+                GeneralFormField(
+                  validator: (_) {
+                    if (color == null) {
+                      return 'Por favor, selecione uma cor';
+                    }
+                    return null;
+                  },
+                  widget: ColorSelector(onSelect: chooseColor),
+                ),
                 Container(height: 20),
                 TextInput(
                   onChanged: chooseName,
@@ -79,26 +96,15 @@ class CreatePetIntro extends StatelessWidget {
                     fontSize: 15,
                   ),
                 ),
-                Container(height: 20),
-                Container(
-                  alignment: Alignment.bottomCenter,
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  child: SizedBox(
-                    width: 200,
-                    height: 50,
-                    child: ElevatedButton(
-                      onPressed: () => submitForm(context),
-                      child: const Text("Adicionar Pet",
-                          style: TextStyle(
-                            fontSize: 20,
-                          )),
-                    ),
-                  ),
-                )
               ],
             ),
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => submitForm(context),
+        label: const Text('ADICIONAR PET'),
+        icon: const Icon(Icons.add),
       ),
     );
   }
@@ -106,10 +112,13 @@ class CreatePetIntro extends StatelessWidget {
 
 class TextInput extends StatelessWidget {
   final void Function(String) onChanged;
-  final String? Function(dynamic a) validator;
+  final String? Function(String?)? validator;
 
-  const TextInput({Key? key, required this.onChanged, required this.validator})
-      : super(key: key);
+  const TextInput({
+    Key? key,
+    required this.onChanged,
+    required this.validator,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
