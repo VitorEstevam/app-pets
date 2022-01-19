@@ -1,4 +1,4 @@
-import 'package:app_pets/pages/page_pet/create_pet_intro.dart';
+import 'package:app_pets/pages/page_pet/page_create_pet.dart';
 import 'package:app_pets/pages/tab_bar_handler.dart';
 import 'package:app_pets/stores/pets/store_pets.dart';
 import 'package:app_pets/widgets/image_loader.dart';
@@ -114,7 +114,7 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
          Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-            builder: (context) => CreatePetIntro(),
+            builder: (context) => PageCreatePet(),
           ),
           (route) => false,
         );

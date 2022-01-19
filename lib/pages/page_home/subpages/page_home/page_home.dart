@@ -1,8 +1,12 @@
+import 'package:app_pets/classes/pet.dart';
 import 'package:app_pets/consts/theme.dart';
 import 'package:app_pets/pages/page_home/subpages/page_add_task/page_add_task.dart';
 import 'package:app_pets/pages/page_home/subpages/page_add_task/page_add_task.dart';
+import 'package:app_pets/pages/page_pet/page_create_pet.dart';
 import 'package:app_pets/stores/pets/store_pets.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 import 'widgets/pet_picture.dart';
@@ -50,7 +54,12 @@ class MainButtons extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PageCreatePet(),
+                      ),
+                    ),
                 child: SizedBox(
                   height: 40,
                   child: Row(
@@ -79,52 +88,107 @@ class PageHome extends StatefulWidget {
 class _PageHomeState extends State<PageHome> {
   @override
   Widget build(BuildContext context) {
-    var pet = Provider.of<StorePets>(context).pets[0];
-
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Theme.of(context).backgroundColor,
-      floatingActionButton: FloatingActionButton.extended(
-        // backgroundColor: Theme.of(context).primaryColor,
-        onPressed: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const PageAddTask(),
-          ),
-        ),
-        label: const Text('ADICIONAR TAREFA'),
-        icon: const Icon(Icons.add),
-      ),
-      appBar: AppBar(
-        title: const Text("nome do app"),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Container(height: 10),
-          Expanded(
-            flex: 2,
-            child: SizedBox(
-              width: double.infinity,
-              child: PetPicture(pet: pet),
+    return Observer(builder: (context) {
+      var pet = Provider.of<StorePets>(context).actualPet!;
+      return Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Theme.of(context).backgroundColor,
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const PageAddTask(),
             ),
           ),
-          const MainButtons(),
-          Expanded(
-            flex: 2,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
+          label: const Text('ADICIONAR TAREFA'),
+          icon: const Icon(Icons.add),
+        ),
+        appBar: AppBar(
+          title: const Text("nome do app"),
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(height: 10),
+            Expanded(
+              flex: 2,
               child: SizedBox(
                 width: double.infinity,
-                child: TaskViewer(pet: pet,),
+                child: PetSelector(pet),
               ),
             ),
+            const MainButtons(),
+            Expanded(
+              flex: 2,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: TaskViewer(
+                    pet: pet,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              height: 40,
+            )
+          ],
+        ),
+      );
+    });
+  }
+}
+
+class PetSelector extends StatefulWidget {
+  final pet;
+  const PetSelector(this.pet, {
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<PetSelector> createState() => _PetSelectorState();
+}
+
+class _PetSelectorState extends State<PetSelector> {
+  CarouselController buttonCarouselController = CarouselController();
+
+ Future<String> getFutureDados(index) async =>
+      await Future.delayed(Duration(milliseconds:1), () {
+        buttonCarouselController.jumpToPage(index);
+        return '';
+      });
+
+  @override
+  Widget build(BuildContext context) {
+    var index = Provider.of<StorePets>(context).getActualPetIndex();
+    var pets = Provider.of<StorePets>(context, listen: false).pets;
+
+    return FutureBuilder(
+      future: getFutureDados(index),
+      builder: (context,snapshot) {
+        return CarouselSlider(
+          carouselController: buttonCarouselController,
+          items: [
+            for (var i = 0; i < pets.length; i++)
+              GestureDetector(
+                  onTap: () => buttonCarouselController.animateToPage(i),
+                  child: PetPicture(pet: pets[i])),
+          ],
+          options: CarouselOptions(
+            enableInfiniteScroll: false,
+            enlargeCenterPage: true,
+            enlargeStrategy: CenterPageEnlargeStrategy.scale,
+            aspectRatio: 10 / 5,
+            viewportFraction: 0.4,
+            initialPage: Provider.of<StorePets>(context).getPetIndex(widget.pet),
+            onPageChanged: (index, other) {
+              Provider.of<StorePets>(context, listen: false)
+                  .setActualPet(pets[index]);
+            },
           ),
-          Container(
-            height: 40,
-          )
-        ],
-      ),
+        );
+      }
     );
   }
 }

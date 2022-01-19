@@ -19,7 +19,7 @@ class PetPicture extends StatelessWidget {
         child: Container(
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage(pet.petIconUrl)) ,
+            image: DecorationImage(image: AssetImage(pet.petIconUrl), fit: BoxFit.cover) ,
               color: pet.color,
               shape: BoxShape.circle,
               border: Border.all(color: pet.color.darken(0.15), width: 8)),

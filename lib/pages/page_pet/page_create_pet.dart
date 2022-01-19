@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 
 import 'widgets/icon_selector.dart';
 
-class CreatePetIntro extends StatelessWidget {
+class PageCreatePet extends StatelessWidget {
   String? name;
   String? image;
   Color? color;
@@ -33,14 +33,17 @@ class CreatePetIntro extends StatelessWidget {
     Provider.of<StorePets>(context, listen: false)
         .addNewPet(Pet(name!, image!, color!));
 
-    Navigator.of(
-      context,
-    ).push(MaterialPageRoute(builder: (context) => const TabBarHandler()));
+    if (Navigator.of(context).canPop()) {
+      Navigator.pop(context);
+    } else {
+      Navigator.of(
+        context,
+      ).push(MaterialPageRoute(builder: (context) => const TabBarHandler()));
+    }
   }
 
   void submitForm(BuildContext context) {
     if (_formKey.currentState!.validate()) {
-
       createAnimal(context);
     }
   }

@@ -1,7 +1,7 @@
 import 'package:app_pets/classes/pet.dart';
 import 'package:app_pets/classes/tasks/task.dart';
 import 'package:app_pets/pages/page_home/onboarding/onboard_intro.dart';
-import 'package:app_pets/pages/page_pet/create_pet_intro.dart';
+import 'package:app_pets/pages/page_pet/page_create_pet.dart';
 import 'package:app_pets/pages/tab_bar_handler.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,14 +18,31 @@ abstract class _StorePets with Store {
   @observable
   ObservableList<Pet> pets = ObservableList<Pet>.of([]);
 
+  @observable
+  Pet? actualPet;
+
   List<String> getPetNames() {
     List<String> names = pets.map((pet) => pet.name).toList();
     return names;
   }
 
+  int getPetIndex(Pet pet){
+    return pets.indexOf(pet);
+  }
+
+  int getActualPetIndex(){
+    return getPetIndex(actualPet!);
+  }
+
+  @action
+  void setActualPet(Pet newPet) {
+    actualPet = newPet;
+  }
+
   @action
   void addNewPet(Pet newPet) {
     pets.add(newPet);
+    setActualPet(newPet);
   }
 
   @action
@@ -36,4 +53,5 @@ abstract class _StorePets with Store {
   Pet getPetByName(petName){
     return pets.firstWhere((pet) => pet.name == petName);
   }
+
 }
