@@ -20,7 +20,7 @@ class TaskViewer extends StatefulWidget {
 class _TaskViewerState extends State<TaskViewer> {
   @override
   Widget build(BuildContext context) {
-    // final pet = Provider.of<StoreGlobal>(context).pets; /// @TODO Passar aqui o pet escolhido para inicar ele
+    // final pet = Provider.of<StorePets>(context).pets; /// @TODO Passar aqui o pet escolhido para inicar ele
     //final tasks = pet[0].tasks; // Provider.of<StoreTasks>(context);
     final tasks = Provider.of<StoreTasks>(context).tasks;
 

@@ -11,7 +11,7 @@ List<SingleChildWidget> providerStores = [
   Provider<StoreNews>(
     create: (_) => StoreNews(),
   ),
-  Provider<StoreGlobal>(
-    create: (_) => StoreGlobal(),
+  Provider<StorePets>(
+    create: (_) => StorePets(),
   )
 ];

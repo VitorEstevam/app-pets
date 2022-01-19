@@ -30,7 +30,7 @@ class CreatePetIntro extends StatelessWidget {
   }
 
   void createAnimal(BuildContext context) {
-    Provider.of<StoreGlobal>(context, listen: false)
+    Provider.of<StorePets>(context, listen: false)
         .addNewPet(Pet(name!, image!, color!));
 
     Navigator.of(

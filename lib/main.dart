@@ -22,7 +22,7 @@ class AppRoot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _store_global = Provider.of<StoreGlobal>(context);
+    var _store_global = Provider.of<StorePets>(context);
 
     runDebug(context);
 

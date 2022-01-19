@@ -11,10 +11,10 @@ import 'package:mobx/mobx.dart';
 
 part 'store_global.g.dart';
 
-class StoreGlobal = _StoreGlobal with _$StoreGlobal;
+class StorePets = _StorePets with _$StorePets;
 
 // Create the class
-abstract class _StoreGlobal with Store {
+abstract class _StorePets with Store {
   bool tutorialDone = true;
 
   @observable

@@ -11,7 +11,7 @@ class EmptyTasks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _storeGlobal = Provider.of<StoreGlobal>(context);
+    var _StorePets = Provider.of<StorePets>(context);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal:15.0),
@@ -26,7 +26,7 @@ class EmptyTasks extends StatelessWidget {
           ),
           Container(height: 10),
           Text(
-            "Não há tarefas para ${_storeGlobal.pets[0].name}... Vamos começar adicionando uma!",
+            "Não há tarefas para ${_StorePets.pets[0].name}... Vamos começar adicionando uma!",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w400,

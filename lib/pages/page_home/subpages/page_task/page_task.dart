@@ -13,7 +13,7 @@ class TaskBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _storeGlobal = Provider.of<StoreGlobal>(context);
+    var _StorePets = Provider.of<StorePets>(context);
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Column(
@@ -21,7 +21,7 @@ class TaskBody extends StatelessWidget {
         children: [
           Text(
               task.title +
-                  " com ${_storeGlobal.pets[0].name}", //trocar pro pet dinamico
+                  " com ${_StorePets.pets[0].name}", //trocar pro pet dinamico
               style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               maxLines: 2,
               overflow: TextOverflow.ellipsis),

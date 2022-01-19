@@ -86,7 +86,7 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
 
   @override
   Widget build(BuildContext context) {
-    var _store_global = Provider.of<StoreGlobal>(context);
+    var _store_global = Provider.of<StorePets>(context);
     return IntroSlider(
       // List slides
       slides: slides,

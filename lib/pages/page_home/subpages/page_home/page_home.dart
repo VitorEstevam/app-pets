@@ -79,7 +79,7 @@ class PageHome extends StatefulWidget {
 class _PageHomeState extends State<PageHome> {
   @override
   Widget build(BuildContext context) {
-    var pet = Provider.of<StoreGlobal>(context).pets[0];
+    var pet = Provider.of<StorePets>(context).pets[0];
 
     return Scaffold(
       resizeToAvoidBottomInset: false,

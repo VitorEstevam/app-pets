@@ -57,7 +57,7 @@ class _PageAddTaskState extends State<PageAddTask> {
       Future.delayed(
           const Duration(milliseconds: 500), () => {Navigator.pop(context)});
 
-      context.read<StoreGlobal>().addNewTaskToPet(pet!, task);
+      context.read<StorePets>().addNewTaskToPet(pet!, task);
     }
   }
 
@@ -65,7 +65,7 @@ class _PageAddTaskState extends State<PageAddTask> {
 
   @override
   Widget build(BuildContext context) {
-    var _storeGlobal = Provider.of<StoreGlobal>(context);
+    var _StorePets = Provider.of<StorePets>(context);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -89,7 +89,7 @@ class _PageAddTaskState extends State<PageAddTask> {
                   Container(height: 20),
                   PetSelector(
                     callback: (a) => {print(a)},
-                    pets: _storeGlobal.getPetNames(), // const ["luke", "zelda", "pelor"],
+                    pets: _StorePets.getPetNames(), // const ["luke", "zelda", "pelor"],
                   ),
                   Container(height: 20),
                   PeriodSelector(setFrequency),
