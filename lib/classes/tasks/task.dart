@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:app_pets/classes/pet.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 int getHashCode(DateTime key) {
@@ -44,9 +45,10 @@ class SubTask {
 class Task {
   String title = "";
   List<SubTask> subTasks = [];
+  Pet pet;
   DateTime startDate = DateTime(0);
 
-  Task(this.title) {
+  Task(this.title, this.pet) {
     startDate = DateTime.now();
   }
 

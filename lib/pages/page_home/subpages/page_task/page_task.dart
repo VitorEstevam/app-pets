@@ -1,6 +1,6 @@
 import 'package:app_pets/classes/tasks/task.dart';
 import 'package:app_pets/classes/tasks/task_unique.dart';
-import 'package:app_pets/stores/example/store_pets.dart';
+import 'package:app_pets/stores/pets/store_pets.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +13,6 @@ class TaskBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _StorePets = Provider.of<StorePets>(context);
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Column(
@@ -21,7 +20,7 @@ class TaskBody extends StatelessWidget {
         children: [
           Text(
               task.title +
-                  " com ${_StorePets.pets[0].name}", //trocar pro pet dinamico
+                  " com ${task.pet.name}", //trocar pro pet dinamico
               style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               maxLines: 2,
               overflow: TextOverflow.ellipsis),

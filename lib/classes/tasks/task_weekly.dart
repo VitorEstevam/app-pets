@@ -3,7 +3,7 @@ import 'task.dart';
 class TaskWeekly extends Task {
   List<int> weekdays;
 
-  TaskWeekly(title, this.weekdays) : super(title) {
+  TaskWeekly(title,pet, this.weekdays) : super(title, pet) {
     updateSubTasks();
   }
 

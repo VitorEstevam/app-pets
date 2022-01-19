@@ -2,8 +2,7 @@ import 'dart:convert';
 import 'dart:ffi';
 
 import 'package:app_pets/classes/tasks/task.dart';
-import 'package:app_pets/stores/example/store_pets.dart';
-import 'package:app_pets/stores/example/store_tasks.dart';
+import 'package:app_pets/stores/pets/store_pets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
@@ -26,7 +25,7 @@ class _PageAddTaskState extends State<PageAddTask> {
   String? title;
   Function? taskFactory;
   dynamic taskParam;
-  String? pet;
+  String? petName;
   int selectedPet = 0;
   void setFrequency(Function factory,dynamic param){
     taskParam = param;
@@ -38,26 +37,22 @@ class _PageAddTaskState extends State<PageAddTask> {
   }
 
   void setPet(String _pet) {
-    pet = _pet;
+    petName = _pet;
   }
 
   void submitForm() {
     if (_formKey.currentState!.validate()) {
+      var pet = context.read<StorePets>().getPetByName(petName);
+      var task = taskFactory!(title,pet,taskParam);
+    
+      context.read<StorePets>().addNewTaskToPet(pet, task);
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
             content: Text('Task salva'), duration: Duration(milliseconds: 500)),
       );
-
-      /// @TODO adicionar task APENAS no pet
-      /// 
-      var task = taskFactory!(title,taskParam);
-
-      context.read<StoreTasks>().insert(task);
-
       Future.delayed(
           const Duration(milliseconds: 500), () => {Navigator.pop(context)});
-
-      context.read<StorePets>().addNewTaskToPet(pet!, task);
     }
   }
 
@@ -65,8 +60,6 @@ class _PageAddTaskState extends State<PageAddTask> {
 
   @override
   Widget build(BuildContext context) {
-    var _StorePets = Provider.of<StorePets>(context);
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).backgroundColor,
@@ -88,8 +81,8 @@ class _PageAddTaskState extends State<PageAddTask> {
                   ),
                   Container(height: 20),
                   PetSelector(
-                    callback: (a) => {print(a)},
-                    pets: _StorePets.getPetNames(), // const ["luke", "zelda", "pelor"],
+                    callback: (name) => {setPet(name)},
+                    pets: Provider.of<StorePets>(context).getPetNames(), // const ["luke", "zelda", "pelor"],
                   ),
                   Container(height: 20),
                   PeriodSelector(setFrequency),

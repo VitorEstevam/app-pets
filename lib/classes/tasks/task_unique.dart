@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'task.dart';
 
 class TaskUnique extends Task {
-  TaskUnique(title, DateTime date) : super(title) {
+  TaskUnique(title, pet, DateTime date) : super(title, pet) {
     var _task = SubTask(date);
     subTasks.add(_task);
   }

@@ -1,6 +1,6 @@
 import 'package:app_pets/pages/page_pet/create_pet_intro.dart';
 import 'package:app_pets/pages/tab_bar_handler.dart';
-import 'package:app_pets/stores/example/store_pets.dart';
+import 'package:app_pets/stores/pets/store_pets.dart';
 import 'package:app_pets/widgets/image_loader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

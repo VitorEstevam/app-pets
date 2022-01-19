@@ -1,6 +1,6 @@
 import 'package:app_pets/classes/pet.dart';
 import 'package:app_pets/consts/utils.dart';
-import 'package:app_pets/stores/example/store_pets.dart';
+import 'package:app_pets/stores/pets/store_pets.dart';
 import 'package:app_pets/widgets/image_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
