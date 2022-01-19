@@ -1,7 +1,7 @@
 import 'package:app_pets/consts/theme.dart';
 import 'package:app_pets/pages/page_home/subpages/page_add_task/page_add_task.dart';
 import 'package:app_pets/pages/page_home/subpages/page_add_task/page_add_task.dart';
-import 'package:app_pets/stores/example/store_global.dart';
+import 'package:app_pets/stores/example/store_pets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

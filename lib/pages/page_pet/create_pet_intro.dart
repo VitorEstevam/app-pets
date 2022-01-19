@@ -2,7 +2,7 @@ import 'package:app_pets/classes/pet.dart';
 import 'package:app_pets/pages/page_pet/widgets/choose_circle_color.dart';
 import 'package:app_pets/pages/page_pet/widgets/color_selector.dart';
 import 'package:app_pets/pages/tab_bar_handler.dart';
-import 'package:app_pets/stores/example/store_global.dart';
+import 'package:app_pets/stores/example/store_pets.dart';
 import 'package:app_pets/widgets/general_form_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

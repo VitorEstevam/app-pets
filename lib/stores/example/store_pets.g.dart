@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'store_global.dart';
+part of 'store_pets.dart';
 
 // **************************************************************************
 // StoreGenerator

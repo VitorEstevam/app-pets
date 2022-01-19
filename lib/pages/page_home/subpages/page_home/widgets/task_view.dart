@@ -1,5 +1,5 @@
 import 'package:app_pets/classes/pet.dart';
-import 'package:app_pets/stores/example/store_global.dart';
+import 'package:app_pets/stores/example/store_pets.dart';
 import 'package:app_pets/stores/example/store_tasks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';

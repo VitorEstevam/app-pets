@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 // run builder on cmd to generate the code
 
-part 'store_global.g.dart';
+part 'store_pets.g.dart';
 
 class StorePets = _StorePets with _$StorePets;
 
@@ -45,7 +45,7 @@ abstract class _StorePets with Store {
     if (!tutorialDone)
       return OnboardingIntro();
     else if (pets.isEmpty)
-      return CreatePetIntro(); // @TODO CRIAÇÃO DE PETS
+      return CreatePetIntro(); 
     else
       return TabBarHandler();
   }

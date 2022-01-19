@@ -1,6 +1,6 @@
 import 'package:app_pets/classes/tasks/task_unique.dart';
 import 'package:app_pets/classes/tasks/task_weekly.dart';
-import 'package:app_pets/stores/example/store_global.dart';
+import 'package:app_pets/stores/example/store_pets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

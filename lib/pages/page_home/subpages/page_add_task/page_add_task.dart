@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:ffi';
 
 import 'package:app_pets/classes/tasks/task.dart';
-import 'package:app_pets/stores/example/store_global.dart';
+import 'package:app_pets/stores/example/store_pets.dart';
 import 'package:app_pets/stores/example/store_tasks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';

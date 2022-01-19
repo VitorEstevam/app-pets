@@ -1,7 +1,7 @@
 import 'package:app_pets/debug_config.dart';
 import 'package:app_pets/pages/page_home/onboarding/onboard_intro.dart';
 import 'package:app_pets/pages/tab_bar_handler.dart';
-import 'package:app_pets/stores/example/store_global.dart';
+import 'package:app_pets/stores/example/store_pets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
