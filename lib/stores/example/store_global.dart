@@ -18,14 +18,7 @@ abstract class _StoreGlobal with Store {
   bool tutorialDone = true;
 
   @observable
-  ObservableList<Pet> pets = ObservableList<Pet>.of([
-    Pet(
-      "Luke",
-      "lib/assets/dog_icon_creation.png",
-      "lib/assets/purple_icon.png",
-      Colors.purple,
-    )
-  ]);
+  ObservableList<Pet> pets = ObservableList<Pet>.of([]);
 
   @observable
   Map<String, Pet> mapPets = {};

@@ -1,23 +1,20 @@
 import 'package:app_pets/classes/tasks/task.dart';
-import 'package:app_pets/classes/tasks/task_unique.dart';
 import 'package:app_pets/pages/page_home/subpages/page_task/page_task.dart';
-import 'package:app_pets/stores/example/store_global.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
+
 
 class CardTask extends StatelessWidget {
+  final Color color;
   const CardTask({
     Key? key,
-    required this.task,
+    required this.task, this.color = Colors.grey,
   }) : super(key: key);
 
   final Task task;
 
   @override
   Widget build(BuildContext context) {
-    var _store = Provider.of<StoreGlobal>(context);
-
     return Padding(
       padding: const EdgeInsets.only(left: 30.0),
       child: SizedBox.fromSize(
@@ -40,12 +37,11 @@ class CardTask extends StatelessWidget {
                   BoxShadow(
                     color: Colors.black45,
                     blurRadius: 4,
-                    // spreadRadius: 4,
-                    offset: Offset(0, 1), // Shadow position
+                    offset: Offset(0, 1), 
                   ),
                 ],
                 borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                color: _store.pets[0].colorReference, // @TODO SELECTED PET COLOR
+                color: color, 
               ),
               child: Padding(
                 padding: const EdgeInsets.all(15.0),

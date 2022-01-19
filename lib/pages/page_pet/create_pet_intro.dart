@@ -1,145 +1,135 @@
 import 'package:app_pets/classes/pet.dart';
 import 'package:app_pets/pages/page_pet/widgets/choose_circle_color.dart';
-import 'package:app_pets/pages/page_pet/widgets/choose_circle_icon.dart';
+import 'package:app_pets/pages/page_pet/widgets/color_selector.dart';
 import 'package:app_pets/pages/tab_bar_handler.dart';
 import 'package:app_pets/stores/example/store_global.dart';
+import 'package:app_pets/widgets/general_form_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'widgets/icon_selector.dart';
+
 class CreatePetIntro extends StatelessWidget {
-  String? animalName;
-  String? animalImageUrl;
-  String? iconColorUrl;
-  Color? iconColor;
+  String? name;
+  String? image;
+  Color? color;
+  final _formKey = GlobalKey<FormState>();
 
-  void choose_icon(String stringUrl) {
-    animalImageUrl = stringUrl;
+  void chooseIcon(String stringUrl) {
+    print(stringUrl);
+    image = stringUrl;
   }
 
-  void choose_color(String colorUrl, Color color) {
-    iconColor = color;
-    iconColorUrl = colorUrl;
+  void chooseColor(Color _color) {
+    color = _color;
   }
 
-  void setAnimalName(String name) {
-    animalName = name;
+  void chooseName(String _name) {
+    name = _name;
   }
 
-  void checkAllDone() {}
+  void createAnimal(BuildContext context) {
+    Provider.of<StoreGlobal>(context, listen: false)
+        .addNewPet(Pet(name!, image!, color!));
+
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (context) => const TabBarHandler()));
+  }
+
+  void submitForm(BuildContext context) {
+    if (_formKey.currentState!.validate()) {
+
+      createAnimal(context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    var _store_global = Provider.of<StoreGlobal>(context);
-
-    void createAnimal() {
-      _store_global.addNewPet(
-          Pet(animalName!, animalImageUrl!, iconColorUrl!, iconColor!));
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => TabBarHandler()));
-    }
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text("nome do app"),
+        title: const Text("PetsApp"),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(height: 20),
-              const Text(
-                "Selecione seu pet",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              Container(height: 20),
-              Row(
-                children: [
-                  Expanded(
-                    child: ChooseCircleIcon(
-                        "lib/assets/cat_icon_creation.png", choose_icon),
-                  ),
-                  Expanded(
-                    child: ChooseCircleIcon(
-                        "lib/assets/dog_icon_creation.png", choose_icon),
-                  ),
-                  Expanded(
-                    child: ChooseCircleIcon(
-                        "lib/assets/dog_icon_creation.png", choose_icon),
-                  ),
-                ],
-              ),
-              Container(height: 20),
-              const Text(
-                "Selecione uma cor para ele",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              Container(height: 20),
-              Row(
-                children: [
-                  Expanded(
-                    child: ChooseCircleColor("lib/assets/green_icon.png",
-                        Colors.green, choose_color),
-                  ),
-                  Expanded(
-                    child: ChooseCircleColor("lib/assets/green_icon.png",
-                        Colors.green, choose_color),
-                  ),
-                  Expanded(
-                    child: ChooseCircleColor("lib/assets/purple_icon.png",
-                        Colors.purple, choose_color),
-                  ),
-                ],
-              ),
-              Container(height: 20),
-              const Text(
-                "Nome do seu animal",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              Container(height: 20),
-              TextFormField(
-                  decoration: const InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    labelText: 'Título',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Por favor, preencha o título';
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(height: 20),
+                GeneralFormField(
+                  validator: (_) {
+                    if (image == null) {
+                      return 'Por favor, selecione um ícone';
                     }
                     return null;
                   },
-                  onChanged: setAnimalName),
-              Container(height: 20),
-              const Text(
-                "Não se preocupe, você poderá adicionar mais posteriormente!",
-                style: TextStyle(
-                  fontSize: 15,
+                  widget: IconSelector(onSelect: chooseIcon),
                 ),
-              ),
-              Container(height: 20),
-              Container(
-                alignment: Alignment.bottomCenter,
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: SizedBox(
-                  width: 200,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: createAnimal,
-                    child: const Text("Adicionar Pet",
-                        style: TextStyle(
-                          fontSize: 20,
-                        )),
+                Container(height: 20),
+                GeneralFormField(
+                  validator: (_) {
+                    if (color == null) {
+                      return 'Por favor, selecione uma cor';
+                    }
+                    return null;
+                  },
+                  widget: ColorSelector(onSelect: chooseColor),
+                ),
+                Container(height: 20),
+                TextInput(
+                  onChanged: chooseName,
+                  validator: (_) {
+                    if (name == null || name == "") {
+                      return 'Por favor, preencha o nome';
+                    }
+                    return null;
+                  },
+                ),
+                Container(height: 20),
+                const Text(
+                  "Não se preocupe, você poderá adicionar mais posteriormente!",
+                  style: TextStyle(
+                    fontSize: 15,
                   ),
                 ),
-              )
-            ],
+              ],
+            ),
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => submitForm(context),
+        label: const Text('ADICIONAR PET'),
+        icon: const Icon(Icons.add),
+      ),
     );
+  }
+}
+
+class TextInput extends StatelessWidget {
+  final void Function(String) onChanged;
+  final String? Function(String?)? validator;
+
+  const TextInput({
+    Key? key,
+    required this.onChanged,
+    required this.validator,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+        validator: validator,
+        decoration: const InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
+          labelText: 'Nome',
+          border: OutlineInputBorder(),
+        ),
+        onChanged: onChanged);
   }
 }

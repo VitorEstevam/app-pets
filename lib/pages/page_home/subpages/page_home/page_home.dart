@@ -1,7 +1,9 @@
 import 'package:app_pets/consts/theme.dart';
 import 'package:app_pets/pages/page_home/subpages/page_add_task/page_add_task.dart';
 import 'package:app_pets/pages/page_home/subpages/page_add_task/page_add_task.dart';
+import 'package:app_pets/stores/example/store_global.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'widgets/pet_picture.dart';
 import 'widgets/task_view.dart';
@@ -67,11 +69,18 @@ class MainButtons extends StatelessWidget {
   }
 }
 
-class PageHome extends StatelessWidget {
+class PageHome extends StatefulWidget {
   const PageHome({Key? key}) : super(key: key);
 
   @override
+  State<PageHome> createState() => _PageHomeState();
+}
+
+class _PageHomeState extends State<PageHome> {
+  @override
   Widget build(BuildContext context) {
+    var pet = Provider.of<StoreGlobal>(context).pets[0];
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).backgroundColor,
@@ -93,21 +102,21 @@ class PageHome extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(height: 10),
-          const Expanded(
+          Expanded(
             flex: 2,
             child: SizedBox(
               width: double.infinity,
-              child: PetPicture(),
+              child: PetPicture(pet: pet),
             ),
           ),
           const MainButtons(),
-          const Expanded(
+          Expanded(
             flex: 2,
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 10),
               child: SizedBox(
                 width: double.infinity,
-                child: TaskViewer(),
+                child: TaskViewer(pet: pet,),
               ),
             ),
           ),
