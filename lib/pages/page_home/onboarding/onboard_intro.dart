@@ -1,6 +1,6 @@
 import 'package:app_pets/pages/page_pet/create_pet_intro.dart';
 import 'package:app_pets/pages/tab_bar_handler.dart';
-import 'package:app_pets/stores/example/store_global.dart';
+import 'package:app_pets/stores/pets/store_pets.dart';
 import 'package:app_pets/widgets/image_loader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -86,7 +86,7 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
 
   @override
   Widget build(BuildContext context) {
-    var _store_global = Provider.of<StoreGlobal>(context);
+    var _store_global = Provider.of<StorePets>(context);
     return IntroSlider(
       // List slides
       slides: slides,
@@ -109,7 +109,7 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
       renderDoneBtn: myButton("Pronto"),
       doneButtonStyle: myButtonStyle(),
       onDonePress: (){
-        _store_global.tutorialDone = true; // @TODO: SAVE THIS
+        // _store_global.tutorialDone = true; // @TODO: use shared prefs
 
          Navigator.pushAndRemoveUntil(
           context,

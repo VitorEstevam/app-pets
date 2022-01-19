@@ -1,6 +1,6 @@
 import 'package:app_pets/classes/pet.dart';
 import 'package:app_pets/consts/utils.dart';
-import 'package:app_pets/stores/example/store_global.dart';
+import 'package:app_pets/stores/pets/store_pets.dart';
 import 'package:app_pets/widgets/image_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,9 +20,9 @@ class PetPicture extends StatelessWidget {
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             image: DecorationImage(image: AssetImage(pet.petIconUrl)) ,
-              color: pet.colorReference,
+              color: pet.color,
               shape: BoxShape.circle,
-              border: Border.all(color: pet.colorReference.darken(0.15), width: 8)),
+              border: Border.all(color: pet.color.darken(0.15), width: 8)),
         ),
       ),
       Row(

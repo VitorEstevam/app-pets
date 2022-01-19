@@ -1,7 +1,7 @@
 import 'package:app_pets/consts/theme.dart';
 import 'package:app_pets/pages/page_home/subpages/page_add_task/page_add_task.dart';
 import 'package:app_pets/pages/page_home/subpages/page_add_task/page_add_task.dart';
-import 'package:app_pets/stores/example/store_global.dart';
+import 'package:app_pets/stores/pets/store_pets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -79,7 +79,7 @@ class PageHome extends StatefulWidget {
 class _PageHomeState extends State<PageHome> {
   @override
   Widget build(BuildContext context) {
-    var pet = Provider.of<StoreGlobal>(context).pets[0];
+    var pet = Provider.of<StorePets>(context).pets[0];
 
     return Scaffold(
       resizeToAvoidBottomInset: false,

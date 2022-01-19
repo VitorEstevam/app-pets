@@ -1,3 +1,4 @@
+import 'package:app_pets/classes/pet.dart';
 import 'package:app_pets/classes/tasks/task.dart';
 import 'package:app_pets/classes/tasks/task_unique.dart';
 import 'package:app_pets/classes/tasks/task_weekly.dart';
@@ -23,13 +24,13 @@ class _PeriodSelectorState extends State<PeriodSelector> {
 
   void submitTaskUnique(DateTime dt) {
     // ignore: prefer_function_declarations_over_variables
-    var _factory = (String a, dynamic b) => TaskUnique(a, b);
+    var _factory = (String a,Pet b, dynamic c) => TaskUnique(a, b,c);
     widget.onPeriodSubmit(_factory, dt);
   }
 
     void submitTaskWeekly(List<int> wk) {
     // ignore: prefer_function_declarations_over_variables
-    var _factory = (String a, dynamic b) => TaskWeekly(a, b);
+    var _factory = (String a,Pet b, dynamic c) => TaskWeekly(a, b,c);
     widget.onPeriodSubmit(_factory, wk);
   }
 
