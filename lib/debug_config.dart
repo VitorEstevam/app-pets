@@ -6,6 +6,4 @@ import 'package:provider/provider.dart';
 
 import 'classes/pet.dart';
 
-void runDebug(BuildContext context) {
-  // var _store_global = Provider.of<StoreGlobal>(context);
-}
+

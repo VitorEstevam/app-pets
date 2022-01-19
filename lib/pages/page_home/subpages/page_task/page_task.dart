@@ -20,7 +20,7 @@ class TaskBody extends StatelessWidget {
         children: [
           Text(
               task.title +
-                  " com ${task.pet.name}", //trocar pro pet dinamico
+                  " com ${task.pet.name}",
               style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               maxLines: 2,
               overflow: TextOverflow.ellipsis),

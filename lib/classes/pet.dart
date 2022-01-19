@@ -5,10 +5,10 @@ import 'package:mobx/mobx.dart';
 class Pet {
   String name;
   String petIconUrl;
-  Color colorReference;
+  Color color;
 
   @observable
   ObservableList<Task> tasks = ObservableList<Task>.of([]);
 
-  Pet(this.name, this.petIconUrl, this.colorReference);
+  Pet(this.name, this.petIconUrl, this.color);
 }

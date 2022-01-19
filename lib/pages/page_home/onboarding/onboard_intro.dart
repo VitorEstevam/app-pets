@@ -109,7 +109,7 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
       renderDoneBtn: myButton("Pronto"),
       doneButtonStyle: myButtonStyle(),
       onDonePress: (){
-        _store_global.tutorialDone = true; // @TODO: SAVE THIS
+        // _store_global.tutorialDone = true; // @TODO: use shared prefs
 
          Navigator.pushAndRemoveUntil(
           context,

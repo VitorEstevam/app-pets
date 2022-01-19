@@ -20,9 +20,9 @@ class PetPicture extends StatelessWidget {
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             image: DecorationImage(image: AssetImage(pet.petIconUrl)) ,
-              color: pet.colorReference,
+              color: pet.color,
               shape: BoxShape.circle,
-              border: Border.all(color: pet.colorReference.darken(0.15), width: 8)),
+              border: Border.all(color: pet.color.darken(0.15), width: 8)),
         ),
       ),
       Row(

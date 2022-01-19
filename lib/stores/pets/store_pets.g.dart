@@ -9,21 +9,6 @@ part of 'store_pets.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$StorePets on _StorePets, Store {
-  final _$tutorialDoneAtom = Atom(name: '_StorePets.tutorialDone');
-
-  @override
-  bool get tutorialDone {
-    _$tutorialDoneAtom.reportRead();
-    return super.tutorialDone;
-  }
-
-  @override
-  set tutorialDone(bool value) {
-    _$tutorialDoneAtom.reportWrite(value, super.tutorialDone, () {
-      super.tutorialDone = value;
-    });
-  }
-
   final _$petsAtom = Atom(name: '_StorePets.pets');
 
   @override
@@ -39,10 +24,33 @@ mixin _$StorePets on _StorePets, Store {
     });
   }
 
+  final _$_StorePetsActionController = ActionController(name: '_StorePets');
+
+  @override
+  void addNewPet(Pet newPet) {
+    final _$actionInfo =
+        _$_StorePetsActionController.startAction(name: '_StorePets.addNewPet');
+    try {
+      return super.addNewPet(newPet);
+    } finally {
+      _$_StorePetsActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void addNewTaskToPet(Pet pet, Task task) {
+    final _$actionInfo = _$_StorePetsActionController.startAction(
+        name: '_StorePets.addNewTaskToPet');
+    try {
+      return super.addNewTaskToPet(pet, task);
+    } finally {
+      _$_StorePetsActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
-tutorialDone: ${tutorialDone},
 pets: ${pets}
     ''';
   }

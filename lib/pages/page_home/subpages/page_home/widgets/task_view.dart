@@ -30,7 +30,7 @@ class _TaskViewerState extends State<TaskViewer> {
                 scrollDirection: Axis.horizontal,
                 itemCount: tasks.length,
                 itemBuilder: (context, i) {
-                  return CardTask(task: tasks[i], color: widget.pet.colorReference);
+                  return CardTask(task: tasks[i], color: widget.pet.color);
                 },
               ),
       );
