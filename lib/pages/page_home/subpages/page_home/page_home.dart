@@ -51,12 +51,7 @@ class _PageHomeState extends State<PageHome> {
           children: <Widget>[
             Container(height: 10),
             Expanded(
-              child: Container(
-                color: Colors.green,
-                constraints: BoxConstraints(
-                    minHeight: MediaQuery.of(context).size.height / 3),
-                    child: PetSelector(pet),
-              ),
+              child: PetSelector(pet),
             ),
             Container(height: 30),
             const Align(
@@ -129,7 +124,7 @@ class _PetSelectorState extends State<PetSelector> {
               for (var i = 0; i < pets.length; i++)
                 GestureDetector(
                     onTap: () => buttonCarouselController.animateToPage(i),
-                    child: PetPicture(pet: pets[i])),
+                    child: PetPicture(pet: pets[i], size:MediaQuery.of(context).size.height / 2)),
             ],
             options: CarouselOptions(
               enableInfiniteScroll: false,
@@ -137,6 +132,7 @@ class _PetSelectorState extends State<PetSelector> {
               enlargeStrategy: CenterPageEnlargeStrategy.scale,
               // height: 275,
               height: MediaQuery.of(context).size.height / 2,
+              // aspectRatio: 1.5,
               viewportFraction: 0.5,
               initialPage:
                   Provider.of<StorePets>(context).getPetIndex(widget.pet),
