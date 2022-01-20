@@ -18,8 +18,10 @@ class CardTask extends StatefulWidget {
 }
 
 class _CardTaskState extends State<CardTask> {
+
   @override
   Widget build(BuildContext context) {
+      var size = MediaQuery.of(context).size.width * 0.7;
     return Padding(
       padding: const EdgeInsets.only(left: 30.0),
       child: SizedBox.fromSize(
@@ -35,8 +37,8 @@ class _CardTaskState extends State<CardTask> {
               ),
             ),
             child: Container(
-              height: 50,
-              width: MediaQuery.of(context).size.width * 0.7,
+              width: size,
+              constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.width * 0.3),
               decoration: BoxDecoration(
                 boxShadow: const [
                   BoxShadow(
