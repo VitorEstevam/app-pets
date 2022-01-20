@@ -112,7 +112,8 @@ class _PageHomeState extends State<PageHome> {
             Container(height: 10),
             Expanded(
               flex: 2,
-              child: SizedBox(
+              child: Container(
+                color: Colors.red,
                 width: double.infinity,
                 child: PetSelector(pet),
               ),
@@ -142,7 +143,8 @@ class _PageHomeState extends State<PageHome> {
 
 class PetSelector extends StatefulWidget {
   final pet;
-  const PetSelector(this.pet, {
+  const PetSelector(
+    this.pet, {
     Key? key,
   }) : super(key: key);
 
@@ -152,11 +154,15 @@ class PetSelector extends StatefulWidget {
 
 class _PetSelectorState extends State<PetSelector> {
   CarouselController buttonCarouselController = CarouselController();
-
- Future<String> getFutureDados(index) async =>
-      await Future.delayed(Duration(milliseconds:1), () {
-        buttonCarouselController.jumpToPage(index);
-        return '';
+  bool start = true;
+  Future getFutureDados(index) async =>
+      await Future.delayed(Duration(milliseconds: 0), () {
+        if (start == true) {
+          buttonCarouselController.animateToPage(index);
+          print("started");
+        } else {
+          start = true;
+        }
       });
 
   @override
@@ -165,30 +171,31 @@ class _PetSelectorState extends State<PetSelector> {
     var pets = Provider.of<StorePets>(context, listen: false).pets;
 
     return FutureBuilder(
-      future: getFutureDados(index),
-      builder: (context,snapshot) {
-        return CarouselSlider(
-          carouselController: buttonCarouselController,
-          items: [
-            for (var i = 0; i < pets.length; i++)
-              GestureDetector(
-                  onTap: () => buttonCarouselController.animateToPage(i),
-                  child: PetPicture(pet: pets[i])),
-          ],
-          options: CarouselOptions(
-            enableInfiniteScroll: false,
-            enlargeCenterPage: true,
-            enlargeStrategy: CenterPageEnlargeStrategy.scale,
-            aspectRatio: 10 / 5,
-            viewportFraction: 0.4,
-            initialPage: Provider.of<StorePets>(context).getPetIndex(widget.pet),
-            onPageChanged: (index, other) {
-              Provider.of<StorePets>(context, listen: false)
-                  .setActualPet(pets[index]);
-            },
-          ),
-        );
-      }
-    );
+        future: getFutureDados(index),
+        builder: (context, snapshot) {
+          return CarouselSlider(
+            carouselController: buttonCarouselController,
+            items: [
+              for (var i = 0; i < pets.length; i++)
+                GestureDetector(
+                    onTap: () => buttonCarouselController.animateToPage(i),
+                    child: PetPicture(pet: pets[i])),
+            ],
+            options: CarouselOptions(
+              enableInfiniteScroll: false,
+              enlargeCenterPage: true,
+              enlargeStrategy: CenterPageEnlargeStrategy.scale,
+              aspectRatio: 1,
+              viewportFraction: 0.6,
+              initialPage:
+                  Provider.of<StorePets>(context).getPetIndex(widget.pet),
+              onPageChanged: (index, other) {
+                Provider.of<StorePets>(context, listen: false)
+                    .setActualPet(pets[index]);
+                    start = false;
+              },
+            ),
+          );
+        });
   }
 }

@@ -14,37 +14,40 @@ class PetPicture extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Expanded(
-        child: Container(
-          clipBehavior: Clip.antiAlias,
-          decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage(pet.petIconUrl), fit: BoxFit.cover) ,
-              color: pet.color,
-              shape: BoxShape.circle,
-              border: Border.all(color: pet.color.darken(0.15), width: 8)),
-        ),
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            pet.name, //"Luke", /// @TODO Pegar nome do pet em destaque
-            style: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
+    return Container(
+      color: Colors.yellow,
+      child: Column(children: [
+        Expanded(
+          child: Container(
+            clipBehavior: Clip.antiAlias,
+            decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage(pet.petIconUrl), fit: BoxFit.cover) ,
+                color: pet.color,
+                shape: BoxShape.circle,
+                border: Border.all(color: pet.color.darken(0.15), width: 8)),
           ),
-          IconButton(
-            splashRadius: 20.0,
-            onPressed: () {},
-            icon: Icon(
-              Icons.edit,
-              color: Theme.of(context).primaryColor,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              pet.name, //"Luke", /// @TODO Pegar nome do pet em destaque
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          )
-        ],
-      )
-    ]);
+            IconButton(
+              splashRadius: 20.0,
+              onPressed: () {},
+              icon: Icon(
+                Icons.edit,
+                color: Theme.of(context).primaryColor,
+              ),
+            )
+          ],
+        )
+      ]),
+    );
   }
 }
