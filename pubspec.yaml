@@ -85,6 +85,7 @@ flutter:
     - lib/assets/cat_icon_creation.png
     - lib/assets/dog_icon_creation.png
     - lib/assets/icon/icon.png
+    - lib/assets/pets/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
