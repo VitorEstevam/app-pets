@@ -24,7 +24,33 @@ mixin _$StorePets on _StorePets, Store {
     });
   }
 
+  final _$actualPetAtom = Atom(name: '_StorePets.actualPet');
+
+  @override
+  Pet? get actualPet {
+    _$actualPetAtom.reportRead();
+    return super.actualPet;
+  }
+
+  @override
+  set actualPet(Pet? value) {
+    _$actualPetAtom.reportWrite(value, super.actualPet, () {
+      super.actualPet = value;
+    });
+  }
+
   final _$_StorePetsActionController = ActionController(name: '_StorePets');
+
+  @override
+  void setActualPet(Pet newPet) {
+    final _$actionInfo = _$_StorePetsActionController.startAction(
+        name: '_StorePets.setActualPet');
+    try {
+      return super.setActualPet(newPet);
+    } finally {
+      _$_StorePetsActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void addNewPet(Pet newPet) {
@@ -51,7 +77,8 @@ mixin _$StorePets on _StorePets, Store {
   @override
   String toString() {
     return '''
-pets: ${pets}
+pets: ${pets},
+actualPet: ${actualPet}
     ''';
   }
 }

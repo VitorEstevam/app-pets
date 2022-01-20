@@ -3,16 +3,21 @@ import 'package:app_pets/pages/page_home/subpages/page_task/page_task.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-
-class CardTask extends StatelessWidget {
+class CardTask extends StatefulWidget {
   final Color color;
   const CardTask({
     Key? key,
-    required this.task, this.color = Colors.grey,
+    required this.task,
+    this.color = Colors.grey,
   }) : super(key: key);
 
   final Task task;
 
+  @override
+  State<CardTask> createState() => _CardTaskState();
+}
+
+class _CardTaskState extends State<CardTask> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,7 +30,7 @@ class CardTask extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => PageTask(
-                  task: task,
+                  task: widget.task,
                 ),
               ),
             ),
@@ -37,11 +42,11 @@ class CardTask extends StatelessWidget {
                   BoxShadow(
                     color: Colors.black45,
                     blurRadius: 4,
-                    offset: Offset(0, 1), 
+                    offset: Offset(0, 1),
                   ),
                 ],
                 borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                color: color, 
+                color: widget.color,
               ),
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
@@ -51,10 +56,10 @@ class CardTask extends StatelessWidget {
                   children: [
                     Text(
                       DateFormat('dd/MM/yyyy')
-                          .format(task.subTasks[0].dateToDo),
+                          .format(widget.task.subTasks[0].dateToDo),
                       style: const TextStyle(fontSize: 15),
                     ),
-                    Text(task.title,
+                    Text(widget.task.title,
                         style: const TextStyle(
                             fontSize: 25, fontWeight: FontWeight.bold),
                         maxLines: 2,

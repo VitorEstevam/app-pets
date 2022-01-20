@@ -19,21 +19,37 @@ class TaskViewer extends StatefulWidget {
 class _TaskViewerState extends State<TaskViewer> {
   @override
   Widget build(BuildContext context) {
-    final tasks = widget.pet.tasks;
-
     return Observer(builder: (context) {
-      return Container(
-        child: tasks.isEmpty
-            ? const EmptyTasks()
-            : ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemCount: tasks.length,
-                itemBuilder: (context, i) {
-                  return CardTask(task: tasks[i], color: widget.pet.color);
-                },
-              ),
-      );
+      final tasks = widget.pet.tasks;
+      final widgets = tasks
+          .map((task) => CardTask(task: task, color: widget.pet.color))
+          .toList();
+      final list = ListView(
+          physics: const BouncingScrollPhysics(),
+          scrollDirection: Axis.horizontal,
+          children: widgets);
+
+      bool ended = false;
+
+      Future getFutureDados() async => await Future.delayed(
+            const Duration(milliseconds: 1),
+            () {
+              ended = true;
+            },
+          );
+
+      return FutureBuilder(
+          future: getFutureDados(),
+          builder: (context, _) {
+            return Container(
+              child: tasks.isEmpty
+                  ? EmptyTasks(name: widget.pet.name)
+                  : AnimatedSwitcher(
+                      duration: Duration(milliseconds: 250),
+                      child: ended ? list : Container(),
+                    ),
+            );
+          });
     });
   }
 }
