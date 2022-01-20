@@ -11,14 +11,14 @@ class IconSelector extends StatefulWidget {
 
 class _IconSelectorState extends State<IconSelector> {
   List<String> icons = [
-    "lib/assets/cat_icon_creation.png",
-    "lib/assets/cat_icon_creation.png",
-    "lib/assets/dog_icon_creation.png",
-    "lib/assets/dog_icon_creation.png",
-    "lib/assets/cat_icon_creation.png",
-    "lib/assets/cat_icon_creation.png",
-    "lib/assets/dog_icon_creation.png",
-    "lib/assets/dog_icon_creation.png",
+    "lib/assets/pets/CAT.png",
+    "lib/assets/pets/CAT1.png",
+    "lib/assets/pets/CAT2.png",
+    "lib/assets/pets/CAT3.png",
+    "lib/assets/pets/DOG.png",
+    "lib/assets/pets/DOG1.png",
+    "lib/assets/pets/DOG2.png",
+    "lib/assets/pets/DOG3.png",
   ];
   int? selected;
 

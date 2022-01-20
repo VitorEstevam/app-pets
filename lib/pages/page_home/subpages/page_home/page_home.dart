@@ -1,5 +1,6 @@
 import 'package:app_pets/classes/pet.dart';
 import 'package:app_pets/consts/theme.dart';
+import 'package:app_pets/debug_config.dart';
 import 'package:app_pets/pages/page_home/subpages/page_add_task/page_add_task.dart';
 import 'package:app_pets/pages/page_home/subpages/page_add_task/page_add_task.dart';
 import 'package:app_pets/pages/page_pet/page_create_pet.dart';
@@ -11,72 +12,6 @@ import 'package:provider/provider.dart';
 
 import 'widgets/pet_picture.dart';
 import 'widgets/task_view.dart';
-
-class MainButtons extends StatelessWidget {
-  const MainButtons({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            child: ElevatedButton(
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(
-                  (Theme.of(context).primaryColor),
-                ),
-                backgroundColor: MaterialStateProperty.all<Color>(
-                  Colors.white,
-                ),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(3),
-                    side: BorderSide(color: Theme.of(context).primaryColor),
-                  ),
-                ),
-              ),
-              onPressed: () {},
-              child: const SizedBox(
-                height: 40,
-                child: Center(
-                  child: Text("VER TODOS",
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                ),
-              ),
-            ),
-          ),
-        ),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            child: ElevatedButton(
-                onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PageCreatePet(),
-                      ),
-                    ),
-                child: SizedBox(
-                  height: 40,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Icon(Icons.add),
-                      Text("ADICIONAR PET",
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                    ],
-                  ),
-                )),
-          ),
-        ),
-      ],
-    );
-  }
-}
 
 class PageHome extends StatefulWidget {
   const PageHome({Key? key}) : super(key: key);
@@ -105,22 +40,23 @@ class _PageHomeState extends State<PageHome> {
         ),
         appBar: AppBar(
           title: const Text("nome do app"),
+          actions: [
+            IconButton(
+                onPressed: () => debugOptions(context),
+                icon: Icon(Icons.bug_report))
+          ],
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(height: 10),
-            Expanded(
-              flex: 2,
-              child: Container(
-                color: Colors.red,
-                width: double.infinity,
-                child: PetSelector(pet),
-              ),
+            Container(
+              width: double.infinity,
+              child: PetSelector(pet),
             ),
-            const MainButtons(),
+            // const MainButtons(),
             Expanded(
-              flex: 2,
+              flex: 1,
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: SizedBox(
@@ -186,16 +122,83 @@ class _PetSelectorState extends State<PetSelector> {
               enlargeCenterPage: true,
               enlargeStrategy: CenterPageEnlargeStrategy.scale,
               aspectRatio: 1,
-              viewportFraction: 0.6,
+              height: 250,
+              viewportFraction: 0.5,
               initialPage:
                   Provider.of<StorePets>(context).getPetIndex(widget.pet),
               onPageChanged: (index, other) {
                 Provider.of<StorePets>(context, listen: false)
                     .setActualPet(pets[index]);
-                    start = false;
+                start = false;
               },
             ),
           );
         });
+  }
+}
+
+class MainButtons extends StatelessWidget {
+  const MainButtons({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: ElevatedButton(
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(
+                  (Theme.of(context).primaryColor),
+                ),
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  Colors.white,
+                ),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(3),
+                    side: BorderSide(color: Theme.of(context).primaryColor),
+                  ),
+                ),
+              ),
+              onPressed: () {},
+              child: const SizedBox(
+                height: 40,
+                child: Center(
+                  child: Text("VER TODOS",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: ElevatedButton(
+                onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PageCreatePet(),
+                      ),
+                    ),
+                child: SizedBox(
+                  height: 40,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Icon(Icons.add),
+                      Text("ADICIONAR PET",
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                )),
+          ),
+        ),
+      ],
+    );
   }
 }
