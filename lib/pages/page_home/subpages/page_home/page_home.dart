@@ -50,11 +50,25 @@ class _PageHomeState extends State<PageHome> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(height: 10),
-            Container(
-              width: double.infinity,
-              child: PetSelector(pet),
+            Expanded(
+              child: Container(
+                color: Colors.green,
+                constraints: BoxConstraints(
+                    minHeight: MediaQuery.of(context).size.height / 3),
+                    child: PetSelector(pet),
+              ),
             ),
-            // const MainButtons(),
+            Container(height: 30),
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: EdgeInsets.only(left: 20.0),
+                child: Text(
+                  "Tarefas",
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
             Expanded(
               flex: 1,
               child: Padding(
@@ -68,7 +82,7 @@ class _PageHomeState extends State<PageHome> {
               ),
             ),
             Container(
-              height: 40,
+              height: 20,
             )
           ],
         ),
@@ -121,8 +135,8 @@ class _PetSelectorState extends State<PetSelector> {
               enableInfiniteScroll: false,
               enlargeCenterPage: true,
               enlargeStrategy: CenterPageEnlargeStrategy.scale,
-              aspectRatio: 1,
-              height: 250,
+              // height: 275,
+              height: MediaQuery.of(context).size.height / 2,
               viewportFraction: 0.5,
               initialPage:
                   Provider.of<StorePets>(context).getPetIndex(widget.pet),

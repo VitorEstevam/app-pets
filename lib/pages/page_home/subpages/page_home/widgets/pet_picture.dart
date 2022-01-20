@@ -15,15 +15,16 @@ class PetPicture extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
       Expanded(
+        flex: 1,
         child: Container(
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             image: DecorationImage(
-              scale: 0.1,
               image: AssetImage(pet.petIconUrl),
-              fit: BoxFit.cover,
+              // fit: BoxFit.cover,
             ),
             color: pet.color,
             shape: BoxShape.circle,
