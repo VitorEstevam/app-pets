@@ -26,16 +26,16 @@ void runDebug(BuildContext context) {
     var pet2 = Pet("Zelda", "lib/assets/cat_icon_creation.png", Colors.blue);
     Provider.of<StorePets>(context).addNewPet(pet2);
     var task2 = TaskUnique("dar banho", pet, DateTime(2022, 01, 23));
-        var task3 = TaskUnique("dar banho", pet, DateTime(2022, 01, 23));
+    var task3 = TaskUnique("dar banho", pet, DateTime(2022, 01, 23));
     Provider.of<StorePets>(context).addNewTaskToPet(pet2, task2);
-        Provider.of<StorePets>(context).addNewTaskToPet(pet2, task3);
+    Provider.of<StorePets>(context).addNewTaskToPet(pet2, task3);
   }
 }
 
 Widget startingAppRoute(BuildContext context) {
   var tutorialDone = true; //todo change to the shared prefs
   var pets = Provider.of<StorePets>(context).pets;
-  
+
   if (!tutorialDone) {
     return const OnboardingIntro();
   } else if (pets.isEmpty) {

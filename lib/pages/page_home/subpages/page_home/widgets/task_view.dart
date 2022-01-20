@@ -19,21 +19,24 @@ class TaskViewer extends StatefulWidget {
 class _TaskViewerState extends State<TaskViewer> {
   @override
   Widget build(BuildContext context) {
-    final tasks = widget.pet.tasks;
 
-    return Observer(builder: (context) {
-      return Container(
-        child: tasks.isEmpty
-            ? const EmptyTasks()
-            : ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemCount: tasks.length,
-                itemBuilder: (context, i) {
-                  return CardTask(task: tasks[i], color: widget.pet.color);
-                },
-              ),
-      );
-    });
+
+    return Observer(
+      builder: (context) {
+            final tasks = widget.pet.tasks;
+        return Container(
+          child: tasks.isEmpty
+              ? EmptyTasks(name: widget.pet.name)
+              : ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: tasks.length,
+                  itemBuilder: (context, i) {
+                    return CardTask(task: tasks[i], color: widget.pet.color);
+                  },
+                ),
+        );
+      }
+    );
   }
 }

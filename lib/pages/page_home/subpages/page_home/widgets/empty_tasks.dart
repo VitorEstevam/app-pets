@@ -5,14 +5,13 @@ import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 
 class EmptyTasks extends StatelessWidget {
+  final String name;
   const EmptyTasks({
-    Key? key,
+    Key? key, required this.name,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var _StorePets = Provider.of<StorePets>(context);
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal:15.0),
       child: Column(
@@ -26,8 +25,8 @@ class EmptyTasks extends StatelessWidget {
           ),
           Container(height: 10),
           Text(
-            "Não há tarefas para ${_StorePets.pets[0].name}... Vamos começar adicionando uma!",
-            style: TextStyle(
+            "Não há tarefas para ${name}... Vamos começar adicionando uma!",
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w400,
             ),
