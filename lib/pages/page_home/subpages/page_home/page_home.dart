@@ -39,7 +39,7 @@ class _PageHomeState extends State<PageHome> {
           icon: const Icon(Icons.add),
         ),
         appBar: AppBar(
-          title: const Text("nome do app"),
+          title: const Text("App Pets"),
           actions: [
             IconButton(
                 onPressed: () => debugOptions(context),
@@ -51,13 +51,14 @@ class _PageHomeState extends State<PageHome> {
           children: <Widget>[
             Container(height: 10),
             Expanded(
+              flex: 1,
               child: PetSelector(pet),
             ),
             Container(height: 30),
             const Align(
               alignment: Alignment.centerLeft,
               child: Padding(
-                padding: EdgeInsets.only(left: 20.0),
+                padding: EdgeInsets.only(left: 30.0),
                 child: Text(
                   "Tarefas",
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
@@ -132,7 +133,7 @@ class _PetSelectorState extends State<PetSelector> {
               enlargeStrategy: CenterPageEnlargeStrategy.scale,
               // height: 275,
               height: MediaQuery.of(context).size.height / 2,
-              // aspectRatio: 1.5,
+              aspectRatio: 1.5,
               viewportFraction: 0.5,
               initialPage:
                   Provider.of<StorePets>(context).getPetIndex(widget.pet),
@@ -147,68 +148,3 @@ class _PetSelectorState extends State<PetSelector> {
   }
 }
 
-class MainButtons extends StatelessWidget {
-  const MainButtons({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            child: ElevatedButton(
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(
-                  (Theme.of(context).primaryColor),
-                ),
-                backgroundColor: MaterialStateProperty.all<Color>(
-                  Colors.white,
-                ),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(3),
-                    side: BorderSide(color: Theme.of(context).primaryColor),
-                  ),
-                ),
-              ),
-              onPressed: () {},
-              child: const SizedBox(
-                height: 40,
-                child: Center(
-                  child: Text("VER TODOS",
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                ),
-              ),
-            ),
-          ),
-        ),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            child: ElevatedButton(
-                onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PageCreatePet(),
-                      ),
-                    ),
-                child: SizedBox(
-                  height: 40,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Icon(Icons.add),
-                      Text("ADICIONAR PET",
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                    ],
-                  ),
-                )),
-          ),
-        ),
-      ],
-    );
-  }
-}
