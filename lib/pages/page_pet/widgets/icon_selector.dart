@@ -16,9 +16,9 @@ class _IconSelectorState extends State<IconSelector> {
     "lib/assets/pets/CAT2.png",
     "lib/assets/pets/CAT3.png",
     "lib/assets/pets/DOG.png",
-    "lib/assets/pets/DOG1.png",
     "lib/assets/pets/DOG2.png",
     "lib/assets/pets/DOG3.png",
+    "lib/assets/pets/DOG4.png",
   ];
   int? selected;
 
@@ -34,7 +34,7 @@ class _IconSelectorState extends State<IconSelector> {
       isSelected: selected == index,
     );
   }
-
+ 
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -42,15 +42,18 @@ class _IconSelectorState extends State<IconSelector> {
       children: [
         const Align(
           alignment: Alignment.centerLeft,
-          child: Text(
-            "Selecione um ícone para seu pet",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal:20.0),
+            child: Text(
+              "Selecione um ícone para seu pet",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
           ),
         ),
         Container(height: 20),
         Wrap(
           alignment: WrapAlignment.center,
-          spacing: 20,
+          spacing: 15,
           runSpacing: 15,
           children: [
             for (var i = 0; i < icons.length; i++) iconWidget(i, icons[i]),

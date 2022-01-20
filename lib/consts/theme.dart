@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 ThemeData theme = ThemeData(
-  backgroundColor: Colors.white,
+  backgroundColor: Color(0xffFFF9F7),
   bottomNavigationBarTheme:
       const BottomNavigationBarThemeData(backgroundColor: Colors.red),
   primarySwatch: const MaterialColor(
