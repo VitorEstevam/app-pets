@@ -49,7 +49,7 @@ class _PageHomeState extends State<PageHome> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Container(height: 50),
+            Container(height: 10),
             PetSelector(pet),
             Container(height: 10),
             Expanded(child: Container()),
