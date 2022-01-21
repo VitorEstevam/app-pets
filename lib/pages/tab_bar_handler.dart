@@ -1,6 +1,8 @@
 import 'package:app_pets/pages/page_home/subpages/page_home/page_home.dart';
+import 'package:app_pets/pages/page_home/subpages/page_task/page_task.dart';
 import 'package:app_pets/pages/page_news/subpages/page_news.dart';
 import 'package:app_pets/pages/page_pet/page_pets.dart';
+import 'package:app_pets/pages/page_tasks/page_tasks.dart';
 import 'package:app_pets/widgets/tab_view_navigator.dart';
 import 'package:flutter/material.dart';
 
@@ -46,8 +48,10 @@ class TabBarHandler extends StatelessWidget {
                   return const PageNews();
                 },
               ),
-              const Center(
-                child: Text("tarefas"),
+              TabViewNavigator(
+                builder: (context) {
+                  return PageTasks();
+                },
               ),
               TabViewNavigator(
                 builder: (context) {
