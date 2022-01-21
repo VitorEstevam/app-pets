@@ -42,17 +42,20 @@ class _ColorSelectorState extends State<ColorSelector> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            "Selecione uma cor para ele",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Selecione uma cor para ele",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
           ),
         ),
         Container(height: 20),
         Wrap(
           alignment: WrapAlignment.center,
-          spacing: 20,
+          spacing: 15,
           runSpacing: 15,
           children: [
             for (var j = 0; j < colors.length; j++) colorWidget(j, colors[j]),

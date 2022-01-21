@@ -57,33 +57,33 @@ class PageCreatePet extends StatelessWidget {
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(height: 20),
-                GeneralFormField(
-                  validator: (_) {
-                    if (image == null) {
-                      return 'Por favor, selecione um ícone';
-                    }
-                    return null;
-                  },
-                  widget: IconSelector(onSelect: chooseIcon),
-                ),
-                Container(height: 20),
-                GeneralFormField(
-                  validator: (_) {
-                    if (color == null) {
-                      return 'Por favor, selecione uma cor';
-                    }
-                    return null;
-                  },
-                  widget: ColorSelector(onSelect: chooseColor),
-                ),
-                Container(height: 20),
-                TextInput(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(height: 20),
+              GeneralFormField(
+                validator: (_) {
+                  if (image == null) {
+                    return 'Por favor, selecione um ícone';
+                  }
+                  return null;
+                },
+                widget: IconSelector(onSelect: chooseIcon),
+              ),
+              Container(height: 20),
+              GeneralFormField(
+                validator: (_) {
+                  if (color == null) {
+                    return 'Por favor, selecione uma cor';
+                  }
+                  return null;
+                },
+                widget: ColorSelector(onSelect: chooseColor),
+              ),
+              Container(height: 20),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: TextInput(
                   onChanged: chooseName,
                   validator: (_) {
                     if (name == null || name == "") {
@@ -92,22 +92,41 @@ class PageCreatePet extends StatelessWidget {
                     return null;
                   },
                 ),
-                Container(height: 20),
-                const Text(
+              ),
+              Container(height: 20),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Text(
                   "Não se preocupe, você poderá adicionar mais posteriormente!",
                   style: TextStyle(
                     fontSize: 15,
                   ),
                 ),
-              ],
-            ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: ElevatedButton(
+                    onPressed: () => submitForm(context),
+                    child: Center(
+                      child: Container(
+                        width: double.infinity,
+                        height: 40,
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: const [
+                              Icon(Icons.add),
+                              Text('ADICIONAR PET')
+                            ],
+                          ),
+                        ),
+                      ),
+                    )),
+              )
+            ],
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => submitForm(context),
-        label: const Text('ADICIONAR PET'),
-        icon: const Icon(Icons.add),
       ),
     );
   }

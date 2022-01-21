@@ -7,50 +7,56 @@ import 'package:provider/provider.dart';
 
 class PetPicture extends StatelessWidget {
   final Pet pet;
+  final double size;
   const PetPicture({
-    Key? key,
+    Key? key, required this.size,
     required this.pet,
   }) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-      Expanded(
-        child: Container(
+    return Container(
+      // color: Colors.blue,
+      height: size,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+        Container(
+          height: size * 0.5,
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             image: DecorationImage(
-              scale: 0.1,
               image: AssetImage(pet.petIconUrl),
-              fit: BoxFit.cover,
+              // fit: BoxFit.cover,
             ),
             color: pet.color,
             shape: BoxShape.circle,
             border: Border.all(color: pet.color.darken(0.15), width: 8),
           ),
         ),
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            pet.name, //"Luke", /// @TODO Pegar nome do pet em destaque
-            style: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              pet.name, 
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          IconButton(
-            splashRadius: 20.0,
-            onPressed: () {},
-            icon: Icon(
-              Icons.edit,
-              color: Theme.of(context).primaryColor,
-            ),
-          )
-        ],
-      )
-    ]);
+            IconButton(
+              splashRadius: 20.0,
+              onPressed: () {},
+              icon: Icon(
+                Icons.edit,
+                color: Theme.of(context).primaryColor,
+              ),
+            )
+          ],
+        )
+      ]),
+    );
   }
 }
