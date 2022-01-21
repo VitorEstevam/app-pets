@@ -31,7 +31,7 @@ class _PagePetsState extends State<PagePets> {
               icon: const Icon(Icons.add))
         ],
       ),
-      body: GridPets(),
+      body: const GridPets(),
     );
   }
 }
@@ -80,30 +80,54 @@ class _GridPetsState extends State<GridPets> {
                     Expanded(
                       child: Container(
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 pets[index].name,
+                                overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
                                     fontSize: 25,
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
-
-                              Material(
-                                color: Colors.transparent,
-                                borderRadius: BorderRadius.all(Radius.circular(1000.0)),
-                                clipBehavior: Clip.antiAlias,
-                                child: IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.delete_rounded,
-                                      size: 30,
-                                      color: Colors.white,
-                                    )),
+                              Row(
+                                children: [
+                                  Material(
+                                    color: Colors.transparent,
+                                    borderRadius:
+                                        const BorderRadius.all(Radius.circular(1000.0)),
+                                    clipBehavior: Clip.antiAlias,
+                                    child: InkWell(
+                                        onTap: () {},
+                                        child: const Padding(
+                                          padding: EdgeInsets.all(5.0),
+                                          child: Icon(
+                                            Icons.edit,
+                                            size: 25,
+                                            color: Colors.white,
+                                          ),
+                                        )),
+                                  ),
+                                  Material(
+                                    color: Colors.transparent,
+                                    borderRadius:
+                                        const BorderRadius.all(Radius.circular(1000.0)),
+                                    clipBehavior: Clip.antiAlias,
+                                    child: InkWell(
+                                        onTap: () {},
+                                        child: const Padding(
+                                          padding: EdgeInsets.all(5.0),
+                                          child: Icon(
+                                            Icons.delete_rounded,
+                                            size: 25,
+                                            color: Colors.white,
+                                          ),
+                                        )),
+                                  ),
+                                ],
                               )
                             ],
                           ),
