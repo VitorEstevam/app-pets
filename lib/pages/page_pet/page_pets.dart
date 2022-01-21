@@ -100,7 +100,7 @@ class _GridPetsState extends State<GridPets> {
                                 child: IconButton(
                                     onPressed: () {},
                                     icon: const Icon(
-                                      Icons.,
+                                      Icons.delete_rounded,
                                       size: 30,
                                       color: Colors.white,
                                     )),
