@@ -1,8 +1,10 @@
 import 'dart:collection';
 
 import 'package:app_pets/classes/tasks/task.dart';
+import 'package:app_pets/classes/tasks/task_weekly.dart';
 import 'package:app_pets/consts/theme.dart';
 import 'package:app_pets/consts/utils.dart';
+import 'package:app_pets/pages/page_home/subpages/page_task/widgets/date_markers.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/locale.dart';
@@ -25,7 +27,7 @@ class _TaskCalendarState extends State<TaskCalendar> {
 
   Color getEventColor(DateTime date) {
     var status = widget.task.getStatus();
-    
+
     if (tasks[date]![0]) {
       return Colors.green;
     } else {
@@ -57,8 +59,7 @@ class _TaskCalendarState extends State<TaskCalendar> {
           child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
-                border:
-                    Border.all(width: 2, color: Colors.grey),
+                border: Border.all(width: 2, color: Colors.grey),
               ),
               child: Center(
                 child: Text(date.day.toString()),
@@ -67,20 +68,25 @@ class _TaskCalendarState extends State<TaskCalendar> {
       },
       markerBuilder: (context, date, _) {
         var task = getTasks(date);
-        return task.isEmpty
-            ? Container()
-            : Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: getEventColor(date),
-                  ),
-                  child: Center(
-                    child: Text(date.day.toString()),
-                  ),
-                ),
-              );
+        if (!task.isEmpty) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: getEventColor(date),
+              ),
+              child: Center(
+                child: Text(date.day.toString()),
+              ),
+            ),
+          );
+        } else {
+          if (widget.task.checkFutureDate(date)) {
+            return comingMarker(date);
+          }
+          return Container();
+        }
       },
     );
   }

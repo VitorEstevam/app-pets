@@ -52,6 +52,10 @@ class Task {
     startDate = DateTime.now();
   }
 
+  bool checkFutureDate(DateTime date){
+    return false;
+  }
+
   String get subTitle {
     return "";
   }

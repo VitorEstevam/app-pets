@@ -19,6 +19,9 @@ void debugOptions(BuildContext context) {
   task = TaskUnique("dar banho", pet, DateTime(2022, 01, 25));
   Provider.of<StorePets>(context, listen: false).addNewTaskToPet(pet, task);
 
+  task = TaskWeekly("passear", pet, [1,2,5]);
+  Provider.of<StorePets>(context, listen: false).addNewTaskToPet(pet, task);
+
   //---- zelda
   pet = Pet("Zelda $petIndex", "lib/assets/pets/CAT.png", Colors.blue);
   Provider.of<StorePets>(context, listen: false).addNewPet(pet);
@@ -26,8 +29,8 @@ void debugOptions(BuildContext context) {
   task = TaskUnique("dar banho", pet, DateTime(2022, 02, 01));
   Provider.of<StorePets>(context, listen: false).addNewTaskToPet(pet, task);
 
-  task = TaskUnique("dar banho", pet, DateTime(2022, 01, 25));
-  Provider.of<StorePets>(context, listen: false).addNewTaskToPet(pet, task);
+  // task = Task("dar banho", pet, DateTime(2022, 01, 25));
+  // Provider.of<StorePets>(context, listen: false).addNewTaskToPet(pet, task);
 
   petIndex+=1;
 }
