@@ -54,7 +54,7 @@ class TaskWeekly extends Task {
   }
 
   @override
-  int getStreak() {
+  int get streak {
     var streak = 0;
     for (var task in subTasks) {
       if (!task.done) {
@@ -68,19 +68,21 @@ class TaskWeekly extends Task {
 
   @override
   void updateSubTasks() {
+    var days = subTasks.map((e) => e.dateToDo).toList();
     var start = startDate;
-    // var end = DateTime.now();
     var end = DateTime.now();
     final daysToGenerate = end.difference(start).inDays;
 
     for (var i = 0; i < daysToGenerate; i++) {
       var day = DateTime(start.year, start.month, start.day + (i));
 
-      if (weekdays.contains(day.weekday)) {
-        var subTask = SubTask(day);
+      if (!days.contains(day)) {
+        if (weekdays.contains(day.weekday)) {
+          var subTask = SubTask(day);
 
-        if (!subTasks.contains(subTask)) {
-          subTasks.insert(0, subTask);
+          if (!subTasks.contains(subTask)) {
+            subTasks.insert(0, subTask);
+          }
         }
       }
     }
@@ -92,11 +94,20 @@ class TaskWeekly extends Task {
       if (weekdays.contains(day.weekday)) {
         var subTask = SubTask(day);
 
-        if (!subTasks.contains(subTask)) {
-          subTasks.insert(0, subTask);
+        SubTask? t;
+        for (var i in subTasks) {
+          if (i.dateToDo == subTask.dateToDo) {
+            t = i;
+            break;
+          }
         }
-
-        return;
+        if (t == null) {
+          subTasks.insert(0, subTask);
+          return;
+        }
+        if (t.done == false) {
+          return;
+        }
       }
     }
   }
