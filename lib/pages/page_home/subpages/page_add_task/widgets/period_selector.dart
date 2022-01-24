@@ -1,3 +1,4 @@
+import 'package:app_pets/classes/period_tuple.dart';
 import 'package:app_pets/classes/pet.dart';
 import 'package:app_pets/classes/tasks/task.dart';
 import 'package:app_pets/classes/tasks/task_unique.dart';
@@ -6,6 +7,8 @@ import 'package:app_pets/pages/page_home/subpages/page_add_task/widgets/date_pic
 import 'package:app_pets/pages/page_home/subpages/page_add_task/widgets/week_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'period_picker.dart';
 
 class PeriodSelector extends StatefulWidget {
   final Function(Function factory, dynamic param) onPeriodSubmit;
@@ -24,14 +27,22 @@ class _PeriodSelectorState extends State<PeriodSelector> {
 
   void submitTaskUnique(DateTime dt) {
     // ignore: prefer_function_declarations_over_variables
-    var _factory = (String a,Pet b, dynamic c) => TaskUnique(a, b,c);
+    var _factory = (String a, Pet b, dynamic c) => TaskUnique(a, b, c);
     widget.onPeriodSubmit(_factory, dt);
   }
 
-    void submitTaskWeekly(List<int> wk) {
+  void submitTaskWeekly(List<int> wk) {
     // ignore: prefer_function_declarations_over_variables
-    var _factory = (String a,Pet b, dynamic c) => TaskWeekly(a, b,c);
+    var _factory = (String a, Pet b, dynamic c) => TaskWeekly(a, b, c);
     widget.onPeriodSubmit(_factory, wk);
+  }
+
+  void submitTaskPeriodic(PeriodTuple dr) {
+    // ignore: prefer_function_declarations_over_variables
+    // var _factory = (String a, Pet b, dynamic c) => TaskPeriodic(a, b, c);
+    // widget.onPeriodSubmit(_factory, wk);
+
+    print(dr);
   }
 
   Widget getBody() {
@@ -40,14 +51,18 @@ class _PeriodSelectorState extends State<PeriodSelector> {
         callback: (a) => submitTaskUnique(a),
       );
     }
-    
+
     if (isSelected[1]) {
       return WeekPicker(
         callback: (a) => submitTaskWeekly(a),
       );
     }
 
-    if (isSelected[2]) return Container();
+    if (isSelected[2]) {
+      return PeriodPicker(
+        callback: (a) => submitTaskPeriodic(a),
+      );
+    }
     return Container();
   }
 

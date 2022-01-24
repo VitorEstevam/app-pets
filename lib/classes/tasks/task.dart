@@ -52,7 +52,7 @@ class Task {
     startDate = DateTime.now();
   }
 
-  bool checkFutureDate(DateTime date){
+  bool checkFutureDate(DateTime date) {
     return false;
   }
 
@@ -63,7 +63,7 @@ class Task {
   void markAsDone() {
     //pass
   }
-  
+
   void updateSubTasks() {
     //pass
   }
@@ -72,7 +72,7 @@ class Task {
     return TaskStatus.empty;
   }
 
-  int getStreak() {
+  int get streak {
     return 0;
   }
 

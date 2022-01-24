@@ -13,23 +13,22 @@ class TaskBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    task.updateSubTasks();
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-              task.title +
-                  " com ${task.pet.name}",
+          Text(task.title + " com ${task.pet.name}",
               style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               maxLines: 2,
               overflow: TextOverflow.ellipsis),
           Container(height: 15),
           Text(
-           task.subTitle,
+            task.subTitle,
             style: const TextStyle(fontSize: 15),
           ),
-          const Text("Frequência",
+          Text("Frequência ${task.streak}",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           TaskCalendar(task)
         ],
