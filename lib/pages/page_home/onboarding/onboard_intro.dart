@@ -8,7 +8,12 @@ import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
 import 'package:onboarding/onboarding.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+dynamic setIntroState() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setBool("tutorial", true);
+}
 
 class OnboardingIntro extends StatefulWidget {
   const OnboardingIntro({Key? key}) : super(key: key);
@@ -46,21 +51,20 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
 
   Slide createPageModel(String textTitle, String textBody, String imgPath) {
     return Slide(
-        title: textTitle,
-        styleTitle: const TextStyle(
-            color: Colors.black, fontSize: 30.0, fontWeight: FontWeight.bold),
-        description: textBody,
-        styleDescription: const TextStyle(
-            color: Colors.black,
-            fontSize: 20.0),
-        maxLineTitle: 2,
-        marginTitle:
-            const EdgeInsets.only(left: 20.0, right:20.0,bottom: 10.0, top: 30),
-        marginDescription:
-            const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-        backgroundImage: imgPath,
-        backgroundImageFit: BoxFit.cover,
-        backgroundOpacity: 0.0,);
+      title: textTitle,
+      styleTitle: const TextStyle(
+          color: Colors.black, fontSize: 30.0, fontWeight: FontWeight.bold),
+      description: textBody,
+      styleDescription: const TextStyle(color: Colors.black, fontSize: 20.0),
+      maxLineTitle: 2,
+      marginTitle:
+          const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 10.0, top: 30),
+      marginDescription:
+          const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      backgroundImage: imgPath,
+      backgroundImageFit: BoxFit.cover,
+      backgroundOpacity: 0.0,
+    );
   }
 
   Widget myButton(title) {
@@ -108,15 +112,13 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
       // Done button
       renderDoneBtn: myButton("Pronto"),
       doneButtonStyle: myButtonStyle(),
-      onDonePress: (){
-        // _store_global.tutorialDone = true; // @TODO: use shared prefs
-
-         Navigator.pushAndRemoveUntil(
+      onDonePress: () {
+        setIntroState();
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => PageCreatePet(),
           ),
-          (route) => false,
         );
       },
     );

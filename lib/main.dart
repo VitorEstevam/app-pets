@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 
 import 'package:app_pets/consts/theme.dart';
 import 'package:app_pets/consts/provider_stores.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 bool once = false;
 bool debug = true;
@@ -22,9 +23,16 @@ void runDebug(BuildContext context) {
   }
 }
 
-Widget startingAppRoute(BuildContext context) {
-  var tutorialDone = false; //todo change to the shared prefs
-  var pets = Provider.of<StorePets>(context).pets;
+dynamic getIntroState() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool? _res = prefs.getBool("tutorial");
+
+  return _res ?? false;
+}
+
+Future<Widget> startingAppRoute(BuildContext context) async {
+  var tutorialDone = await getIntroState(); //todo change to the shared prefs
+  var pets = Provider.of<StorePets>(context, listen: false).pets;
 
   if (!tutorialDone) {
     return const OnboardingIntro();
@@ -37,7 +45,10 @@ Widget startingAppRoute(BuildContext context) {
 
 void main() {
   runApp(
-    MultiProvider(providers: providerStores, child: const AppRoot()),
+    MultiProvider(
+      providers: providerStores,
+      child: const AppRoot(),
+    ),
   );
 }
 
@@ -51,7 +62,11 @@ class AppRoot extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'App Pets',
       theme: theme,
-      home: startingAppRoute(context),
+      home: FutureBuilder<Widget>(
+          future: startingAppRoute(context),
+          builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
+            return snapshot.hasData ? snapshot.data! : Container();
+          }),
     );
   }
 }
