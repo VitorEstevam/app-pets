@@ -56,9 +56,12 @@ class TaskWeekly extends Task {
   @override
   int get streak {
     var streak = 0;
-    for (var task in subTasks) {
+    var sb = subTasks.reversed;
+    for (var task in sb) {
       if (!task.done) {
-        streak = 0;
+        if (compareDates(task.dateToDo, DateTime.now()) < 0) {
+          streak = 0;
+        }
       } else {
         streak++;
       }

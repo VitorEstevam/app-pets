@@ -29,10 +29,10 @@ class _TaskCalendarState extends State<TaskCalendar> {
     var status = widget.task.getStatus();
 
     if (tasks[date]![0]) {
-      return Colors.green;
+      return Color(0xff00C853);
     } else {
       if (compareDates(date, DateTime.now()) < 0) {
-        return Colors.red;
+        return Color(0xffC62828);
       } else {
         return Colors.grey;
       }
@@ -57,35 +57,44 @@ class _TaskCalendarState extends State<TaskCalendar> {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                border: Border.all(width: 2, color: Colors.grey),
-              ),
-              child: Center(
-                child: Text(date.day.toString()),
-              )),
+            decoration: BoxDecoration(
+              color: Colors.grey.lighten(0.2),
+              shape: BoxShape.circle,
+            ),
+          ),
         );
       },
       markerBuilder: (context, date, _) {
         var task = getTasks(date);
-        if (!task.isEmpty) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: getEventColor(date),
-              ),
-              child: Center(
-                child: Text(date.day.toString()),
-              ),
-            ),
-          );
-        } else {
+
+        if (compareDates(date, DateTime.now()) > 0) {
           if (widget.task.checkFutureDate(date)) {
-            return comingMarker(date);
+            return ComingMarker(date);
           }
-          return Container();
+        }
+
+        if (isToday(date)) {
+          if (task.isNotEmpty) {
+            if (task[0]) {
+              return EventMarker(date, getEventColor(date));
+            } else {
+              return ComingMarker(date);
+            }
+          } else {
+            return Center(
+              child: Text(
+                date.day.toString(),
+                style: const TextStyle(fontWeight: FontWeight.w900),
+              ),
+            );
+          }
+        }
+
+        if (task.isNotEmpty) {
+          if (compareDates(date, DateTime.now()) > 0) {
+            return ComingMarker(date);
+          }
+          return EventMarker(date, getEventColor(date));
         }
       },
     );

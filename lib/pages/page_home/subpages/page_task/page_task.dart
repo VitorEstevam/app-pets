@@ -14,24 +14,51 @@ class TaskBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     task.updateSubTasks();
-    return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(task.title + " com ${task.pet.name}",
-              style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis),
-          Container(height: 15),
-          Text(
-            task.subTitle,
-            style: const TextStyle(fontSize: 15),
-          ),
-          Text("Frequência ${task.streak}",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-          TaskCalendar(task)
-        ],
+    return Container(
+      color: Theme.of(context).backgroundColor,
+      child: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(task.title + " com ${task.pet.name}",
+                style:
+                    const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis),
+            Container(height: 20),
+            Text(
+              task.subTitle,
+              style: const TextStyle(fontSize: 15),
+            ),
+            Container(height: 5),
+            SizedBox(
+              height: 40,
+              width: double.infinity,
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Chip(
+                  backgroundColor: Colors.orange,
+                  avatar: const Icon(
+                    Icons.local_fire_department,
+                    color: Colors.yellow,
+                  ),
+                  label: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal:10.0, vertical: 5),
+                    child: Text("${task.streak.toString()}", style: TextStyle(fontSize: 20),),
+                  ),
+                ),
+              ),
+            ),
+            Container(height: 20),
+            const Text("Frequência",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: TaskCalendar(task),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -50,7 +77,7 @@ class _PageTaskState extends State<PageTask> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.task.title)),
+      appBar: AppBar(title: Text("Tarefa")),
       floatingActionButton: FloatingActionButton.extended(
           backgroundColor: Theme.of(context).primaryColor,
           label: const Text("Feita hoje"),
