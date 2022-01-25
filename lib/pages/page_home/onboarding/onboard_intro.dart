@@ -29,7 +29,7 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
     super.initState();
 
     slides.add(createPageModel(
-        "Bem-vindo(a) ao {app}!",
+        "Bem-vindo(a) ao App Pets!",
         "Feito com carinho para que você possa dedicar mais tempo ao seu bichinho de estimação!",
         'lib/assets/onboarding/Boas-vindas-1.png'));
 
