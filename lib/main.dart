@@ -23,7 +23,7 @@ void runDebug(BuildContext context) {
 }
 
 Widget startingAppRoute(BuildContext context) {
-  var tutorialDone = true; //todo change to the shared prefs
+  var tutorialDone = false; //todo change to the shared prefs
   var pets = Provider.of<StorePets>(context).pets;
 
   if (!tutorialDone) {

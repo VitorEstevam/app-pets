@@ -26,22 +26,22 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
     slides.add(createPageModel(
         "Bem-vindo(a) ao {app}!",
         "Feito com carinho para que você possa dedicar mais tempo ao seu bichinho de estimação!",
-        'lib/assets/Pag1_pets.jpg'));
+        'lib/assets/onboarding/Boas-vindas-1.png'));
 
     slides.add(createPageModel(
         "Melhore os laços com seu pet!",
         "Cumprir com todas as responsabilidades do seu pet não só é importante para a saúde dele(a) como ajuda melhorar os laços entre o bichinho e dono(a)! ",
-        "lib/assets/Pag2_pets.jpg"));
+        'lib/assets/onboarding/Boas-vindas-2.png'));
 
     slides.add(createPageModel(
-        "Sobre o {app}",
+        "Sobre o App Pets",
         "Lembre de todas as responsabilidades para seu pet gerenciando suas tarefas!",
-        "lib/assets/Pag3_pets.jpg"));
+        'lib/assets/onboarding/Boas-vindas-3.png'));
 
     slides.add(createPageModel(
         "Então vamos começar!",
         "Adicione seu primeiro pet! Selecione um ícone e uma cor para representá-lo ao usar o aplicativo.",
-        "lib/assets/Pag4_pets.jpg"));
+        'lib/assets/onboarding/Boas-vindas-4.png'));
   }
 
   Slide createPageModel(String textTitle, String textBody, String imgPath) {
