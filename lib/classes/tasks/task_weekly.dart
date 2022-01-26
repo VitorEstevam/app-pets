@@ -3,10 +3,46 @@ import 'package:app_pets/consts/utils.dart';
 import 'task.dart';
 
 class TaskWeekly extends Task {
-  List<int> weekdays;
+  late List<int> weekdays;
 
   TaskWeekly(title, pet, this.weekdays) : super(title, pet) {
     updateSubTasks();
+  }
+
+  // late String title = "";
+  // late List<SubTask> subTasks = [];
+  // late DateTime startDate = DateTime(0);
+  // late List<int> weekdays;
+  TaskWeekly.fromJson(Map<String, dynamic> data) : super.empty() {
+    title = data['title'];
+    startDate = DateTime.parse(data['startDate']);
+
+    if (data['subTasks'] != null) {
+      subTasks = [];
+      data['subTasks'].forEach((st) {
+        subTasks.add(SubTask.fromJson(st));
+      });
+    }
+    
+    weekdays = data['weekdays'].cast<int>();
+  }
+
+  // String title = "";
+  // List<SubTask> subTasks = [];
+  // Pet pet;
+  // DateTime startDate = DateTime(0);
+  // late List<int> weekdays;
+  @override
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['title'] = title;
+    data['subTasks'] = subTasks.map((t) => t.toJson()).toList();
+    // pet should be created on from json constructor
+    // data['pet'] = pet.toJson(); //stack overflow
+    data['startDate'] = startDate.toString();
+    data['weekdays'] = weekdays;
+    
+    return data;
   }
 
   @override

@@ -17,6 +17,22 @@ class SubTask {
     dateToDo = DateTime(date.year, date.month, date.day);
   }
 
+  //late DateTime dateToDo;
+  // bool done = false;
+  SubTask.fromJson(Map<String, dynamic> data) {
+    dateToDo = DateTime.parse(data['dateToDo']);
+    var val = data['done'];
+    done = val.toLowerCase() == 'true';
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['dateToDo'] = dateToDo.toString();
+    data['done'] = done.toString();
+
+    return data;
+  }
+
   TaskStatus getStatus() {
     var now = DateTime.now();
     var today = DateTime(now.year, now.month, now.day);
@@ -43,14 +59,16 @@ class SubTask {
 }
 
 class Task {
-  String title = "";
-  List<SubTask> subTasks = [];
-  Pet pet;
-  DateTime startDate = DateTime(0);
+  late String title = "";
+  late List<SubTask> subTasks = [];
+  late Pet pet;
+  late DateTime startDate = DateTime(0);
 
   Task(this.title, this.pet) {
     startDate = DateTime.now();
   }
+
+  Task.empty();
 
   bool checkFutureDate(DateTime date) {
     return false;
@@ -86,5 +104,10 @@ class Task {
       map[subTask.dateToDo] = [subTask.done];
     }
     return map;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    return data;
   }
 }

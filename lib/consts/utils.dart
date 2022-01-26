@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 int compareDates(DateTime d1, d2) {
   var _d1 = DateTime(d1.year, d1.month, d1.day);
@@ -9,6 +10,15 @@ int compareDates(DateTime d1, d2) {
 
 bool isToday(DateTime date) {
   return compareDates(date, DateTime.now()) == 0;
+}
+
+Future<void> saveState(context) async {
+  // SharedPreferences prefs = await SharedPreferences.getInstance();
+  // await prefs.setBool("tutorial", true);
+}
+
+void loadState(context){
+
 }
 
 extension ColorBrightness on Color {
