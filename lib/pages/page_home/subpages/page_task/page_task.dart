@@ -1,5 +1,6 @@
 import 'package:app_pets/classes/tasks/task.dart';
 import 'package:app_pets/classes/tasks/task_unique.dart';
+import 'package:app_pets/consts/utils.dart';
 import 'package:app_pets/stores/pets/store_pets.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -99,6 +100,7 @@ class _PageTaskState extends State<PageTask> {
           icon: const Icon(Icons.check),
           onPressed: () => setState(() {
                 widget.task.markAsDone();
+                saveState(context);
               })),
       body: TaskBody(widget.task),
     );

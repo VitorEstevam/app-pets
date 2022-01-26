@@ -33,8 +33,7 @@ class TaskUnique extends Task {
     final Map<String, dynamic> data = Map<String, dynamic>();
     data['title'] = title;
     data['subTasks'] = subTasks.map((t) => t.toJson()).toList();
-    // pet should be created on from json constructor
-    // data['pet'] = pet.toJson(); //stack overflow
+    // pet should be created on fromJson constructor
     data['startDate'] = startDate.toString();
     return data;
   }

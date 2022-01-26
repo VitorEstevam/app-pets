@@ -1,5 +1,6 @@
 import 'package:app_pets/classes/pet.dart';
 import 'package:app_pets/classes/tasks/task_unique.dart';
+import 'package:app_pets/consts/utils.dart';
 import 'package:app_pets/debug_config.dart';
 import 'package:app_pets/pages/page_home/onboarding/onboard_intro.dart';
 import 'package:app_pets/pages/page_pet/page_create_pet.dart';
@@ -31,7 +32,8 @@ dynamic getIntroState() async {
 }
 
 Future<Widget> startingAppRoute(BuildContext context) async {
-  var tutorialDone = await getIntroState(); //todo change to the shared prefs
+  var tutorialDone = await getIntroState(); 
+  var a = await Provider.of<StorePets>(context, listen: false).loadPets();
   var pets = Provider.of<StorePets>(context, listen: false).pets;
 
   if (!tutorialDone) {
@@ -57,16 +59,16 @@ class AppRoot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    runDebug(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'App Pets',
       theme: theme,
       home: FutureBuilder<Widget>(
-          future: startingAppRoute(context),
-          builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
-            return snapshot.hasData ? snapshot.data! : Container();
-          }),
+        future: startingAppRoute(context),
+        builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
+          return snapshot.hasData ? snapshot.data! : Container();
+        },
+      ),
     );
   }
 }

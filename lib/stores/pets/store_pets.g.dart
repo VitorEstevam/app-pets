@@ -53,6 +53,17 @@ mixin _$StorePets on _StorePets, Store {
   }
 
   @override
+  void setPets(ObservableList<Pet> _pets) {
+    final _$actionInfo =
+        _$_StorePetsActionController.startAction(name: '_StorePets.setPets');
+    try {
+      return super.setPets(_pets);
+    } finally {
+      _$_StorePetsActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void addNewPet(Pet newPet) {
     final _$actionInfo =
         _$_StorePetsActionController.startAction(name: '_StorePets.addNewPet');

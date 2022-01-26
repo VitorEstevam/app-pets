@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ffi';
 
 import 'package:app_pets/classes/tasks/task.dart';
+import 'package:app_pets/consts/utils.dart';
 import 'package:app_pets/stores/pets/store_pets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -46,7 +47,7 @@ class _PageAddTaskState extends State<PageAddTask> {
       var task = taskFactory!(title,pet,taskParam);
     
       context.read<StorePets>().addNewTaskToPet(pet, task);
-
+      saveState(context);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
             content: Text('Task salva'), duration: Duration(milliseconds: 500)),

@@ -1,4 +1,5 @@
 import 'package:app_pets/classes/pet.dart';
+import 'package:app_pets/consts/utils.dart';
 import 'package:app_pets/pages/page_pet/widgets/choose_circle_color.dart';
 import 'package:app_pets/pages/page_pet/widgets/color_selector.dart';
 import 'package:app_pets/pages/tab_bar_handler.dart';
@@ -32,6 +33,8 @@ class PageCreatePet extends StatelessWidget {
   void createAnimal(BuildContext context) {
     Provider.of<StorePets>(context, listen: false)
         .addNewPet(Pet(name!, image!, color!));
+
+    saveState(context);
 
     if (Navigator.of(context).canPop()) {
       Navigator.pop(context);
