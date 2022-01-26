@@ -41,8 +41,7 @@ abstract class _StorePets with Store {
   Future<bool> loadPets() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var encoded = await prefs.getString("pets");
-    if(encoded == null) return false;
-
+    if (encoded == null) return false;
 
     Map<String, dynamic> state = jsonDecode(encoded);
     List list = state["pets"].map((pet) => Pet.fromJson(pet)).toList();
@@ -53,7 +52,7 @@ abstract class _StorePets with Store {
       _pets.add(el);
     });
 
-    pets.addAll(_pets);
+    pets = _pets;
     actualPet = pets[0];
     return true;
   }

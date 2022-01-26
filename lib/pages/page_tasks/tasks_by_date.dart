@@ -92,7 +92,7 @@ class _ListTasksByDateState extends State<ListTasksByDate> {
                   child: Text('Apagar Tarefa'),
                 ),
               ],
-            ),
+            ), 
           ],
         ),
       );

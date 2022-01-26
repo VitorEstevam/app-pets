@@ -5,6 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
+enum option {
+  a,
+  b,
+}
+
 class PagePets extends StatefulWidget {
   const PagePets({Key? key}) : super(key: key);
 
@@ -93,42 +98,40 @@ class _GridPetsState extends State<GridPets> {
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
-                              Row(
-                                children: [
-                                  Material(
-                                    color: Colors.transparent,
-                                    borderRadius:
-                                        const BorderRadius.all(Radius.circular(1000.0)),
-                                    clipBehavior: Clip.antiAlias,
-                                    child: InkWell(
-                                        onTap: () {},
-                                        child: const Padding(
-                                          padding: EdgeInsets.all(5.0),
-                                          child: Icon(
-                                            Icons.edit,
-                                            size: 25,
-                                            color: Colors.white,
-                                          ),
-                                        )),
+                              Material(
+                                color: Colors.transparent,
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(1000.0)),
+                                clipBehavior: Clip.antiAlias,
+                                child: PopupMenuButton<option>(
+                                  icon: Icon(
+                                    Icons.more_vert,
+                                    color: Colors.white,
                                   ),
-                                  Material(
-                                    color: Colors.transparent,
-                                    borderRadius:
-                                        const BorderRadius.all(Radius.circular(1000.0)),
-                                    clipBehavior: Clip.antiAlias,
-                                    child: InkWell(
-                                        onTap: () {},
-                                        child: const Padding(
-                                          padding: EdgeInsets.all(5.0),
-                                          child: Icon(
-                                            Icons.delete_rounded,
-                                            size: 25,
-                                            color: Colors.white,
-                                          ),
-                                        )),
-                                  ),
-                                ],
-                              )
+                                  onSelected: (option result) {
+                                    setState(() {
+                                      switch (result) {
+                                        case option.a:
+                                          //call edit task
+                                          break;
+                                        case option.b:
+                                          //call remove task
+                                          break;
+                                      }
+                                    });
+                                  },
+                                  itemBuilder: (BuildContext context) =>
+                                      <PopupMenuEntry<option>>[
+                                    const PopupMenuItem<option>(
+                                      value: option.a,
+                                      child: Text('Editar Pet'),
+                                    ),
+                                    const PopupMenuItem<option>(
+                                      child: Text('Apagar Pet'),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                         ),
