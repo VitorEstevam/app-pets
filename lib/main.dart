@@ -1,5 +1,6 @@
 import 'package:app_pets/classes/pet.dart';
 import 'package:app_pets/classes/tasks/task_unique.dart';
+import 'package:app_pets/consts/utils.dart';
 import 'package:app_pets/debug_config.dart';
 import 'package:app_pets/pages/page_home/onboarding/onboard_intro.dart';
 import 'package:app_pets/pages/page_pet/page_create_pet.dart';
@@ -12,6 +13,7 @@ import 'package:provider/provider.dart';
 
 import 'package:app_pets/consts/theme.dart';
 import 'package:app_pets/consts/provider_stores.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 bool once = false;
 bool debug = true;
@@ -22,9 +24,17 @@ void runDebug(BuildContext context) {
   }
 }
 
-Widget startingAppRoute(BuildContext context) {
-  var tutorialDone = true; //todo change to the shared prefs
-  var pets = Provider.of<StorePets>(context).pets;
+dynamic getIntroState() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool? _res = prefs.getBool("tutorial");
+
+  return _res ?? false;
+}
+
+Future<Widget> startingAppRoute(BuildContext context) async {
+  var tutorialDone = await getIntroState(); 
+  var a = await Provider.of<StorePets>(context, listen: false).loadPets();
+  var pets = Provider.of<StorePets>(context, listen: false).pets;
 
   if (!tutorialDone) {
     return const OnboardingIntro();
@@ -37,7 +47,10 @@ Widget startingAppRoute(BuildContext context) {
 
 void main() {
   runApp(
-    MultiProvider(providers: providerStores, child: const AppRoot()),
+    MultiProvider(
+      providers: providerStores,
+      child: const AppRoot(),
+    ),
   );
 }
 
@@ -46,12 +59,16 @@ class AppRoot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    runDebug(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'App Pets',
       theme: theme,
-      home: startingAppRoute(context),
+      home: FutureBuilder<Widget>(
+        future: startingAppRoute(context),
+        builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
+          return snapshot.hasData ? snapshot.data! : Container();
+        },
+      ),
     );
   }
 }

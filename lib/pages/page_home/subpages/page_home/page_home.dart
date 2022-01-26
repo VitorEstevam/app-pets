@@ -1,5 +1,6 @@
 import 'package:app_pets/classes/pet.dart';
 import 'package:app_pets/consts/theme.dart';
+import 'package:app_pets/consts/utils.dart';
 import 'package:app_pets/debug_config.dart';
 import 'package:app_pets/pages/page_home/subpages/page_add_task/page_add_task.dart';
 import 'package:app_pets/pages/page_home/subpages/page_add_task/page_add_task.dart';
@@ -42,8 +43,21 @@ class _PageHomeState extends State<PageHome> {
           title: const Text("App Pets"),
           actions: [
             IconButton(
-                onPressed: () => debugOptions(context),
-                icon: Icon(Icons.bug_report))
+              onPressed: () => debugOptions(context),
+              icon: Icon(Icons.bug_report),
+            ),
+            IconButton(
+              onPressed: () => saveState(context),
+              icon: Icon(Icons.save),
+            ),
+            IconButton(
+              onPressed: () => loadState(context),
+              icon: Icon(Icons.download),
+            ),
+                        IconButton(
+              onPressed: () => removeStates(),
+              icon: Icon(Icons.delete),
+            ),
           ],
         ),
         body: Column(
@@ -109,42 +123,43 @@ class _PetSelectorState extends State<PetSelector> {
 
   @override
   Widget build(BuildContext context) {
-    var index = Provider.of<StorePets>(context).getActualPetIndex();
-    var pets = Provider.of<StorePets>(context, listen: false).pets;
-
-    return Container(
-      height: MediaQuery.of(context).size.height / 3,
-      child: FutureBuilder(
-          future: getFutureDados(index),
-          builder: (context, snapshot) {
-            return CarouselSlider(
-              carouselController: buttonCarouselController,
-              items: [
-                for (var i = 0; i < pets.length; i++)
-                  GestureDetector(
-                      onTap: () => buttonCarouselController.animateToPage(i),
-                      child: PetPicture(
-                          pet: pets[i],
-                          size: MediaQuery.of(context).size.height / 2)),
-              ],
-              options: CarouselOptions(
-                enableInfiniteScroll: false,
-                enlargeCenterPage: true,
-                enlargeStrategy: CenterPageEnlargeStrategy.scale,
-                // height: 275,
-                height: MediaQuery.of(context).size.height / 2,
-                aspectRatio: 1.5,
-                viewportFraction: 0.5,
-                initialPage:
-                    Provider.of<StorePets>(context).getPetIndex(widget.pet),
-                onPageChanged: (index, other) {
-                  Provider.of<StorePets>(context, listen: false)
-                      .setActualPet(pets[index]);
-                  start = false;
-                },
-              ),
-            );
-          }),
-    );
+    return Observer(builder: (context) {
+      var index = Provider.of<StorePets>(context).getActualPetIndex();
+      var pets = Provider.of<StorePets>(context, listen: false).pets;
+      return Container(
+        height: MediaQuery.of(context).size.height / 3,
+        child: FutureBuilder(
+            future: getFutureDados(index),
+            builder: (context, snapshot) {
+              return CarouselSlider(
+                carouselController: buttonCarouselController,
+                items: [
+                  for (var i = 0; i < pets.length; i++)
+                    GestureDetector(
+                        onTap: () => buttonCarouselController.animateToPage(i),
+                        child: PetPicture(
+                            pet: pets[i],
+                            size: MediaQuery.of(context).size.height / 2)),
+                ],
+                options: CarouselOptions(
+                  enableInfiniteScroll: false,
+                  enlargeCenterPage: true,
+                  enlargeStrategy: CenterPageEnlargeStrategy.scale,
+                  // height: 275,
+                  height: MediaQuery.of(context).size.height / 2,
+                  aspectRatio: 1.5,
+                  viewportFraction: 0.5,
+                  initialPage:
+                      Provider.of<StorePets>(context).getPetIndex(widget.pet),
+                  onPageChanged: (index, other) {
+                    Provider.of<StorePets>(context, listen: false)
+                        .setActualPet(pets[index]);
+                    start = false;
+                  },
+                ),
+              );
+            }),
+      );
+    });
   }
 }

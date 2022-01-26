@@ -8,7 +8,12 @@ import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
 import 'package:onboarding/onboarding.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+dynamic setIntroState() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setBool("tutorial", true);
+}
 
 class OnboardingIntro extends StatefulWidget {
   const OnboardingIntro({Key? key}) : super(key: key);
@@ -24,43 +29,42 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
     super.initState();
 
     slides.add(createPageModel(
-        "Bem-vindo(a) ao {app}!",
+        "Bem-vindo(a) ao App Pets!",
         "Feito com carinho para que você possa dedicar mais tempo ao seu bichinho de estimação!",
-        'lib/assets/Pag1_pets.jpg'));
+        'lib/assets/onboarding/Boas-vindas-1.png'));
 
     slides.add(createPageModel(
         "Melhore os laços com seu pet!",
         "Cumprir com todas as responsabilidades do seu pet não só é importante para a saúde dele(a) como ajuda melhorar os laços entre o bichinho e dono(a)! ",
-        "lib/assets/Pag2_pets.jpg"));
+        'lib/assets/onboarding/Boas-vindas-2.png'));
 
     slides.add(createPageModel(
-        "Sobre o {app}",
+        "Sobre o App Pets",
         "Lembre de todas as responsabilidades para seu pet gerenciando suas tarefas!",
-        "lib/assets/Pag3_pets.jpg"));
+        'lib/assets/onboarding/Boas-vindas-3.png'));
 
     slides.add(createPageModel(
         "Então vamos começar!",
         "Adicione seu primeiro pet! Selecione um ícone e uma cor para representá-lo ao usar o aplicativo.",
-        "lib/assets/Pag4_pets.jpg"));
+        'lib/assets/onboarding/Boas-vindas-4.png'));
   }
 
   Slide createPageModel(String textTitle, String textBody, String imgPath) {
     return Slide(
-        title: textTitle,
-        styleTitle: const TextStyle(
-            color: Colors.black, fontSize: 30.0, fontWeight: FontWeight.bold),
-        description: textBody,
-        styleDescription: const TextStyle(
-            color: Colors.black,
-            fontSize: 20.0),
-        maxLineTitle: 2,
-        marginTitle:
-            const EdgeInsets.only(left: 20.0, right:20.0,bottom: 10.0, top: 30),
-        marginDescription:
-            const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-        backgroundImage: imgPath,
-        backgroundImageFit: BoxFit.cover,
-        backgroundOpacity: 0.0,);
+      title: textTitle,
+      styleTitle: const TextStyle(
+          color: Colors.black, fontSize: 30.0, fontWeight: FontWeight.bold),
+      description: textBody,
+      styleDescription: const TextStyle(color: Colors.black, fontSize: 20.0),
+      maxLineTitle: 2,
+      marginTitle:
+          const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 10.0, top: 30),
+      marginDescription:
+          const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      backgroundImage: imgPath,
+      backgroundImageFit: BoxFit.cover,
+      backgroundOpacity: 0.0,
+    );
   }
 
   Widget myButton(title) {
@@ -108,15 +112,13 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
       // Done button
       renderDoneBtn: myButton("Pronto"),
       doneButtonStyle: myButtonStyle(),
-      onDonePress: (){
-        // _store_global.tutorialDone = true; // @TODO: use shared prefs
-
-         Navigator.pushAndRemoveUntil(
+      onDonePress: () {
+        setIntroState();
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => PageCreatePet(),
           ),
-          (route) => false,
         );
       },
     );
