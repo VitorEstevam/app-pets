@@ -1,5 +1,6 @@
 
 import 'package:app_pets/classes/tasks/task.dart';
+import 'package:app_pets/consts/utils.dart';
 import 'package:app_pets/stores/pets/store_pets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -78,7 +79,8 @@ class _ListTasksByDateState extends State<ListTasksByDate> {
                       //call edit task
                       break;
                     case option.b:
-                      //call remove task
+                      Provider.of<StorePets>(context, listen: false).removeTask(task);
+                      saveState(context);
                       break;
                   }
                 });
@@ -89,6 +91,7 @@ class _ListTasksByDateState extends State<ListTasksByDate> {
                   child: Text('Editar Tarefa'),
                 ),
                 const PopupMenuItem<option>(
+                  value: option.b,
                   child: Text('Apagar Tarefa'),
                 ),
               ],

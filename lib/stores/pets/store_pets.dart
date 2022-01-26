@@ -74,6 +74,24 @@ abstract class _StorePets with Store {
   }
 
   @action
+  void removePet(Pet _pet) {
+    pets.remove(_pet);
+
+    if (actualPet == _pet) {
+      if (pets.length > 0) {
+        actualPet = pets[0];
+      } else {
+        actualPet = null;
+      }
+    }
+  }
+
+  @action
+  void removeTask(Task task) {
+    task.pet.tasks.remove(task);
+  }
+
+  @action
   void addNewTaskToPet(Pet pet, Task task) {
     pet.tasks.add(task);
   }

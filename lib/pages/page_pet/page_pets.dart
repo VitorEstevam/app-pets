@@ -98,39 +98,38 @@ class _GridPetsState extends State<GridPets> {
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
-                              Material(
-                                color: Colors.transparent,
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(1000.0)),
-                                clipBehavior: Clip.antiAlias,
-                                child: PopupMenuButton<option>(
-                                  icon: Icon(
-                                    Icons.more_vert,
-                                    color: Colors.white,
-                                  ),
-                                  onSelected: (option result) {
-                                    setState(() {
-                                      switch (result) {
-                                        case option.a:
-                                          //call edit task
-                                          break;
-                                        case option.b:
-                                          //call remove task
-                                          break;
-                                      }
-                                    });
-                                  },
-                                  itemBuilder: (BuildContext context) =>
-                                      <PopupMenuEntry<option>>[
-                                    const PopupMenuItem<option>(
-                                      value: option.a,
-                                      child: Text('Editar Pet'),
-                                    ),
-                                    const PopupMenuItem<option>(
-                                      child: Text('Apagar Pet'),
-                                    ),
-                                  ],
+                              PopupMenuButton<option>(
+                                icon: Icon(
+                                  Icons.more_vert,
+                                  color: Colors.white,
                                 ),
+                                onSelected: (option result) {
+                                  setState(() {
+                                    switch (result) {
+                                      case option.a:
+                                        //call edit pet
+                                        break;
+                                      case option.b:
+                                        Provider.of<StorePets>(context,
+                                                listen: false)
+                                            .removePet(pet);
+
+                                        saveState(context);
+                                        break;
+                                    }
+                                  });
+                                },
+                                itemBuilder: (BuildContext context) =>
+                                    <PopupMenuEntry<option>>[
+                                  const PopupMenuItem<option>(
+                                    value: option.a,
+                                    child: Text('Editar Pet'),
+                                  ),
+                                  const PopupMenuItem<option>(
+                                    value: option.b,
+                                    child: Text('Apagar Pet'),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
