@@ -42,6 +42,17 @@ mixin _$StorePets on _StorePets, Store {
   final _$_StorePetsActionController = ActionController(name: '_StorePets');
 
   @override
+  void updatePet(Pet pet, String name, String icon, Color color) {
+    final _$actionInfo =
+        _$_StorePetsActionController.startAction(name: '_StorePets.updatePet');
+    try {
+      return super.updatePet(pet, name, icon, color);
+    } finally {
+      _$_StorePetsActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setActualPet(Pet newPet) {
     final _$actionInfo = _$_StorePetsActionController.startAction(
         name: '_StorePets.setActualPet');
@@ -69,6 +80,28 @@ mixin _$StorePets on _StorePets, Store {
         _$_StorePetsActionController.startAction(name: '_StorePets.addNewPet');
     try {
       return super.addNewPet(newPet);
+    } finally {
+      _$_StorePetsActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void removePet(Pet _pet) {
+    final _$actionInfo =
+        _$_StorePetsActionController.startAction(name: '_StorePets.removePet');
+    try {
+      return super.removePet(_pet);
+    } finally {
+      _$_StorePetsActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void removeTask(Task task) {
+    final _$actionInfo =
+        _$_StorePetsActionController.startAction(name: '_StorePets.removeTask');
+    try {
+      return super.removeTask(task);
     } finally {
       _$_StorePetsActionController.endAction(_$actionInfo);
     }

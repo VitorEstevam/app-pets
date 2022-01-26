@@ -107,7 +107,13 @@ class _GridPetsState extends State<GridPets> {
                                   setState(() {
                                     switch (result) {
                                       case option.a:
-                                        //call edit pet
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  PageCreatePet(pet: pet,),
+                                            ));
+
                                         break;
                                       case option.b:
                                         Provider.of<StorePets>(context,

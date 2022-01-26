@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:app_pets/classes/pet.dart';
 import 'package:app_pets/consts/utils.dart';
 import 'package:app_pets/pages/page_pet/widgets/choose_circle_color.dart';
@@ -11,10 +13,21 @@ import 'package:provider/provider.dart';
 
 import 'widgets/icon_selector.dart';
 
-class PageCreatePet extends StatelessWidget {
+class PageCreatePet extends StatefulWidget {
+  final Pet? pet;
+  PageCreatePet({Key? key, this.pet}) : super(key: key);
+
+  @override
+  State<PageCreatePet> createState() => _PageCreatePetState();
+}
+
+class _PageCreatePetState extends State<PageCreatePet> {
   String? name;
+
   String? image;
+
   Color? color;
+
   final _formKey = GlobalKey<FormState>();
 
   void chooseIcon(String stringUrl) {
@@ -45,10 +58,33 @@ class PageCreatePet extends StatelessWidget {
     }
   }
 
+  void updatePet(BuildContext context) {
+    Provider.of<StorePets>(context, listen: false)
+        .updatePet(widget.pet!, name!, image!, color!);
+
+    saveState(context);
+
+    Navigator.pop(context);
+  }
+
   void submitForm(BuildContext context) {
     if (_formKey.currentState!.validate()) {
-      createAnimal(context);
+      if (widget.pet != null) {
+        updatePet(context);
+      } else {
+        createAnimal(context);
+      }
     }
+  }
+
+  @override
+  void initState() {
+    if (widget.pet != null) {
+      name = widget.pet!.name;
+      color = widget.pet!.color;
+      image = widget.pet!.petIconUrl;
+    }
+    super.initState();
   }
 
   @override
@@ -71,7 +107,7 @@ class PageCreatePet extends StatelessWidget {
                   }
                   return null;
                 },
-                widget: IconSelector(onSelect: chooseIcon),
+                widget: IconSelector(onSelect: chooseIcon, initialValue: image),
               ),
               Container(height: 20),
               GeneralFormField(
@@ -81,19 +117,20 @@ class PageCreatePet extends StatelessWidget {
                   }
                   return null;
                 },
-                widget: ColorSelector(onSelect: chooseColor),
+                widget: ColorSelector(onSelect: chooseColor, initialValue: color),
               ),
               Container(height: 20),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0),
                 child: TextInput(
                   onChanged: chooseName,
-                  validator: (_) {
+                  validator: (_) { 
                     if (name == null || name == "") {
                       return 'Por favor, preencha o nome';
                     }
                     return null;
                   },
+                  initialValue: name, //change to the var itself
                 ),
               ),
               Container(height: 20),
@@ -138,17 +175,20 @@ class PageCreatePet extends StatelessWidget {
 class TextInput extends StatelessWidget {
   final void Function(String) onChanged;
   final String? Function(String?)? validator;
+  final String? initialValue;
 
   const TextInput({
     Key? key,
     required this.onChanged,
     required this.validator,
+    this.initialValue = "",
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
         validator: validator,
+        initialValue: initialValue,
         decoration: const InputDecoration(
           filled: true,
           fillColor: Colors.white,

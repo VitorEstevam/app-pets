@@ -46,18 +46,6 @@ class _PageHomeState extends State<PageHome> {
               onPressed: () => debugOptions(context),
               icon: Icon(Icons.bug_report),
             ),
-            IconButton(
-              onPressed: () => saveState(context),
-              icon: Icon(Icons.save),
-            ),
-            IconButton(
-              onPressed: () => loadState(context),
-              icon: Icon(Icons.download),
-            ),
-                        IconButton(
-              onPressed: () => removeStates(),
-              icon: Icon(Icons.delete),
-            ),
           ],
         ),
         body: Column(
@@ -66,30 +54,32 @@ class _PageHomeState extends State<PageHome> {
             Container(height: 10),
             PetSelector(pet),
             Container(height: 10),
-            Expanded(child: Container()),
+            // Expanded(child: Container()),
             const Align(
               alignment: Alignment.centerLeft,
               child: Padding(
-                padding: EdgeInsets.only(left: 30.0),
+                padding: EdgeInsets.only(left: 20.0),
                 child: Text(
                   "Tarefas",
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Container(
-                height: MediaQuery.of(context).size.width * 0.5,
-                // color: Colors.yellow,
-                width: double.infinity,
-                child: TaskViewer(
-                  pet: pet,
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Container(
+                  // height: MediaQuery.of(context).size.width * 0.5,
+                  // color: Colors.yellow,
+                  width: double.infinity,
+                  child: TaskViewer(
+                    pet: pet,
+                  ),
                 ),
               ),
             ),
             Container(
-              height: 20,
+              height: 40,
             )
           ],
         ),

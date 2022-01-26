@@ -58,6 +58,15 @@ abstract class _StorePets with Store {
   }
 
   @action
+  void updatePet(Pet pet, String name, String icon, Color color) {
+    pet.name = name;
+    pet.color = color;
+    pet.petIconUrl = icon;
+
+    pets = pets; //call a rebuild
+  }
+
+  @action
   void setActualPet(Pet newPet) {
     actualPet = newPet;
   }

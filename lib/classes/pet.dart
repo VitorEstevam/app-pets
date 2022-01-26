@@ -5,8 +5,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:mobx/mobx.dart';
 
 class Pet {
+  @observable
   late String name;
+  @observable
   late String petIconUrl;
+  @observable
   late Color color;
 
   @observable

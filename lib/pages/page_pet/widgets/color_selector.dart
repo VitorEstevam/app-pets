@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 
 class ColorSelector extends StatefulWidget {
   final void Function(Color color) onSelect;
+  final Color? initialValue;
 
-  const ColorSelector({Key? key, required this.onSelect}) : super(key: key);
+  const ColorSelector({
+    Key? key,
+    required this.onSelect,
+    this.initialValue,
+  }) : super(key: key);
 
   @override
   _ColorSelectorState createState() => _ColorSelectorState();
@@ -24,6 +29,10 @@ class _ColorSelectorState extends State<ColorSelector> {
   int? selected;
   int itemsPerRow = 4;
 
+  int getColorIndex(Color col){
+    return colors.indexOf(col); 
+  }
+
   Widget colorWidget(index, Color color) {
     return ChooseCircleColor(
       color,
@@ -35,6 +44,14 @@ class _ColorSelectorState extends State<ColorSelector> {
       },
       selected == index,
     );
+  }
+
+  @override
+  void initState() {
+    if(widget.initialValue != null){
+      selected = getColorIndex(widget.initialValue!);
+    }
+    super.initState();
   }
 
   @override

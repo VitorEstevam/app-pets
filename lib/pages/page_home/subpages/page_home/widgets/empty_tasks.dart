@@ -13,22 +13,25 @@ class EmptyTasks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal:15.0),
+      padding: const EdgeInsets.symmetric(horizontal:0.0),
       child: Column(
         children: [
           const Expanded(
             child: FittedBox(
-              fit: BoxFit.fitHeight,
+              // fit: BoxFit.fitHeight,
               alignment: Alignment.topCenter,
-              child: ImageLoader("lib/assets/placeholderTask.png"),
+              child: ImageLoader("lib/assets/no_tasks.png"),
             ),
           ),
           Container(height: 10),
-          Text(
-            "Não há tarefas para ${name}... Vamos começar adicionando uma!",
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w400,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Text(
+              "Não há tarefas para ${name}... Vamos começar adicionando uma!",
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
+              ),
             ),
           ),
         ],
