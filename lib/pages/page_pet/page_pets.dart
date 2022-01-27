@@ -1,5 +1,6 @@
 import 'package:app_pets/consts/utils.dart';
 import 'package:app_pets/pages/page_pet/page_create_pet.dart';
+import 'package:app_pets/pages/page_pet/pet_tasks.dart';
 import 'package:app_pets/stores/pets/store_pets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -22,19 +23,19 @@ class _PagePetsState extends State<PagePets> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      floatingActionButton: FloatingActionButton.extended(
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PageCreatePet(),
+            ),
+          ),
+          label: const Text('ADICIONAR PET'),
+          icon: const Icon(Icons.add),
+        ),
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         title: const Text("Meus Pets"),
-        actions: [
-          IconButton(
-              onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PageCreatePet(),
-                    ),
-                  ),
-              icon: const Icon(Icons.add))
-        ],
       ),
       body: const GridPets(),
     );
@@ -66,85 +67,96 @@ class _GridPetsState extends State<GridPets> {
             itemCount: pets.length,
             itemBuilder: (BuildContext ctx, index) {
               var pet = pets[index];
-              return Container(
-                clipBehavior: Clip.antiAlias,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                child: Column(
-                  children: [
-                    Expanded(
-                      flex: 3,
-                      child: Container(
-                        child: FittedBox(
-                            child: Image.asset(pet.petIconUrl),
-                            fit: BoxFit.cover),
-                        width: double.infinity,
-                        color: pet.color,
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                pets[index].name,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                    fontSize: 25,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              PopupMenuButton<option>(
-                                icon: Icon(
-                                  Icons.more_vert,
-                                  color: Colors.white,
-                                ),
-                                onSelected: (option result) {
-                                  setState(() {
-                                    switch (result) {
-                                      case option.a:
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  PageCreatePet(pet: pet,),
-                                            ));
-
-                                        break;
-                                      case option.b:
-                                        Provider.of<StorePets>(context,
-                                                listen: false)
-                                            .removePet(pet);
-
-                                        saveState(context);
-                                        break;
-                                    }
-                                  });
-                                },
-                                itemBuilder: (BuildContext context) =>
-                                    <PopupMenuEntry<option>>[
-                                  const PopupMenuItem<option>(
-                                    value: option.a,
-                                    child: Text('Editar Pet'),
-                                  ),
-                                  const PopupMenuItem<option>(
-                                    value: option.b,
-                                    child: Text('Apagar Pet'),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+              return InkWell(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PetTasks(pet: pet),
+                  ),
+                ),
+                child: Container(
+                  clipBehavior: Clip.antiAlias,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: Container(
+                          child: FittedBox(
+                              child: Image.asset(pet.petIconUrl),
+                              fit: BoxFit.cover),
+                          width: double.infinity,
+                          color: pet.color,
                         ),
-                        width: double.infinity,
-                        color: pet.color.darken(0.15),
                       ),
-                    ),
-                  ],
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 10.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  pets[index].name,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                      fontSize: 25,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                PopupMenuButton<option>(
+                                  icon: Icon(
+                                    Icons.more_vert,
+                                    color: Colors.white,
+                                  ),
+                                  onSelected: (option result) {
+                                    setState(() {
+                                      switch (result) {
+                                        case option.a:
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PageCreatePet(
+                                                  pet: pet,
+                                                ),
+                                              ));
+
+                                          break;
+                                        case option.b:
+                                          Provider.of<StorePets>(context,
+                                                  listen: false)
+                                              .removePet(pet);
+
+                                          saveState(context);
+                                          break;
+                                      }
+                                    });
+                                  },
+                                  itemBuilder: (BuildContext context) =>
+                                      <PopupMenuEntry<option>>[
+                                    const PopupMenuItem<option>(
+                                      value: option.a,
+                                      child: Text('Editar Pet'),
+                                    ),
+                                    const PopupMenuItem<option>(
+                                      value: option.b,
+                                      child: Text('Apagar Pet'),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          width: double.infinity,
+                          color: pet.color.darken(0.15),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               );
             });

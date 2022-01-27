@@ -72,14 +72,14 @@ class AppRoot extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'App Pets',
+      title: 'AppPets',
       theme: theme,
       home: FutureBuilder<bool>(
-        future: initVars(context),
-        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-          return snapshot.hasData ? initialWidget(context) : Container();
-        },
-      ),
+              future: initVars(context),
+              builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                return snapshot.hasData ? initialWidget(context) : Container();
+              },
+            ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:app_pets/classes/tasks/task.dart';
 import 'package:app_pets/consts/utils.dart';
+import 'package:app_pets/pages/page_home/subpages/page_task/page_task.dart';
 import 'package:app_pets/stores/pets/store_pets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -36,6 +37,14 @@ class _ListTasksByPetState extends State<ListTasksByPet> {
 
     Widget WTask(Task task) {
       return ListTile(
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PageTask(
+              task: task,
+            ),
+          ),
+        ),
         contentPadding: EdgeInsets.symmetric(vertical: 5),
         leading: Container(
           width: 70,

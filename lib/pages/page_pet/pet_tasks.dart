@@ -1,6 +1,7 @@
-
+import 'package:app_pets/classes/pet.dart';
 import 'package:app_pets/classes/tasks/task.dart';
 import 'package:app_pets/consts/utils.dart';
+import 'package:app_pets/pages/page_home/subpages/page_add_task/page_add_task.dart';
 import 'package:app_pets/pages/page_home/subpages/page_task/page_task.dart';
 import 'package:app_pets/stores/pets/store_pets.dart';
 import 'package:flutter/material.dart';
@@ -14,19 +15,17 @@ enum option {
   b,
 }
 
-class ListTasksByDate extends StatefulWidget {
-  const ListTasksByDate({
-    Key? key,
-  }) : super(key: key);
+class PetTasks extends StatefulWidget {
+  final Pet pet;
+  const PetTasks({Key? key, required this.pet}) : super(key: key);
 
   @override
-  State<ListTasksByDate> createState() => _ListTasksByDateState();
+  State<PetTasks> createState() => _PetTasksState();
 }
 
-class _ListTasksByDateState extends State<ListTasksByDate> {
+class _PetTasksState extends State<PetTasks> {
   @override
   Widget build(BuildContext context) {
-
     Widget Title(value) {
       var date = DateTime.parse(value);
       return Padding(
@@ -40,14 +39,14 @@ class _ListTasksByDateState extends State<ListTasksByDate> {
 
     Widget WTask(Task task) {
       return ListTile(
-        onTap: ()=>Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => PageTask(
-                  task: task,
-                ),
-              ),
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PageTask(
+              task: task,
             ),
+          ),
+        ),
         contentPadding: EdgeInsets.symmetric(vertical: 5),
         leading: Container(
           width: 70,
@@ -88,7 +87,8 @@ class _ListTasksByDateState extends State<ListTasksByDate> {
                       //call edit task
                       break;
                     case option.b:
-                      Provider.of<StorePets>(context, listen: false).removeTask(task);
+                      Provider.of<StorePets>(context, listen: false)
+                          .removeTask(task);
                       saveState(context);
                       break;
                   }
@@ -104,28 +104,40 @@ class _ListTasksByDateState extends State<ListTasksByDate> {
                   child: Text('Apagar Tarefa'),
                 ),
               ],
-            ), 
+            ),
           ],
         ),
       );
     }
 
-    return Observer(builder: (context) {
-      var pets = Provider.of<StorePets>(context).pets;
+    return Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Theme.of(context).backgroundColor,
+        appBar: AppBar(
+          title: Text("Tarefas do ${widget.pet.name}"),
+          actions: [
+            IconButton(
+                onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PageAddTask(),
+                      ),
+                    ),
+                icon: const Icon(Icons.add))
+          ],
+        ),
+        body: Observer(builder: (context) {
+          var pets = Provider.of<StorePets>(context).pets;
 
-      List<Task> tasks = pets
-          .map((pet) => pet.tasks.toList())
-          .toList()
-          .expand((task) => task)
-          .toList();
+          List<Task> tasks = widget.pet.tasks;
 
-      return GroupedListView<dynamic, String>(
-        elements: tasks,
-        groupBy: (element) => element.subTasks[0].dateToDo.toString(),
-        groupSeparatorBuilder: (String groupByValue) => Title(groupByValue),
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        itemBuilder: (context, dynamic element) => WTask(element),
-      );
-    });
+          return GroupedListView<dynamic, String>(
+            elements: tasks,
+            groupBy: (element) => element.subTasks[0].dateToDo.toString(),
+            groupSeparatorBuilder: (String groupByValue) => Title(groupByValue),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            itemBuilder: (context, dynamic element) => WTask(element),
+          );
+        }));
   }
 }

@@ -40,7 +40,7 @@ class _PageHomeState extends State<PageHome> {
           icon: const Icon(Icons.add),
         ),
         appBar: AppBar(
-          title: const Text("App Pets"),
+          title: const Text("AppPets"),
           actions: [
             IconButton(
               onPressed: () => debugOptions(context),

@@ -44,6 +44,7 @@ class TaskBody extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Chip(
+
                     backgroundColor: Colors.orange,
                     avatar: const Icon(
                       Icons.local_fire_department,
@@ -51,10 +52,10 @@ class TaskBody extends StatelessWidget {
                     ),
                     label: Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 10.0, vertical: 5),
+                          horizontal: 0, vertical: 5),
                       child: Text(
-                        "${task.streak.toString()}",
-                        style: TextStyle(fontSize: 20),
+                        "Sequência ${task.streak.toString()}",
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),

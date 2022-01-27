@@ -29,17 +29,18 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
     super.initState();
 
     slides.add(createPageModel(
-        "Bem-vindo(a) ao App Pets!",
+      
+        "Bem-vindo(a) ao AppPets!",
         "Feito com carinho para que você possa dedicar mais tempo ao seu bichinho de estimação!",
         'lib/assets/onboarding/Boas-vindas-1.png'));
 
     slides.add(createPageModel(
-        "Melhore os laços com seu pet!",
+        "Melhore os laços\ncom seu pet!",
         "Cumprir com todas as responsabilidades do seu pet não só é importante para a saúde dele(a) como ajuda melhorar os laços entre o bichinho e dono(a)! ",
         'lib/assets/onboarding/Boas-vindas-2.png'));
 
     slides.add(createPageModel(
-        "Sobre o App Pets",
+        "Sobre o AppPets",
         "Lembre de todas as responsabilidades para seu pet gerenciando suas tarefas!",
         'lib/assets/onboarding/Boas-vindas-3.png'));
 
@@ -73,7 +74,7 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
       child: Text(
         title,
         style: const TextStyle(
-          color: Colors.white,
+          // color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -84,6 +85,20 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
     return ButtonStyle(
       shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()),
       backgroundColor:
+          MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
+      foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+    );
+  }
+
+  ButtonStyle backButtonStyle() {
+    return ButtonStyle(
+      shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder(
+          side: BorderSide(color: Theme.of(context).primaryColor, width: 2))),
+      backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+      // textStyle: MaterialStateProperty.all<TextStyle>(
+      //   (TextStyle(color: Theme.of(context).primaryColor)),
+      // ),
+      foregroundColor:
           MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
     );
   }
@@ -103,7 +118,7 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
       // Prev button
       showPrevBtn: true,
       renderPrevBtn: myButton("Voltar"),
-      prevButtonStyle: myButtonStyle(),
+      prevButtonStyle: backButtonStyle(),
 
       // Next button
       renderNextBtn: myButton("Avançar"),
