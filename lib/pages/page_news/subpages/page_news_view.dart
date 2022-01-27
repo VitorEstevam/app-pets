@@ -1,4 +1,5 @@
 import 'package:app_pets/classes/news.dart';
+import 'package:app_pets/pages/page_home/subpages/page_add_task/page_add_task.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -24,8 +25,13 @@ class _PageNewsViewState extends State<PageNewsView> {
                 builder: (BuildContext context, BoxConstraints constraints) {
               return FlexibleSpaceBar(
                 collapseMode: CollapseMode.pin,
-                title: constraints.biggest.height == 80
-                    ? Text(widget.news.title,softWrap: false, maxLines: 1,overflow: TextOverflow.fade,)
+                title: constraints.biggest.height < 90
+                    ? Text(
+                        widget.news.title,
+                        softWrap: false,
+                        maxLines: 1,
+                        overflow: TextOverflow.fade,
+                      )
                     : null,
                 background: Container(
                   foregroundDecoration: BoxDecoration(
@@ -51,31 +57,39 @@ class _PageNewsViewState extends State<PageNewsView> {
               ),
             ),
           ),
-          SliverToBoxAdapter(
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
+          if (widget.news.taskTitle != null)
+            SliverToBoxAdapter(
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
                       ),
                     ),
-                  ),
-                  onPressed: () {},
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: const [
-                      Icon(Icons.directions_run),
-                      Text("Adicionar uma tarefa")
-                    ],
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PageAddTask(
+                          title: widget.news.taskTitle ?? "",
+                        ),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: const [
+                        Icon(Icons.directions_run),
+                        Text("Adicionar uma tarefa")
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
           SliverToBoxAdapter(
             child: Padding(
               padding:

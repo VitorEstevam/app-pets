@@ -16,7 +16,8 @@ import 'widgets/pet_selector.dart';
 import 'widgets/title_field.dart';
 
 class PageAddTask extends StatefulWidget {
-  const PageAddTask({Key? key}) : super(key: key);
+  final String? title;
+  const PageAddTask({Key? key, this.title}) : super(key: key);
 
   @override
   State<PageAddTask> createState() => _PageAddTaskState();
@@ -28,6 +29,14 @@ class _PageAddTaskState extends State<PageAddTask> {
   dynamic taskParam;
   String? petName;
   int selectedPet = 0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    title = widget.title;
+    super.initState();
+  }
+
   void setFrequency(Function factory, dynamic param) {
     taskParam = param;
     taskFactory = factory;
@@ -78,6 +87,7 @@ class _PageAddTaskState extends State<PageAddTask> {
                 children: [
                   Container(height: 20),
                   TitleField(
+                    initialValue: title ?? "",
                     callback: setTitle,
                   ),
                   Container(height: 20),
