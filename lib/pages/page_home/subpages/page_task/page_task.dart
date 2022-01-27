@@ -2,6 +2,7 @@ import 'package:app_pets/classes/tasks/task.dart';
 import 'package:app_pets/classes/tasks/task_unique.dart';
 import 'package:app_pets/consts/utils.dart';
 import 'package:app_pets/stores/pets/store_pets.dart';
+import 'package:app_pets/widgets/task_streak_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -43,22 +44,7 @@ class TaskBody extends StatelessWidget {
                 width: double.infinity,
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: Chip(
-
-                    backgroundColor: Colors.orange,
-                    avatar: const Icon(
-                      Icons.local_fire_department,
-                      color: Colors.yellow,
-                    ),
-                    label: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 0, vertical: 5),
-                      child: Text(
-                        "Sequência ${task.streak.toString()}",
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
+                  child: TaskStreakChip(task: task),
                 ),
               ),
               Container(height: 20),

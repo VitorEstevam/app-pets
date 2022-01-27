@@ -67,7 +67,7 @@ class _PageHomeState extends State<PageHome> {
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
+                padding: const EdgeInsets.symmetric(vertical: 5),
                 child: Container(
                   // height: MediaQuery.of(context).size.width * 0.5,
                   // color: Colors.yellow,

@@ -64,6 +64,7 @@ abstract class _StorePets with Store {
     pet.petIconUrl = icon;
 
     pets = pets; //call a rebuild
+    setActualPet(pet);
   }
 
   @action
