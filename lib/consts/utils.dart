@@ -63,12 +63,23 @@ extension ColorBrightness on Color {
   }
 
   Color lighten([double amount = .1]) {
-    assert(amount >= 0 && amount <= 1);
+    //recebe uma varivel
+    assert(amount >= 0 && amount <= 1); //limites
 
     final hsl = HSLColor.fromColor(this);
     final hslLight =
-        hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0));
+        hsl.withLightness((hsl.lightness + amount)); // fazer a paradinha
 
-    return hslLight.toColor();
+    return hslLight.toColor(); //retorna
+  }
+}
+
+extension Changes on Color {
+  Color changeBrightBy(double amount) {
+    var hsl = HSLColor.fromColor(this);
+    var newBright = hsl.lightness + amount;
+    newBright = newBright.clamp(0, 1);
+
+    return hsl.withLightness(newBright).toColor();
   }
 }
