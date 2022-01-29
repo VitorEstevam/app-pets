@@ -16,7 +16,8 @@ import 'widgets/pet_selector.dart';
 import 'widgets/title_field.dart';
 
 class PageAddTask extends StatefulWidget {
-  const PageAddTask({Key? key}) : super(key: key);
+  final String? title;
+  const PageAddTask({Key? key, this.title}) : super(key: key);
 
   @override
   State<PageAddTask> createState() => _PageAddTaskState();
@@ -28,7 +29,15 @@ class _PageAddTaskState extends State<PageAddTask> {
   dynamic taskParam;
   String? petName;
   int selectedPet = 0;
-  void setFrequency(Function factory,dynamic param){
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    title = widget.title;
+    super.initState();
+  }
+
+  void setFrequency(Function factory, dynamic param) {
     taskParam = param;
     taskFactory = factory;
   }
@@ -44,8 +53,8 @@ class _PageAddTaskState extends State<PageAddTask> {
   void submitForm() {
     if (_formKey.currentState!.validate()) {
       var pet = context.read<StorePets>().getPetByName(petName);
-      var task = taskFactory!(title,pet,taskParam);
-    
+      var task = taskFactory!(title, pet, taskParam);
+
       context.read<StorePets>().addNewTaskToPet(pet, task);
       saveState(context);
       ScaffoldMessenger.of(context).showSnackBar(
@@ -73,30 +82,48 @@ class _PageAddTaskState extends State<PageAddTask> {
             key: _formKey,
             child: SingleChildScrollView(
               child: Column(
-                mainAxisSize: MainAxisSize.min,
+                mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(height: 20),
                   TitleField(
+                    initialValue: title ?? "",
                     callback: setTitle,
                   ),
                   Container(height: 20),
                   PetSelector(
                     callback: (name) => {setPet(name)},
-                    pets: Provider.of<StorePets>(context).getPetNames(), // const ["luke", "zelda", "pelor"],
+                    pets: Provider.of<StorePets>(context)
+                        .getPetNames(), // const ["luke", "zelda", "pelor"],
                   ),
                   Container(height: 20),
                   PeriodSelector(setFrequency),
+                  Container(height: 20),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: ElevatedButton(
+                        onPressed: () => submitForm(),
+                        child: Center(
+                          child: Container(
+                            width: double.infinity,
+                            height: 40,
+                            child: Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: const [
+                                  Icon(Icons.add),
+                                  Text('ADICIONAR TASK')
+                                ],
+                              ),
+                            ),
+                          ),
+                        )),
+                  ),
                 ],
               ),
             ),
           )),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: submitForm,
-        label: const Text("SALVAR"),
-        icon: const Icon(Icons.save),
-                backgroundColor: Theme.of(context).primaryColor,
-      ),
     );
   }
 }

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class IconSelector extends StatefulWidget {
   final void Function(String) onSelect;
-
-  const IconSelector({Key? key, required this.onSelect}) : super(key: key);
+  final String? initialValue;
+  const IconSelector({Key? key, required this.onSelect, this.initialValue})
+      : super(key: key);
 
   @override
   State<IconSelector> createState() => _IconSelectorState();
@@ -34,7 +35,19 @@ class _IconSelectorState extends State<IconSelector> {
       isSelected: selected == index,
     );
   }
- 
+
+  int getIconIndex(String ico) {
+    return icons.indexOf(ico);
+  }
+
+  @override
+  void initState() {
+    if (widget.initialValue != null) {
+      selected = getIconIndex(widget.initialValue!);
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -43,7 +56,7 @@ class _IconSelectorState extends State<IconSelector> {
         const Align(
           alignment: Alignment.centerLeft,
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal:20.0),
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
               "Selecione um ícone para seu pet",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),

@@ -47,6 +47,7 @@ class TaskWeekly extends Task {
 
   @override
   String get subTitle {
+    weekdays.sort();
     var content = "";
 
     for (var day in weekdays) {

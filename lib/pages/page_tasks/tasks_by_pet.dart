@@ -1,4 +1,6 @@
 import 'package:app_pets/classes/tasks/task.dart';
+import 'package:app_pets/consts/utils.dart';
+import 'package:app_pets/pages/page_home/subpages/page_task/page_task.dart';
 import 'package:app_pets/stores/pets/store_pets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -35,6 +37,14 @@ class _ListTasksByPetState extends State<ListTasksByPet> {
 
     Widget WTask(Task task) {
       return ListTile(
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PageTask(
+              task: task,
+            ),
+          ),
+        ),
         contentPadding: EdgeInsets.symmetric(vertical: 5),
         leading: Container(
           width: 70,
@@ -75,7 +85,9 @@ class _ListTasksByPetState extends State<ListTasksByPet> {
                       //call edit task
                       break;
                     case option.b:
-                      //call remove task
+                      Provider.of<StorePets>(context, listen: false)
+                          .removeTask(task);
+                      saveState(context);
                       break;
                   }
                 });
@@ -86,6 +98,7 @@ class _ListTasksByPetState extends State<ListTasksByPet> {
                   child: Text('Editar Tarefa'),
                 ),
                 const PopupMenuItem<option>(
+                  value: option.b,
                   child: Text('Apagar Tarefa'),
                 ),
               ],

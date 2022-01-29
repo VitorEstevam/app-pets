@@ -1,26 +1,55 @@
+// ignore_for_file: unnecessary_string_escapes
+
 import 'dart:convert';
 
 import 'package:app_pets/classes/pet.dart';
-import 'package:app_pets/classes/tasks/task_unique.dart';
-import 'package:app_pets/classes/tasks/task_weekly.dart';
-import 'package:flutter/material.dart';
 import 'package:test/test.dart';
 
 void main() {
-  test('pet can be converted to json', () {
-    var pet = Pet("Luke", "lib/assets/pets/DOG.png", Color(0xffFF8A65));
-    var task = TaskUnique("dar banho", pet, DateTime(2022, 01, 24));
-    pet.tasks.insert(0, task);
-    var task2 = TaskWeekly("passear", pet, [3, 5]);
-    pet.tasks.insert(0, task2);
+  group('Pet from/to json', () {
+    test('pet can be created from json and converted back', () {
+      var jsonBefore =
+          "{\"name\":\"Luke\",\"petIconUrl\":\"lib\/assets\/pets\/DOG.png\",\"color\":\"Color(0xffff8a65)\",\"tasks\":[{\"title\":\"passear\",\"subTasks\":[{\"dateToDo\":\"2022-01-28 00:00:00.000\",\"done\":\"false\"}],\"startDate\":\"2022-01-28 18:53:35.148738\",\"weekdays\":[3,5]},{\"title\":\"dar banho\",\"subTasks\":[{\"dateToDo\":\"2022-01-24 00:00:00.000\",\"done\":\"false\"}],\"startDate\":\"2022-01-28 18:53:35.142753\"}]}";
 
-    var json = jsonEncode(pet.toJson());
-    print(json);
+      var pet = Pet.fromJson(jsonDecode(jsonBefore));
+      var jsonAfter = jsonEncode(pet.toJson());
 
-    var petDecoded = Pet.fromJson(jsonDecode(json));
-    print(petDecoded);
+      expect(jsonAfter, equals(jsonBefore));
+    });
 
-    var jsonDecoded = jsonEncode(petDecoded.toJson());
-    print(jsonDecoded);
+    test('pet can be created from json and converted back with changes', () {
+      var jsonExpected =
+          "{\"name\":\"Luke\",\"petIconUrl\":\"lib\/assets\/pets\/DOG.png\",\"color\":\"Color(0xffff8a65)\",\"tasks\":[]}";
+      var jsonBefore =
+          "{\"name\":\"Luke\",\"petIconUrl\":\"lib\/assets\/pets\/DOG.png\",\"color\":\"Color(0xffff8a65)\",\"tasks\":[{\"title\":\"passear\",\"subTasks\":[{\"dateToDo\":\"2022-01-28 00:00:00.000\",\"done\":\"false\"}],\"startDate\":\"2022-01-28 18:53:35.148738\",\"weekdays\":[3,5]},{\"title\":\"dar banho\",\"subTasks\":[{\"dateToDo\":\"2022-01-24 00:00:00.000\",\"done\":\"false\"}],\"startDate\":\"2022-01-28 18:53:35.142753\"}]}";
+
+      var pet = Pet.fromJson(jsonDecode(jsonBefore));
+      pet.tasks.clear();
+      var jsonAfter = jsonEncode(pet.toJson());
+
+      expect(jsonAfter, equals(jsonExpected));
+    });
+
+    test('pet can be created from json and converted back without task value',
+        () {
+      var jsonExpected =
+          "{\"name\":\"Luke\",\"petIconUrl\":\"lib\/assets\/pets\/DOG.png\",\"color\":\"Color(0xffff8a65)\",\"tasks\":[]}";
+      var jsonBefore =
+          "{\"name\":\"Luke\",\"petIconUrl\":\"lib\/assets\/pets\/DOG.png\",\"color\":\"Color(0xffff8a65)\"}";
+
+      var pet = Pet.fromJson(jsonDecode(jsonBefore));
+      pet.tasks.clear();
+      var jsonAfter = jsonEncode(pet.toJson());
+
+      expect(jsonAfter, equals(jsonExpected));
+    });
+
+    test('pet can\'t be created from json with missing fields', () {
+      var jsonBefore =
+          "{\"name\":\"Luke\",\"petIconUrl\":\"lib\/assets\/pets\/DOG.png\",\"tasks\":[{\"title\":\"passear\",\"subTasks\":[{\"dateToDo\":\"2022-01-28 00:00:00.000\",\"done\":\"false\"}],\"startDate\":\"2022-01-28 18:53:35.148738\",\"weekdays\":[3,5]},{\"title\":\"dar banho\",\"subTasks\":[{\"dateToDo\":\"2022-01-24 00:00:00.000\",\"done\":\"false\"}],\"startDate\":\"2022-01-28 18:53:35.142753\"}]}";
+
+      expect(() => Pet.fromJson(jsonDecode(jsonBefore)),
+          throwsA(isA<Exception>()));
+    });
   });
 }

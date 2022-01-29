@@ -5,8 +5,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:mobx/mobx.dart';
 
 class Pet {
+  @observable
   late String name;
+  @observable
   late String petIconUrl;
+  @observable
   late Color color;
 
   @observable
@@ -15,31 +18,35 @@ class Pet {
   Pet(this.name, this.petIconUrl, this.color);
 
   Pet.fromJson(Map<String, dynamic> data) {
-    name = data['name'];
-    petIconUrl = data['petIconUrl'];
+    try {
+      name = data['name'];
+      petIconUrl = data['petIconUrl'];
 
-    var colorCode = data['color'].split('(0x')[1].split(')')[0];
-    int value = int.parse(colorCode, radix: 16);
-    color = Color(value);
+      var colorCode = data['color'].split('(0x')[1].split(')')[0];
+      int value = int.parse(colorCode, radix: 16);
+      color = Color(value);
 
-    // tasks = data['tasks'];
+      // tasks = data['tasks'];
 
-    if (data['tasks'] != null) {
-      tasks = ObservableList<Task>.of([]);
-      data['tasks'].forEach((t) {
-        if (t.containsKey("weekdays")) {
-          //task weekly
-          var _task = TaskWeekly.fromJson(t);
-          _task.pet = this;
-          tasks.add(_task);
-        } else {
-          //task unique
-          var _task = TaskUnique.fromJson(t);
-          _task.pet = this;
-          tasks.add(_task);
-        }
-      });
-    }
+      if (data['tasks'] != null) {
+        tasks = ObservableList<Task>.of([]);
+        data['tasks'].forEach((t) {
+          if (t.containsKey("weekdays")) {
+            //task weekly
+            var _task = TaskWeekly.fromJson(t);
+            _task.pet = this;
+            tasks.add(_task);
+          } else {
+            //task unique
+            var _task = TaskUnique.fromJson(t);
+            _task.pet = this;
+            tasks.add(_task);
+          }
+        });
+      }
+    } catch (e) {
+      throw Exception("invalid params");
+    } 
   }
 
   Map<String, dynamic> toJson() {

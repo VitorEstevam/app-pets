@@ -41,8 +41,7 @@ abstract class _StorePets with Store {
   Future<bool> loadPets() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var encoded = await prefs.getString("pets");
-    if(encoded == null) return false;
-
+    if (encoded == null) return false;
 
     Map<String, dynamic> state = jsonDecode(encoded);
     List list = state["pets"].map((pet) => Pet.fromJson(pet)).toList();
@@ -53,9 +52,19 @@ abstract class _StorePets with Store {
       _pets.add(el);
     });
 
-    pets.addAll(_pets);
+    pets = _pets;
     actualPet = pets[0];
     return true;
+  }
+
+  @action
+  void updatePet(Pet pet, String name, String icon, Color color) {
+    pet.name = name;
+    pet.color = color;
+    pet.petIconUrl = icon;
+
+    pets = pets; //call a rebuild
+    setActualPet(pet);
   }
 
   @action
@@ -75,8 +84,26 @@ abstract class _StorePets with Store {
   }
 
   @action
+  void removePet(Pet _pet) {
+    pets.remove(_pet);
+
+    if (actualPet == _pet) {
+      if (pets.length > 0) {
+        actualPet = pets[0];
+      } else {
+        actualPet = null;
+      }
+    }
+  }
+
+  @action
+  void removeTask(Task task) {
+    task.pet.tasks.remove(task);
+  }
+
+  @action
   void addNewTaskToPet(Pet pet, Task task) {
-    pet.tasks.add(task);
+    pet.tasks.insert(0,task);
   }
 
   Pet getPetByName(petName) {

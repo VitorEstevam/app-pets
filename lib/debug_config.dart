@@ -1,5 +1,6 @@
 import 'package:app_pets/classes/tasks/task_unique.dart';
 import 'package:app_pets/classes/tasks/task_weekly.dart';
+import 'package:app_pets/consts/utils.dart';
 import 'package:app_pets/stores/pets/store_pets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -38,8 +39,7 @@ void debugOptions(BuildContext context) {
   t2.subTasks[1].done = true;
   Provider.of<StorePets>(context, listen: false).addNewTaskToPet(pet, t2);
 
-  // task = Task("dar banho", pet, DateTime(2022, 01, 25));
-  // Provider.of<StorePets>(context, listen: false).addNewTaskToPet(pet, task);
-
   petIndex += 1;
+
+  saveState(context);
 }

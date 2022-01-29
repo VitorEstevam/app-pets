@@ -9,6 +9,7 @@ import 'package:app_pets/stores/pets/store_pets.dart';
 import 'package:flutter/foundation.dart';
 // import 'package:app_pets/stores/example/store_pets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 import 'package:app_pets/consts/theme.dart';
@@ -24,25 +25,35 @@ void runDebug(BuildContext context) {
   }
 }
 
-dynamic getIntroState() async {
+Future<bool> getIntroState() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool? _res = prefs.getBool("tutorial");
 
   return _res ?? false;
 }
 
-Future<Widget> startingAppRoute(BuildContext context) async {
-  var tutorialDone = await getIntroState(); 
-  var a = await Provider.of<StorePets>(context, listen: false).loadPets();
-  var pets = Provider.of<StorePets>(context, listen: false).pets;
+bool tutorialDone = false;
+bool petsLoaded = false;
 
-  if (!tutorialDone) {
-    return const OnboardingIntro();
-  } else if (pets.isEmpty) {
-    return PageCreatePet();
-  } else {
-    return const TabBarHandler();
-  }
+Future<bool> initVars(BuildContext context) async {
+  tutorialDone = await getIntroState();
+  petsLoaded = await Provider.of<StorePets>(context, listen: false).loadPets();
+  return true;
+}
+
+Widget initialWidget(BuildContext context) {
+  return Observer(
+    builder: (BuildContext context) {
+      var pets = Provider.of<StorePets>(context, listen: false).pets;
+      if (!tutorialDone) {
+        return const OnboardingIntro();
+      } else if (pets.isEmpty) {
+        return PageCreatePet();
+      } else {
+        return const TabBarHandler();
+      }
+    },
+  );
 }
 
 void main() {
@@ -61,14 +72,14 @@ class AppRoot extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'App Pets',
+      title: 'AppPets',
       theme: theme,
-      home: FutureBuilder<Widget>(
-        future: startingAppRoute(context),
-        builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
-          return snapshot.hasData ? snapshot.data! : Container();
-        },
-      ),
+      home: FutureBuilder<bool>(
+              future: initVars(context),
+              builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                return snapshot.hasData ? initialWidget(context) : Container();
+              },
+            ),
     );
   }
 }

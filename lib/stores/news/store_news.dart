@@ -18,7 +18,8 @@ abstract class _StoreNews with Store {
     News(
         title: "As vacinas imprecidíveis para seus cachorros e gatos",
         header: "lib/assets/newsHeader.jpg",
-        text: lorem),
+        text: lorem,
+        taskTitle: "Levar para vacinar"),
     News(
         title: "teste2",
         header: "lib/assets/newsHeader.jpg",
