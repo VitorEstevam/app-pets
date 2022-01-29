@@ -39,41 +39,44 @@ class _WeekPickerState extends State<WeekPicker> {
   );
   @override
   Widget build(BuildContext context) {
-    return ToggleButtons(
-      children: <Widget>[
-        Text(
-          "S",
-          style: textstyle,
-        ),
-        Text(
-          "T",
-          style: textstyle,
-        ),
-        Text(
-          "Q",
-          style: textstyle,
-        ),
-        Text(
-          "Q",
-          style: textstyle,
-        ),
-        Text(
-          "S",
-          style: textstyle,
-        ),
-        Text(
-          "S",
-          style: textstyle,
-        ),
-        Text(
-          "D",
-          style: textstyle,
-        ),
-      ],
-      color: Theme.of(context).primaryColor,
-      selectedColor: Theme.of(context).primaryColor,
-      isSelected: isSelected,
-      onPressed: (i) => handleInput(i),
-    );
+    return LayoutBuilder(builder: (context, constraints) {
+      return ToggleButtons(
+        constraints: BoxConstraints.expand(width: constraints.maxWidth / 7 - 2, height: constraints.maxWidth / 7 - 2),
+        children: <Widget>[
+          Text(
+            "S",
+            style: textstyle,
+          ),
+          Text(
+            "T",
+            style: textstyle,
+          ),
+          Text(
+            "Q",
+            style: textstyle,
+          ),
+          Text(
+            "Q",
+            style: textstyle,
+          ),
+          Text(
+            "S",
+            style: textstyle,
+          ),
+          Text(
+            "S",
+            style: textstyle,
+          ),
+          Text(
+            "D",
+            style: textstyle,
+          ),
+        ],
+        color: Theme.of(context).primaryColor,
+        selectedColor: Theme.of(context).primaryColor,
+        isSelected: isSelected,
+        onPressed: (i) => handleInput(i),
+      );
+    });
   }
 }

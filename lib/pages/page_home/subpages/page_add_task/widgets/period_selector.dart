@@ -23,7 +23,7 @@ class PeriodSelector extends StatefulWidget {
 }
 
 class _PeriodSelectorState extends State<PeriodSelector> {
-  var isSelected = [true, false, false];
+  var isSelected = [true, false];
 
   void submitTaskUnique(DateTime dt) {
     // ignore: prefer_function_declarations_over_variables
@@ -57,12 +57,6 @@ class _PeriodSelectorState extends State<PeriodSelector> {
         callback: (a) => submitTaskWeekly(a),
       );
     }
-
-    if (isSelected[2]) {
-      return PeriodPicker(
-        callback: (a) => submitTaskPeriodic(a),
-      );
-    }
     return Container();
   }
 
@@ -80,8 +74,7 @@ class _PeriodSelectorState extends State<PeriodSelector> {
             height: 15,
           ),
           ToggleButtons(
-            constraints:
-                BoxConstraints.expand(width: constraints.maxWidth / 3 - 2),
+            constraints: BoxConstraints.expand(width: constraints.maxWidth / 2 - 2),
             borderRadius: BorderRadius.circular(3.0),
             borderColor: Theme.of(context).primaryColor,
             selectedBorderColor: Theme.of(context).primaryColor,
@@ -90,18 +83,15 @@ class _PeriodSelectorState extends State<PeriodSelector> {
             fillColor: Theme.of(context).primaryColor,
             children: const <Widget>[
               Text("ÚNICA"),
-              Text("SEMANAL"),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.0),
-                child: Text("PERIÓDICA"),
+                child: Text("SEMANAL"),
               ),
             ],
             onPressed: (int index) {
               setState(
                 () {
-                  for (int buttonIndex = 0;
-                      buttonIndex < isSelected.length;
-                      buttonIndex++) {
+                  for (int buttonIndex = 0; buttonIndex < isSelected.length; buttonIndex++) {
                     if (buttonIndex == index) {
                       isSelected[buttonIndex] = true;
                     } else {
