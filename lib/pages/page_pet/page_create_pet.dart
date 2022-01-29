@@ -44,8 +44,7 @@ class _PageCreatePetState extends State<PageCreatePet> {
   }
 
   void createAnimal(BuildContext context) {
-    Provider.of<StorePets>(context, listen: false)
-        .addNewPet(Pet(name!, image!, color!));
+    Provider.of<StorePets>(context, listen: false).addNewPet(Pet(name!, image!, color!));
 
     saveState(context);
 
@@ -54,13 +53,12 @@ class _PageCreatePetState extends State<PageCreatePet> {
     } else {
       Navigator.of(
         context,
-      ).push(MaterialPageRoute(builder: (context) => const TabBarHandler()));
+      ).pushReplacement(MaterialPageRoute(builder: (context) => const TabBarHandler()));
     }
   }
 
   void updatePet(BuildContext context) {
-    Provider.of<StorePets>(context, listen: false)
-        .updatePet(widget.pet!, name!, image!, color!);
+    Provider.of<StorePets>(context, listen: false).updatePet(widget.pet!, name!, image!, color!);
 
     saveState(context);
 
@@ -124,7 +122,7 @@ class _PageCreatePetState extends State<PageCreatePet> {
                 padding: EdgeInsets.symmetric(horizontal: 20.0),
                 child: TextInput(
                   onChanged: chooseName,
-                  validator: (_) { 
+                  validator: (_) {
                     if (name == null || name == "") {
                       return 'Por favor, preencha o nome';
                     }
@@ -155,10 +153,7 @@ class _PageCreatePetState extends State<PageCreatePet> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            children: const [
-                              Icon(Icons.add),
-                              Text('ADICIONAR PET')
-                            ],
+                            children: const [Icon(Icons.add), Text('ADICIONAR PET')],
                           ),
                         ),
                       ),
