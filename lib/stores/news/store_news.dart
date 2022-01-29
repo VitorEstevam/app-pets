@@ -16,7 +16,7 @@ abstract class _StoreNews with Store {
   @observable
   ObservableList<News> news = ObservableList<News>.of([
     News(
-        title: "As vacinas imprecidíveis para seus cachorros e gatos",
+        title: "Comida ou ração: você sabe qual a melhor opção para o seu pet?",
         header: "lib/assets/newsHeader.jpg",
         text: lorem,
         taskTitle: "Levar para vacinar"),
