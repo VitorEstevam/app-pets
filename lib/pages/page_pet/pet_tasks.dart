@@ -16,7 +16,7 @@ enum option {
 }
 
 class PetTasks extends StatefulWidget {
-  final Pet pet;
+  final String pet;
   const PetTasks({Key? key, required this.pet}) : super(key: key);
 
   @override
@@ -87,8 +87,7 @@ class _PetTasksState extends State<PetTasks> {
                       //call edit task
                       break;
                     case option.b:
-                      Provider.of<StorePets>(context, listen: false)
-                          .removeTask(task);
+                      Provider.of<StorePets>(context, listen: false).removeTask(task);
                       saveState(context);
                       break;
                   }
@@ -110,34 +109,32 @@ class _PetTasksState extends State<PetTasks> {
       );
     }
 
-    return Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Theme.of(context).backgroundColor,
-        appBar: AppBar(
-          title: Text("Tarefas do ${widget.pet.name}"),
-          actions: [
-            IconButton(
-                onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PageAddTask(),
+    return Observer(builder: (context) {
+      Provider.of<StorePets>(context, listen: false).actualPet;
+      var pet = Provider.of<StorePets>(context, listen: false).getPetByName(widget.pet);
+      return Scaffold(
+          resizeToAvoidBottomInset: false,
+          backgroundColor: Theme.of(context).backgroundColor,
+          appBar: AppBar(
+            title: Text("Tarefas do ${pet.name}"),
+            actions: [
+              IconButton(
+                  onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PageAddTask(),
+                        ),
                       ),
-                    ),
-                icon: const Icon(Icons.add))
-          ],
-        ),
-        body: Observer(builder: (context) {
-          var pets = Provider.of<StorePets>(context).pets;
-
-          List<Task> tasks = widget.pet.tasks;
-
-          return GroupedListView<dynamic, String>(
-            elements: tasks,
+                  icon: const Icon(Icons.add))
+            ],
+          ),
+          body: GroupedListView<dynamic, String>(
+            elements: pet.tasks,
             groupBy: (element) => element.subTasks[0].dateToDo.toString(),
             groupSeparatorBuilder: (String groupByValue) => Title(groupByValue),
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             itemBuilder: (context, dynamic element) => WTask(element),
-          );
-        }));
+          ));
+    });
   }
 }
