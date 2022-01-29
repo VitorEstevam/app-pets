@@ -103,7 +103,7 @@ abstract class _StorePets with Store {
 
   @action
   void addNewTaskToPet(Pet pet, Task task) {
-    pet.tasks.add(task);
+    pet.tasks.insert(0,task);
   }
 
   Pet getPetByName(petName) {
