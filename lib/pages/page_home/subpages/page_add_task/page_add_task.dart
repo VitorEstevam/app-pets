@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:ffi';
+// import 'dart:ffi';
 
 import 'package:app_pets/classes/tasks/task.dart';
 import 'package:app_pets/consts/utils.dart';
@@ -74,7 +74,7 @@ class _PageAddTaskState extends State<PageAddTask> {
       resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        title: const Text("Adicionar Tarefa"),
+        title: const Text("Adicionar tarefa"),
       ),
       body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -113,7 +113,7 @@ class _PageAddTaskState extends State<PageAddTask> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: const [
                                   Icon(Icons.add),
-                                  Text('ADICIONAR TASK')
+                                  Text('ADICIONAR TAREFA')
                                 ],
                               ),
                             ),

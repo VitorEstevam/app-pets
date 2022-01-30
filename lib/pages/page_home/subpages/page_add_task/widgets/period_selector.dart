@@ -68,7 +68,7 @@ class _PeriodSelectorState extends State<PeriodSelector> {
         children: [
           const Text(
             "Frequência",
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           ),
           Container(
             height: 15,

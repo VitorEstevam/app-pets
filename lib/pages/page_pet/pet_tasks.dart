@@ -116,7 +116,7 @@ class _PetTasksState extends State<PetTasks> {
           resizeToAvoidBottomInset: false,
           backgroundColor: Theme.of(context).backgroundColor,
           appBar: AppBar(
-            title: Text("Tarefas do ${pet.name}"),
+            title: Text("Tarefas para ${pet.name}"),
             actions: [
               IconButton(
                   onPressed: () => Navigator.push(
