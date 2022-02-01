@@ -21,13 +21,13 @@ void main() {
       var task = TaskUnique("Remédio", pet, DateTime(2021, 02, 15));
       store.addNewTaskToPet(pet, task);
 
-      expect(task, store.getPetByName(pet.name).tasks[0]);
+      expect(task, equals(store.getPetByName(pet.name).tasks[0]));
     });
     test('Add taskWeekly to pet', () {
       var task = TaskWeekly("Brincar", pet, [1,3,5]);
       store.addNewTaskToPet(pet, task);
 
-      expect(task, store.getPetByName(pet.name).tasks[0]);
+      expect(task, equals(store.getPetByName(pet.name).tasks[0]));
     });
   });
 }
