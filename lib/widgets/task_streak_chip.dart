@@ -10,7 +10,7 @@ class TaskStreakChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String val = !hideName ? "Sequência " : "";
+    String val = !hideName ? "Sequência: " : "";
     val += task.streak.toString();
     return Chip(
       backgroundColor: Colors.orange,
@@ -22,7 +22,7 @@ class TaskStreakChip extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
         child: Text(
           val,
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
         ),
       ),
     );

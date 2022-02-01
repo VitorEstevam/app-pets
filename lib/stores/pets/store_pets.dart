@@ -98,6 +98,7 @@ abstract class _StorePets with Store {
 
   @action
   void removeTask(Task task) {
+    actualPet = task.pet;
     task.pet.tasks.remove(task);
   }
 

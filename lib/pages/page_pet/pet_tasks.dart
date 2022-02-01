@@ -95,10 +95,6 @@ class _PetTasksState extends State<PetTasks> {
               },
               itemBuilder: (BuildContext context) => <PopupMenuEntry<option>>[
                 const PopupMenuItem<option>(
-                  value: option.a,
-                  child: Text('Editar Tarefa'),
-                ),
-                const PopupMenuItem<option>(
                   value: option.b,
                   child: Text('Apagar Tarefa'),
                 ),

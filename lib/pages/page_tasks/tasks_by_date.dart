@@ -96,10 +96,6 @@ class _ListTasksByDateState extends State<ListTasksByDate> {
               },
               itemBuilder: (BuildContext context) => <PopupMenuEntry<option>>[
                 const PopupMenuItem<option>(
-                  value: option.a,
-                  child: Text('Editar Tarefa'),
-                ),
-                const PopupMenuItem<option>(
                   value: option.b,
                   child: Text('Apagar Tarefa'),
                 ),

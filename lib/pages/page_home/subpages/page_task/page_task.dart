@@ -20,8 +20,7 @@ class TaskBody extends StatelessWidget {
       child: Container(
         color: Theme.of(context).backgroundColor,
         width: double.infinity,
-        constraints: BoxConstraints(
-            maxHeight: MediaQuery.of(context).size.height * 0.91),
+        // constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.91),
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
@@ -29,10 +28,7 @@ class TaskBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(task.title + " com ${task.pet.name}",
-                  style: const TextStyle(
-                      fontSize: 30, fontWeight: FontWeight.bold),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis),
+                  style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold), maxLines: 2, overflow: TextOverflow.ellipsis),
               Container(height: 20),
               Text(
                 task.subTitle,
@@ -48,17 +44,15 @@ class TaskBody extends StatelessWidget {
                 ),
               ),
               Container(height: 20),
-              const Text("Frequência",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              Expanded(
-                child: Container(
-                  width: double.infinity,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: TaskCalendar(task),
-                  ),
+              const Text("Frequência", style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold)),
+              Container(
+                width: double.infinity,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: TaskCalendar(task),
                 ),
-              )
+              ),
+              Container(height: 45),
             ],
           ),
         ),
