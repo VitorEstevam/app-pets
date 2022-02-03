@@ -25,6 +25,8 @@ class TaskWeekly extends Task {
     }
     
     weekdays = data['weekdays'].cast<int>();
+
+    updateSubTasks();
   }
 
   // String title = "";
