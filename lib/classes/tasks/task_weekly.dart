@@ -25,6 +25,8 @@ class TaskWeekly extends Task {
     }
     
     weekdays = data['weekdays'].cast<int>();
+
+    updateSubTasks();
   }
 
   // String title = "";
@@ -109,7 +111,7 @@ class TaskWeekly extends Task {
   @override
   void updateSubTasks() {
     var days = subTasks.map((e) => e.dateToDo).toList();
-    var start = startDate;
+    var start = DateTime(startDate.year, startDate.month, startDate.day);
     var end = DateTime.now();
     final daysToGenerate = end.difference(start).inDays;
 

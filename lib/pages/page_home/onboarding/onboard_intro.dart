@@ -28,10 +28,7 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
   void initState() {
     super.initState();
 
-    slides.add(createPageModel(
-      
-        "Bem-vindo(a) ao AppPets!",
-        "Feito com carinho para que você possa dedicar mais tempo ao seu bichinho de estimação!",
+    slides.add(createPageModel("Bem-vindo(a) ao AppPets!", "Feito com carinho para que você possa dedicar mais tempo ao seu bichinho de estimação!",
         'lib/assets/onboarding/Boas-vindas-1.png'));
 
     slides.add(createPageModel(
@@ -40,9 +37,7 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
         'lib/assets/onboarding/Boas-vindas-2.png'));
 
     slides.add(createPageModel(
-        "Sobre o AppPets",
-        "Lembre de todas as responsabilidades para seu pet gerenciando suas tarefas!",
-        'lib/assets/onboarding/Boas-vindas-3.png'));
+        "Sobre o AppPets", "Lembre de todas as responsabilidades para seu pet gerenciando suas tarefas!", 'lib/assets/onboarding/Boas-vindas-3.png'));
 
     slides.add(createPageModel(
         "Então vamos começar!",
@@ -53,15 +48,12 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
   Slide createPageModel(String textTitle, String textBody, String imgPath) {
     return Slide(
       title: textTitle,
-      styleTitle: const TextStyle(
-          color: Colors.black, fontSize: 30.0, fontWeight: FontWeight.bold),
+      styleTitle: const TextStyle(color: Colors.black, fontSize: 30.0, fontWeight: FontWeight.bold),
       description: textBody,
       styleDescription: const TextStyle(color: Colors.black, fontSize: 20.0),
       maxLineTitle: 2,
-      marginTitle:
-          const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 10.0, top: 30),
-      marginDescription:
-          const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      marginTitle: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 10.0, top: 30),
+      marginDescription: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
       backgroundImage: imgPath,
       backgroundImageFit: BoxFit.cover,
       backgroundOpacity: 0.0,
@@ -84,22 +76,19 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
   ButtonStyle myButtonStyle() {
     return ButtonStyle(
       shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()),
-      backgroundColor:
-          MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
+      backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
       foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
     );
   }
 
   ButtonStyle backButtonStyle() {
     return ButtonStyle(
-      shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder(
-          side: BorderSide(color: Theme.of(context).primaryColor, width: 2))),
+      shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()),
       backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
       // textStyle: MaterialStateProperty.all<TextStyle>(
       //   (TextStyle(color: Theme.of(context).primaryColor)),
       // ),
-      foregroundColor:
-          MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
+      foregroundColor: MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
     );
   }
 

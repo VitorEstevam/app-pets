@@ -20,13 +20,8 @@ class _TaskViewerState extends State<TaskViewer> {
   @override
   Widget build(BuildContext context) {
     final tasks = widget.pet.tasks;
-    final widgets = tasks
-        .map((task) => CardTask(task: task, color: widget.pet.color))
-        .toList();
-    final list = ListView(
-        physics: const BouncingScrollPhysics(),
-        scrollDirection: Axis.horizontal,
-        children: widgets);
+    final widgets = tasks.map((task) => CardTask(task: task, color: widget.pet.color)).toList();
+    final list = ListView(physics: const BouncingScrollPhysics(), scrollDirection: Axis.horizontal, children: widgets);
 
     bool ended = false;
 
@@ -41,12 +36,15 @@ class _TaskViewerState extends State<TaskViewer> {
         future: getFutureDados(),
         builder: (context, _) {
           return Container(
-            child: tasks.isEmpty
-                ? EmptyTasks(name: widget.pet.name)
-                : AnimatedSwitcher(
-                    duration: Duration(milliseconds: 250),
-                    child: ended ? list : Container(),
-                  ),
+            child: AnimatedSwitcher(
+              duration: Duration(milliseconds: 250),
+              child: tasks.isEmpty
+                  ? EmptyTasks(name: widget.pet.name)
+                  : AnimatedSwitcher(
+                      duration: Duration(milliseconds: 250),
+                      child: ended ? list : Container(),
+                    ),
+            ),
           );
         });
   }

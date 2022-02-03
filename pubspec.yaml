@@ -90,6 +90,7 @@ flutter:
     - lib/assets/icon/icon.png
     - lib/assets/pets/
     - lib/assets/onboarding/
+    - lib/assets/news/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

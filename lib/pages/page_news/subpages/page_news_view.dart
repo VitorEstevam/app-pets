@@ -96,7 +96,7 @@ class _PageNewsViewState extends State<PageNewsView> {
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
               child: Text(
                 widget.news.text,
-                style: TextStyle(fontSize: 15),
+                style: TextStyle(fontSize: 20),
               ),
             ),
           ),

@@ -71,7 +71,7 @@ class _GridPetsState extends State<GridPets> {
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => PetTasks(pet: pet),
+                    builder: (context) => PetTasks(pet: pet.name),
                   ),
                 ),
                 child: Container(

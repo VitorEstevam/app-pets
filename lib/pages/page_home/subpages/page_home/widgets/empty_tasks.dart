@@ -34,6 +34,7 @@ class EmptyTasks extends StatelessWidget {
               ),
             ),
           ),
+          Container(height:20)
         ],
       ),
     );
