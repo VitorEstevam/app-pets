@@ -10,7 +10,7 @@ void main() {
     const expectedCol = Color(0xFFf0df75);
     Color col = startCol.changeBrightBy(0.2);
     expect(col, equals(expectedCol));
-  });
+  }, tags: 'petsapp');
   test('Decrease color bright by 0.2', () {
     const expectedCol = Color(0xFF8a790f);
     Color col = startCol.changeBrightBy(-0.2);
