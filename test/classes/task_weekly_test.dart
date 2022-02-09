@@ -5,6 +5,7 @@ import 'dart:ui';
 
 import 'package:app_pets/classes/pet.dart';
 import 'package:app_pets/classes/tasks/task_weekly.dart';
+import 'package:app_pets/consts/utils.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -70,8 +71,9 @@ void main() {
 
       // set all the subtasks done
       task.subTasks.forEach((task) {
-        task.done = true;
+        if (compareDates(task.dateToDo, now) <= 0) task.done = true;
       });
+
       pet.tasks[0] = task;
       int streak = pet.tasks[0].streak;
 
